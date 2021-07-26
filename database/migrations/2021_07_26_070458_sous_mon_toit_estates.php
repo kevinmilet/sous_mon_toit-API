@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class SousMonToitAppointmentsEstates extends Migration
+class SousMonToitEstates extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +14,9 @@ class SousMonToitAppointmentsEstates extends Migration
     public function up(): void
     {
         Schema::create('estates', function(Blueprint $table) {
-            $table->increments('id_estate');
-            $table->integer('Id_estates_types')->unsigned();
-            $table->foreignId('Id_estates_types')->references('Id_estates_types')->on('estates_types');
-            $table->integer('id_customer')->unsigned();
-            $table->foreignId('id_customer')->references('id_customer')->on('estates_types');
+            $table->id('id');
+            $table->foreignId('id_estate_type')->references('id')->on('estates_types');
+            $table->foreignId('id_customer')->references('id')->on('customers');
             $table->string('reference_estate', 50);
             $table->string('dpe_file', 255 )->nullable();
             $table->string('buy_or_rent', 10);

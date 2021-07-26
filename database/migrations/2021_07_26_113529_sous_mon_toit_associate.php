@@ -14,9 +14,10 @@ class SousMonToitAssociate extends Migration
     public function up()
     {
         Schema::create('associate', function(Blueprint $table) {
-            $table->primary('id_customer');
-            $table->integer('id_contract', 11)->unsigned();
-            $table->foreign('id_contract')->references('id_contract')->on('contract');
+
+            $table->foreignId('id_customer')->constrained()->references('id')->on('customers');
+            $table->foreignId('id_contract')->constrained()->references('id')->on('contracts');
+
         });
     }
 

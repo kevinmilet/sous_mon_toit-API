@@ -13,10 +13,10 @@ class SousMonToitCustomerType extends Migration
      */
     public function up()
     {
-        Schema::create('customer_type', function(Blueprint $table) {
-            $table->primary('id_customers_types');
-            $table->string('estate_type', 50);
-            $table->foreign('estate_type')->references('id_estates_types')->on('estates_types');
+        Schema::create('customers_types', function(Blueprint $table) {
+
+            $table->id('id');
+            $table->string('customer_type', 50);
         });
     }
 
