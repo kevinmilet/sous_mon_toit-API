@@ -14,7 +14,7 @@ class SousMonToitFunctions extends Migration
     public function up()
     {
         Schema::create('functions', function(Blueprint $table) {
-            $table->primary('id_function');
+            $table->id('id');
             $table->string('function_name', 50);
         });
     }

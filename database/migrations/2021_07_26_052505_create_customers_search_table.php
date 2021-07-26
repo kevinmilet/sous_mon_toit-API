@@ -14,7 +14,7 @@ class CreateCustomersSearchTable extends Migration
     public function up()
     {
         Schema::create('customers_search', function (Blueprint $table) {
-            $table->id('id_search');
+            $table->id('id');
             $table->string('buy_or_rent');
             $table->integer('surface_min')->default(NULL);
             $table->integer('number_rooms')->default(NULL);
@@ -26,7 +26,7 @@ class CreateCustomersSearchTable extends Migration
             $table->dateTime('created_at');
             $table->dateTime('updated_at')->default(NULL);
             $table->tinyInteger('alert');
-            $table->integer('id_customer');
+            $table->integer('id_customer')->references('id')->on('customers');;
         });
     }
 

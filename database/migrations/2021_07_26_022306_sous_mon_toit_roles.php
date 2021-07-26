@@ -14,7 +14,7 @@ class SousMonToitRoles extends Migration
     public function up()
     {
         Schema::create('roles', function(Blueprint $table) {
-            $table->primary('id_roles');
+            $table->id('id');
             $table->string('role', 50);
         });
     }
