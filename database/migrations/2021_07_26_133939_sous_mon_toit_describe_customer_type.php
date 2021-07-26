@@ -15,7 +15,7 @@ class SousMonToitDescribeCustomerType extends Migration
     {
         Schema::create('describe_customer_type', function(Blueprint $table) {
 
-            $table->foreignId('id_customers_type')->constrained()->references('id')->on('customers_types');
+            $table->foreignId('id_customer_type')->constrained()->references('id')->on('customers_types');
             $table->foreignId('id_customer')->constrained()->references('id')->on('customers');
 
         });
