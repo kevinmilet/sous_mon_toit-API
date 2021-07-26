@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class SousMonToitFunctions extends Migration
+class SousMonToitCustomerType extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class SousMonToitFunctions extends Migration
      */
     public function up()
     {
-        Schema::create('functions', function(Blueprint $table) {
-            $table->primary('id_function');
-            $table->string('function_name', 50);
+        Schema::create('customers_types', function(Blueprint $table) {
+
+            $table->id('id');
+            $table->string('customer_type', 50);
         });
     }
 
@@ -26,6 +27,6 @@ class SousMonToitFunctions extends Migration
      */
     public function down()
     {
-        Schema::drop('functions');
+        //
     }
 }

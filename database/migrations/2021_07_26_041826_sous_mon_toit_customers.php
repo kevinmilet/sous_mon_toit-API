@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class SousMonToitCustomer extends Migration
+class SousMonToitCustomers extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class SousMonToitCustomer extends Migration
     public function up()
     {
         Schema::create('customers', function (Blueprint $table) {
-            $table->increments('id_customer');
+            $table->id('id');
             $table->string('n_customer', 255);
             $table->string('firstname', 255);
             $table->string('lastname', 255);
@@ -27,9 +27,9 @@ class SousMonToitCustomer extends Migration
             $table->dateTime('created_at');
             $table->dateTime('archived_at')->nullable();
             $table->dateTime('updated_at')->nullable();
-            $table->tinyInteger('first_met', 1);
+            $table->integer('first_met');
             $table->string('token', 255)->nullable();
-            $table->tinyInteger('password_request', 1)->nullable();
+            $table->integer('password_request')->nullable();
             
         });
 
@@ -43,6 +43,6 @@ class SousMonToitCustomer extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('customers');
     }
 }
