@@ -27,6 +27,10 @@ class SousMonToitCustomerType extends Migration
      */
     public function down()
     {
+<<<<<<< HEAD:database/migrations/2021_07_26_120006_sous_mon_toit_customer_type.php
         Schema::dropIfExists('customers_types');
+=======
+        Schema::dropIfExists('customer_types');
+>>>>>>> dev:database/migrations/2021_07_26_095521_sous_mon_toit.php
     }
 }
