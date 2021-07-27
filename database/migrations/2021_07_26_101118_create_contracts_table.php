@@ -28,7 +28,7 @@ class CreateContractsTable extends Migration
             $table->string('name');
             $table->foreignId('id_staff')->references('id')->on('staffs');;
             $table->foreignId('id_estate')->references('id')->on('estates');;
-            $table->foreignId('contract_type_id')->references('id')->on('contracts_types');;
+            $table->foreignId('id_contract_type')->references('id')->on('contracts_types');;
         });
     }
 
@@ -40,6 +40,6 @@ class CreateContractsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('contracts');
-        Schema::dropIfExists('contracts_type');
+        Schema::dropIfExists('contracts_types');
     }
 }

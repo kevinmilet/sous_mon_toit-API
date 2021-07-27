@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCustomersSearchTable extends Migration
+class CreateCustomersSearchsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCustomersSearchTable extends Migration
      */
     public function up()
     {
-        Schema::create('customers_search', function (Blueprint $table) {
+        Schema::create('customers_searchs', function (Blueprint $table) {
             $table->id('id');
             $table->string('buy_or_rent');
             $table->integer('surface_min')->default(NULL);
@@ -37,6 +37,6 @@ class CreateCustomersSearchTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customers_search');
+        Schema::dropIfExists('customers_searchs');
     }
 }
