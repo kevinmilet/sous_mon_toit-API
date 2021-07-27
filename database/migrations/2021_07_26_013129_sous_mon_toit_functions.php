@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class SousMonToitRoles extends Migration
+class SousMonToitFunctions extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class SousMonToitRoles extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function(Blueprint $table) {
-            $table->primary('id_roles');
-            $table->string('role', 50);
+        Schema::create('functions', function(Blueprint $table) {
+            $table->id('id');
+            $table->string('function_name', 50);
         });
     }
 
@@ -26,6 +26,6 @@ class SousMonToitRoles extends Migration
      */
     public function down()
     {
-        Schema::drop('roles');
+        Schema::drop('functions');
     }
 }

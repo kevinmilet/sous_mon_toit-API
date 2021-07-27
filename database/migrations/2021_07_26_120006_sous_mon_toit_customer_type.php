@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class SousMonToitAssociate extends Migration
+class SousMonToitCustomerType extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class SousMonToitAssociate extends Migration
      */
     public function up()
     {
-        Schema::create('associate', function(Blueprint $table) {
+        Schema::create('customers_types', function(Blueprint $table) {
 
-            $table->foreignId('id_customer')->constrained()->references('id')->on('customers');
-            $table->foreignId('id_contract')->constrained()->references('id')->on('contracts');
-
+            $table->id('id');
+            $table->string('customer_type', 50);
         });
     }
 
@@ -28,6 +27,6 @@ class SousMonToitAssociate extends Migration
      */
     public function down()
     {
-        Schema::drop('associate');
+        Schema::dropIfExists('customer_types');
     }
 }
