@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class InsertCustomerSearchSeeder extends Seeder
+class InsertCustomersSearchsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class InsertCustomerSearchSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('customer_search')->insert([
+        DB::table('customers_searchs')->insert([
             [
                 'id' => 1,
                 'buy_or_rent' => 'Achat',

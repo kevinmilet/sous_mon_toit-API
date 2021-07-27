@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class InsertStaffSeeder extends Seeder
+class InsertStaffsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class InsertStaffSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('staff')->insert([
+        DB::table('staffs')->insert([
             [
                 'id' => 1,
                 'login' => 'glaforet',
@@ -29,7 +29,7 @@ class InsertStaffSeeder extends Seeder
                 'avatar' => '743d6a6f-5656-4b76-b71c-1f565d18fcff.jpg',
                 'alert_reader' => true,
                 'id_function' => 1,
-                'id_roles' => 1,
+                'id_role' => 1,
             ],
             [
                 'id' => 2,
@@ -45,7 +45,7 @@ class InsertStaffSeeder extends Seeder
                 'avatar' => '743d6a6f-5656-4b76-b71c-1f565d18fcff.jpg',
                 'alert_reader' => false,
                 'id_function' => 2,
-                'id_roles' => 2,
+                'id_role' => 2,
             ],
             [
                 'id' => 3,
@@ -61,7 +61,7 @@ class InsertStaffSeeder extends Seeder
                 'avatar' => '743d6a6f-5656-4b76-b71c-1f565d18fcff.jpg',
                 'alert_reader' => true,
                 'id_function' => 3,
-                'id_roles' => 3,
+                'id_role' => 3,
             ],
             [
                 'id' => 4,
@@ -77,7 +77,7 @@ class InsertStaffSeeder extends Seeder
                 'avatar' => '743d6a6f-5656-4b76-b71c-1f565d18fcff.jpg',
                 'alert_reader' => true,
                 'id_function' => 3,
-                'id_roles' => 3,
+                'id_role' => 3,
             ],
         ]);
     }
