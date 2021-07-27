@@ -34,12 +34,4 @@ class EstatesController extends Controller
 
         return response()->json('Le bien immobilier a bien été archivé', 200);
     }
-
-    public function create()
-    {
-        $estate = new Estates();
-        $estate->save();
-
-        return response()->json('Le bien a bien été enregistré', 200);
-    }
 }
