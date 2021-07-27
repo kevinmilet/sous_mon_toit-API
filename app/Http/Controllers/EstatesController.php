@@ -26,4 +26,13 @@ class EstatesController extends Controller
         $estate =  Estates::find($id);
         return response()->json($estate);
     }
+
+    public function archive($id)
+    {
+        $estate = Estates::findOrFail($id);
+        $estate->archived_at = date("Y-m-d H:i:s");
+        $estate->save();
+
+        return response()->json('Le bien immobilier a bien été archivé', 200);
+    }
 }
