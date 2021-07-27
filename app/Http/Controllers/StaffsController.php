@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Staffs;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use Laravel\Lumen\Http\ResponseFactory;
 
 class StaffsController extends Controller
 {
@@ -17,25 +18,26 @@ class StaffsController extends Controller
         return response()->json(Staffs::all());
     }
 
+
     /**
      * @param $id
      * @return JsonResponse
      */
-    public function getOneById($id): JsonResponse
+    public function getOneById($id): jsonResponse
     {
         return response()->json(Staffs::find($id));
     }
 
     /**
      * @param $id
-     * @return JsonResponse
+     * @return Response|ResponseFactory
      */
-    public function archive($id): JsonResponse
+    public function archive($id)
     {
         $staff = Staffs::findOrFail($id);
         $staff->archived_at = date("Y-m-d H:i:s");
         $staff->save();
 
-        return response()->json('Utilisateur archivé avec succès', 200);
+        return response('Utilisateur archivé avec succès', 200);
     }
 }

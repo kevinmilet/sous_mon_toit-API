@@ -19,10 +19,18 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+/*
+ *  Routes pour Staffs
+ */
 $router->group(['prefix' => 'staff'], function () use ($router) {
     $router->get('/', 'StaffsController@getAllStaff');
     $router->get('/{id}', 'StaffsController@getOneById');
     $router->patch('/archive/{id}', 'StaffsController@archive');
 });
 
-
+/*
+ * Routes pour Functions
+ */
+$router->group(['prefix' => 'functions'], function () use ($router) {
+    $router->get('/', 'FunctionsController@getAllFunctions');
+});
