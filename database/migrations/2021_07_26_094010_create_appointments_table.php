@@ -22,6 +22,7 @@ class CreateAppointmentsTable extends Migration
             $table->id('id');
             $table->dateTime('scheduled_at');
             $table->dateTime('created_at');
+            $table->dateTime('updated_at')->nullable()->default(NULL);
             $table->text('notes')->nullable();
             $table->foreignId('id_estate')->constrained()->references('id')->on('estates');
             $table->foreignId('id_staff')->constrained()->references('id')->on('staffs');
