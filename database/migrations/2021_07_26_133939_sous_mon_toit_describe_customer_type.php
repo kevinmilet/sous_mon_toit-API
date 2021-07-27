@@ -28,6 +28,6 @@ class SousMonToitDescribeCustomerType extends Migration
      */
     public function down()
     {
-        Schema::drop('describe_customer_type');
+        Schema::drop('describe_customer_types');
     }
 }
