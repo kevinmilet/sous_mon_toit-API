@@ -19,7 +19,7 @@ class SousMonToitPictures extends Migration
             $table->string('name', 255);
             $table->boolean('cover')->nullable()->default(null);
             $table->string('alt', 255)->nullable()->default(null);
-            $table->foreignId('id_estate')->constrained()->references('id')->on('functions');
+            $table->foreignId('id_estate')->constrained()->references('id')->on('estates');
 
         });
     }

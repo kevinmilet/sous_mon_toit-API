@@ -58,6 +58,11 @@ class SousMonToitEstates extends Migration
             $table->tinyInteger('elevator');
             $table->decimal('rental_charge')->nullable();
             $table->decimal('coownership_charge')->nullable();
+            $table->dateTime('created_at');
+            $table->dateTime('updated_at')->nullable();
+            $table->dateTime('archived_at')->nullable();
+
+
         });
     }
 

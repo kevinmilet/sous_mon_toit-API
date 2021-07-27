@@ -22,13 +22,13 @@ class CreateContractsTable extends Migration
         Schema::create('contracts', function (Blueprint $table) {
             $table->id('id');
             $table->dateTime('created_at');
-            $table->dateTime('updated_at');
-            $table->dateTime('archived_at');
+            $table->dateTime('updated_at')->nullable();
+            $table->dateTime('archived_at')->nullable();
             $table->string('folder');
             $table->string('name');
             $table->foreignId('id_staff')->references('id')->on('staffs');;
             $table->foreignId('id_estate')->references('id')->on('estates');;
-            $table->foreignId('contract_type_id')->references('id')->on('contracts_types');;
+            $table->foreignId('id_contract_type')->references('id')->on('contracts_types');;
         });
     }
 
@@ -40,6 +40,6 @@ class CreateContractsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('contracts');
-        Schema::dropIfExists('contracts_type');
+        Schema::dropIfExists('contracts_types');
     }
 }

@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class InsertAssociateSeeder extends Seeder
+class InsertAssociatesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class InsertAssociateSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('associate')->insert([
+        DB::table('associates')->insert([
             [
                 'id_customer' => 1,
                 'id_contract' => 1,
