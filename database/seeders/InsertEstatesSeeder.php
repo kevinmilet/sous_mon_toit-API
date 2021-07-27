@@ -17,7 +17,7 @@ class InsertEstatesSeeder extends Seeder
         DB::table('estates')->insert([
            [
                'id_estate' => 1,
-               'Id_estates_types' => 1,
+               'id_estate_type' => 1,
                'id_customer' => 1,
                'reference_estate' => "sm124578",
                'dpe_file' => "lorem-ipsum.pdf",
