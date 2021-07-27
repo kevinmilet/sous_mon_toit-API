@@ -34,3 +34,10 @@ $router->group(['prefix' => 'staff'], function () use ($router) {
 $router->group(['prefix' => 'functions'], function () use ($router) {
     $router->get('/', 'FunctionsController@getAllFunctions');
 });
+
+/*
+ * Routes pour Roles
+ */
+$router->group(['prefix' => 'roles'], function () use ($router) {
+    $router->get('/', 'RolesController@getAllRoles');
+});
