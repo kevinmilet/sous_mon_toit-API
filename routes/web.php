@@ -51,4 +51,10 @@ $router->group(['prefix' => 'customer'], function () use ($router) {
     $router->patch('/archive/{id}','CustomersController@archive');
 });
 
-
+//Contract
+$router->group(['prefix' => 'contract'], function () use ($router){
+    $router->get('/', 'ContractsController@selectAllContracts');
+    $router->get('/contractsTypes', 'ContractsTypesController@selectAllContractsTypes');
+    $router->get('/{id_contract}', 'ContractsController@selectOneContract');
+    $router->patch('/archive/{id_contract}', 'ContractsController@archiveContract');
+});
