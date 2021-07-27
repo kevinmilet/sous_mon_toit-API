@@ -14,7 +14,7 @@ class SousMonToitEstatesTypes extends Migration
     public function up(): void
     {
         Schema::create('estates_types', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id('id');
             $table->string('estates_type_name', 50)->nullable();
         });
         }

@@ -13,7 +13,7 @@ class CreateContractsTable extends Migration
      */
     public function up()
     {   
-        Schema::create('contracts_type', function(Blueprint $table) {
+        Schema::create('contracts_types', function(Blueprint $table) {
             $table->id('id');
             $table->string('contract_type');
             $table->string('template_path');
@@ -26,9 +26,9 @@ class CreateContractsTable extends Migration
             $table->dateTime('archived_at');
             $table->string('folder');
             $table->string('name');
-            $table->foreignId('id_staffs')->references('id')->on('staffs');;
+            $table->foreignId('id_staff')->references('id')->on('staffs');;
             $table->foreignId('id_estate')->references('id')->on('estates');;
-            $table->foreignId('contract_type_id')->references('id')->on('contract_type');;
+            $table->foreignId('contract_type_id')->references('id')->on('contracts_types');;
         });
     }
 
@@ -41,6 +41,5 @@ class CreateContractsTable extends Migration
     {
         Schema::dropIfExists('contracts');
         Schema::dropIfExists('contracts_type');
-
     }
 }
