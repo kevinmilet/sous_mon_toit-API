@@ -22,7 +22,6 @@ class EstatesController extends Controller
      */
     public function selectOneEstate($id)
     {
-
         $estate =  Estates::find($id);
         return response()->json($estate);
     }
