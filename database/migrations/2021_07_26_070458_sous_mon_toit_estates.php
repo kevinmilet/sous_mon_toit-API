@@ -15,7 +15,7 @@ class SousMonToitEstates extends Migration
     {
         Schema::create('estates', function(Blueprint $table) {
             $table->id('id');
-            $table->foreignId('id_estate_type')->references('id')->on('estate_type');
+            $table->foreignId('id_estate_type')->references('id')->on('estates_types');
             $table->foreignId('id_customer')->references('id')->on('customers');
             $table->string('reference_estate', 50);
             $table->string('dpe_file', 255 )->nullable();
