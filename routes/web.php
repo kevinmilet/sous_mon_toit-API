@@ -1,5 +1,7 @@
 <?php
 
+use Laravel\Lumen\Routing\Router;
+
 /** @var Router $router */
 
 /*
@@ -13,9 +15,21 @@
 |
 */
 
-use Laravel\Lumen\Routing\Router;
+//Contract
+$router->group(['prefix' => 'contract'], function () use ($router){
+
+    $router->get('/', 'ContractsController@selectAllContracts');
+    $router->get('/contractsTypes', 'ContractsTypesController@selectAllContractsTypes');
+    $router->get('/{id_contract}', 'ContractsController@selectOneContract');
+    $router->patch('/archive/{id_contract}', 'ContractsController@archiveContract');
+
+});
+
+// $router->get('/contract', 'ContractsController@selectAllContracts');
+// $router->get('/contractsTypes', 'ContractsTypesController@selectAllContractsTypes');
+// $router->get('/contract/{id_contract}', 'ContractsController@selectOneContract');
+// $router->patch('/archiveContract/{id_contract}', 'ContractsController@archive_contract');
 
 $router->get('/', function () use ($router) {
     echo 'test';
 });
-
