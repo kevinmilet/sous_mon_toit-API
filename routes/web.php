@@ -16,6 +16,13 @@
 use Laravel\Lumen\Routing\Router;
 
 $router->get('/', function () use ($router) {
-    echo 'test';
+    return $router->app->version();
 });
+
+$router->group(['prefix' => 'staff'], function () use ($router) {
+    $router->get('/', 'StaffsController@getAllStaff');
+    $router->get('/{id}', 'StaffsController@getOneById');
+    $router->patch('/archive/{id}', 'StaffsController@archive');
+});
+
 
