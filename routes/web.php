@@ -1,6 +1,5 @@
 <?php
 
-/** @var Router $router */
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +14,16 @@
 
 use Laravel\Lumen\Routing\Router;
 
-$router->get('/', function () use ($router) {
-    echo 'test';
-});
+/** @var Router $router */
+
+    // return $router->app->version();
+    /** @var \Laravel\Lumen\Routing\Router $router */
+    $router->group(['prefix' => 'customer'], function () use ($router) {
+
+        $router->get('/','CustomersController@selectAllCustomers');
+        $router->get('/{id}', 'CustomersController@selectOneCustomer');
+        $router->patch('/archive/{id}','CustomersController@archive');
+
+    });
+
 
