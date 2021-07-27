@@ -19,7 +19,7 @@ class InsertAppointmentsSeeder extends Seeder
                 'id' => 1,
                 'scheduled_at' => '2018-01-11 10:16:32',
                 'notes' => NULL,
-                'id_estate' => 2,
+                'id_estate' => 1,
                 'id_staff' => 3,
                 'id_customer' => 1,
                 'id_appointment_type' => 1,
@@ -48,10 +48,10 @@ class InsertAppointmentsSeeder extends Seeder
                 'id' => 4,
                 'scheduled_at' => '2021-01-11 10:16:32',
                 'notes' => NULL,
-                'id_estate' => 3,
+                'id_estate' => 1,
                 'id_staff' => 4,
                 'id_customer' => 5,
-                'id_appointment_type' => 12,
+                'id_appointment_type' => 2,
                 'created_at' => '2018-01-11 10:15:32',
             ]
         ]);

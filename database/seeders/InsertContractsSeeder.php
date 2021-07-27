@@ -34,7 +34,7 @@ class InsertContractsSeeder extends Seeder
                 'folder' => '/contracts',
                 'name' => 'Guilbert_Laura_Offre_1234_20210726.pdf',
                 'id_staff' => 4,
-                'id_estate' => 2,
+                'id_estate' => 1,
                 'id_contract_type' => 3,
             ],
         ]);
