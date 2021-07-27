@@ -20,3 +20,26 @@ $router->group(['prefix' => 'schedule'], function () use ($router){
     $router->patch('update', 'appointmentCtrl@updateAppointment'); // /schedule/update
     $router->delete('delete/{appointment_id}', 'appointmentCtrl@deleteAppointment'); // /schedule/delete/{appointment_id}
 });
+
+/*
+ *  Routes pour Staffs
+ */
+$router->group(['prefix' => 'staff'], function () use ($router) {
+    $router->get('/', 'StaffsController@getAllStaff');
+    $router->get('/{id}', 'StaffsController@getOneById');
+    $router->patch('/archive/{id}', 'StaffsController@archive');
+});
+
+/*
+ * Routes pour Functions
+ */
+$router->group(['prefix' => 'functions'], function () use ($router) {
+    $router->get('/', 'FunctionsController@getAllFunctions');
+});
+
+/*
+ * Routes pour Roles
+ */
+$router->group(['prefix' => 'roles'], function () use ($router) {
+    $router->get('/', 'RolesController@getAllRoles');
+});
