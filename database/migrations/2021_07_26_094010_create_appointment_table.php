@@ -22,10 +22,17 @@ class CreateAppointmentTable extends Migration
             $table->id('id');
             $table->dateTime('scheduled_at');
             $table->text('notes')->nullable();
+<<<<<<< HEAD
             $table->foreignId('id_estate')->constrained()->references('id')->on('estates');;
             $table->foreignId('id_staffs')->constrained()->references('id')->on('staffs');;
             $table->foreignId('id_customer')->constrained()->references('id')->on('customers');;
             $table->foreignId('id_appointment_type')->constrained('appointment_types')->references('id')->on('appointment_types');;
+=======
+            $table->foreignId('id_estate')->constrained()->references('id')->on('estates');
+            $table->foreignId('id_staffs')->constrained()->references('id')->on('staffs');
+            $table->foreignId('id_customer')->constrained()->references('id')->on('customers');
+            $table->foreignId('id_appointment_type')->constrained('appointment_types')->references('id')->on('appointment_types');
+>>>>>>> origin/stephane
         });
     }
 
@@ -38,6 +45,5 @@ class CreateAppointmentTable extends Migration
     {
         Schema::dropIfExists('appointments');
         Schema::dropIfExists('appointment_types');
-
     }
 }
