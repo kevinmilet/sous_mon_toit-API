@@ -16,8 +16,8 @@ class InsertEstatesTypesSeeder extends Seeder
     {
         DB::table('estates_types')->insert([
             [
-                'id_estates_types' => 1,
-                'estates_type_name' => "Appartement",
+                'id_estate_type' => 1,
+                'estate_type_name' => "Appartement",
             ]
         ]);
     }
