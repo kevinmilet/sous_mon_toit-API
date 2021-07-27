@@ -22,8 +22,8 @@ class CreateContractsTable extends Migration
         Schema::create('contracts', function (Blueprint $table) {
             $table->id('id');
             $table->dateTime('created_at');
-            $table->dateTime('updated_at');
-            $table->dateTime('archived_at');
+            $table->dateTime('updated_at')->nullable();
+            $table->dateTime('archived_at')->nullable();
             $table->string('folder');
             $table->string('name');
             $table->foreignId('id_staff')->references('id')->on('staffs');;

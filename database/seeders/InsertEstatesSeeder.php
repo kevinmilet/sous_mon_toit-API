@@ -59,6 +59,8 @@ class InsertEstatesSeeder extends Seeder
                'attic' => false,
                'elevator' => true,
                'created_at' => '2021-07-26 16:18:00',
+               'updated_at' => null,
+               'archived_at' => null,
            ]
         ]);
     }
