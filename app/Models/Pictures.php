@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+<<<<<<< HEAD
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -24,5 +25,11 @@ class Pictures extends Model implements AuthenticatableContract, AuthorizableCon
     ];
 
 
+=======
+use Illuminate\Database\Eloquent\Model;
+
+class Pictures extends Model
+{
+>>>>>>> origin/ethan
 
 }
