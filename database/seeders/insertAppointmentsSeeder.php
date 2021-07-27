@@ -16,7 +16,7 @@ class insertAppointmentsSeeder extends Seeder
     {
         DB::table('appointments')->insert([
             [
-                'id_appointments' => 1,
+                'id' => 1,
                 'scheduled_at' => '2018-01-11 10:16:32',
                 'notes' => NULL,
                 'id_estate' => 2,
@@ -26,7 +26,7 @@ class insertAppointmentsSeeder extends Seeder
                 'created_at' => '2018-01-11 10:15:32',
             ],
             [
-                'id_appointments' => 2,
+                'id' => 2,
                 'scheduled_at' => '2018-06-11 10:16:32',
                 'notes' => NULL,
                 'id_estate' => 1,
@@ -36,7 +36,7 @@ class insertAppointmentsSeeder extends Seeder
                 'created_at' => '2018-01-11 10:15:32',
             ],
             [
-                'id_appointments' => 3,
+                'id' => 3,
                 'scheduled_at' => '2019-08-11 11:16:32',
                 'notes' => NULL,
                 'id_estate' => 1,
@@ -45,7 +45,7 @@ class insertAppointmentsSeeder extends Seeder
                 'id_appointment_type' => 1,
                 'created_at' => '2018-01-11 10:15:32',
             ],            [
-                'id_appointments' => 4,
+                'id' => 4,
                 'scheduled_at' => '2021-01-11 10:16:32',
                 'notes' => NULL,
                 'id_estate' => 3,

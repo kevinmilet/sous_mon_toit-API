@@ -16,7 +16,7 @@ class InsertCustomerSeeder extends Seeder
     {
         DB::table('customers')->insert([
             [
-                'id_customer' => '1',
+                'id' => '1',
                 'n_customer' => '000001',
                 'firstname' => 'Laura',
                 'lastname' => 'Guilbert',
@@ -34,7 +34,7 @@ class InsertCustomerSeeder extends Seeder
                 'password_request' => null,
             ],
             [
-                'id_customer' => '2',
+                'id' => '2',
                 'n_customer' => '000002',
                 'firstname' => 'Michel',
                 'lastname' => 'Dombal',
@@ -52,7 +52,7 @@ class InsertCustomerSeeder extends Seeder
                 'password_request' => null,
             ],
             [
-                'id_customer' => '3',
+                'id' => '3',
                 'n_customer' => '000003',
                 'firstname' => 'John',
                 'lastname' => 'Snow',
@@ -70,7 +70,7 @@ class InsertCustomerSeeder extends Seeder
                 'password_request' => null,
             ],
             [
-                'id_customer' => '4',
+                'id' => '4',
                 'n_customer' => '000004',
                 'firstname' => 'Jeanne',
                 'lastname' => 'Aliz',
@@ -88,7 +88,7 @@ class InsertCustomerSeeder extends Seeder
                 'password_request' => null,
             ],
             [
-                'id_customer' => '5',
+                'id' => '5',
                 'n_customer' => '000003',
                 'firstname' => 'Jean',
                 'lastname' => 'Neymarducovid',
