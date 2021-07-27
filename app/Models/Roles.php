@@ -16,10 +16,9 @@ class Roles extends Model implements AuthenticatableContract, AuthorizableContra
     use Authenticatable, Authorizable, HasFactory;
 
     protected $fillable = [
-        'name', 'email',
+        'id', 'role',
     ];
 
     protected $hidden = [
-        'password',
     ];
 }
