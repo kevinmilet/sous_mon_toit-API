@@ -5,9 +5,9 @@
 use Laravel\Lumen\Routing\Router;
 
 $router->group(['prefix' => 'biens'], function () use ($router) {
-    $router->get('/', 'EstatesController@selectAllEstates');
-    $router->get('/{id}', 'EstatesController@selectOneEstate');
-    $router->patch('/archive/{id}', 'EstatesController@archive');
+    $router->get('/', 'EstatesController@selectAllEstates'); // /biens/
+    $router->get('/{id}', 'EstatesController@selectOneEstate'); // /biens/{id}
+    $router->patch('/archive/{id}', 'EstatesController@archive'); // /biens/archive/{id}
 });
 
 //Appointment
@@ -25,21 +25,21 @@ $router->group(['prefix' => 'schedule'], function () use ($router){
  *  Routes pour Staffs
  */
 $router->group(['prefix' => 'staff'], function () use ($router) {
-    $router->get('/', 'StaffsController@getAllStaff');
-    $router->get('/{id}', 'StaffsController@getOneById');
-    $router->patch('/archive/{id}', 'StaffsController@archive');
+    $router->get('/', 'StaffsController@getAllStaff'); // /staff/
+    $router->get('/{id}', 'StaffsController@getOneById'); // /staff/{id}
+    $router->patch('/archive/{id}', 'StaffsController@archive'); // /staff/archive/{id}
 });
 
 /*
  * Routes pour Functions
  */
 $router->group(['prefix' => 'functions'], function () use ($router) {
-    $router->get('/', 'FunctionsController@getAllFunctions');
+    $router->get('/', 'FunctionsController@getAllFunctions'); // /functions/
 });
 
 /*
  * Routes pour Roles
  */
 $router->group(['prefix' => 'roles'], function () use ($router) {
-    $router->get('/', 'RolesController@getAllRoles');
+    $router->get('/', 'RolesController@getAllRoles'); // /roles/
 });
