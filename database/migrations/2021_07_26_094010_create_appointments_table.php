@@ -18,7 +18,7 @@ class CreateAppointmentsTable extends Migration
             $table->string('appointment_type');
         });
 
-        Schema::create('appointments', function (Blueprint $table) { 
+        Schema::create('appointments', function (Blueprint $table) {
             $table->id('id');
             $table->dateTime('scheduled_at');
             $table->dateTime('created_at');
@@ -26,7 +26,7 @@ class CreateAppointmentsTable extends Migration
             $table->foreignId('id_estate')->constrained()->references('id')->on('estates');
             $table->foreignId('id_staff')->constrained()->references('id')->on('staffs');
             $table->foreignId('id_customer')->constrained()->references('id')->on('customers');
-            $table->foreignId('id_appointment_type')->constrained('appointments_types')->references('id')->on('appointments_types');
+            $table->foreignId('id_appointment_type')->constrained()->references('id')->on('appointments_types');
         });
     }
 

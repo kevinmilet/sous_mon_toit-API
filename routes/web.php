@@ -1,6 +1,6 @@
 <?php
 
-/** @var \Laravel\Lumen\Routing\Router $router */
+/** @var Router $router */
 
 /*
 |--------------------------------------------------------------------------
@@ -13,8 +13,10 @@
 |
 */
 
+use Laravel\Lumen\Routing\Router;
+
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    echo 'test';
 });
 
 //Appointment
@@ -25,5 +27,5 @@ $router->group(['prefix' => 'schedule'], function () use ($router){
     $router->get('staff/{staff_id}', 'appointmentCtrl@showStaffAppointment'); // /scheduled/customer/{staff_id}
     $router->post('createAppt', 'appointmentCtrl@createAppointment'); // /schedule/createAppt
     $router->patch('update', 'appointmentCtrl@updateAppointment'); // /schedule/update
-    $route->delete('delete/{appointment_id}', 'appointmentCtrl@deleteAppointment'); // /schedule/delete/{appointment_id}
-})
+    $router->delete('delete/{appointment_id}', 'appointmentCtrl@deleteAppointment'); // /schedule/delete/{appointment_id}
+});
