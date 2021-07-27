@@ -1,21 +1,10 @@
 <?php
 
-/** @var Router $router */
+/** @var \Laravel\Lumen\Routing\Router $router */
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It is a breeze. Simply tell Lumen the URIs it should respond to
-| and give it the Closure to call when that URI is requested.
-|
-*/
+$router->get('/biens', 'EstatesController@selectAllEstates');
 
-use Laravel\Lumen\Routing\Router;
-
-$router->get('/', function () use ($router) {
-    echo 'test';
+$router->group(['prefix' => 'biens'], function () use ($router) {
+    $router->get('/', 'EstatesController@selectAllEstates');
+    $router->get('/{id}', 'EstatesController@selectOneEstate');
 });
-
