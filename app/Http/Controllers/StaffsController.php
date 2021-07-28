@@ -7,10 +7,24 @@ use App\Models\Staffs;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 use Laravel\Lumen\Http\ResponseFactory;
 
 class StaffsController extends Controller
 {
+    /**
+     * @throws ValidationException
+     */
+    private function validation($request)
+    {
+        $validation = $this->validate($request,
+            [
+                'firstname' => 'string|required|regex',
+                'lastname' => 'string|required|regex',
+                'mail' => 'email',
+            ]);
+    }
+
     /**
      * @return JsonResponse
      */
