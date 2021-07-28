@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointments;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class AppointmentsController extends Controller
@@ -11,25 +11,40 @@ class AppointmentsController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @return Appointments[]|Collection
      */
     public function showAllAppointments()
     {
         return Appointments::all();
     }
 
+    /**
+     * @param $appointment_id
+     * @return mixed
+     */
     public function showAppointment($appointment_id) {
         return Appointments::find($appointment_id);
     }
 
+    /**
+     * @param $customer_id
+     * @return mixed
+     */
     public function showCustomerAppointment($customer_id) {
         return Appointments::where('id_customer', $customer_id)->get();
     }
 
+    /**
+     * @param $staff_id
+     * @return mixed
+     */
     public function showStaffAppointment($staff_id) {
         return Appointments::where('id_staff', $staff_id)->get();
     }
 
+    /**
+     * @param Request $request
+     */
     public function createAppointment(Request $request){
         Appointments::create([
             'notes' => $request->note,

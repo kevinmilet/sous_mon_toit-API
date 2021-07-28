@@ -4,10 +4,16 @@
 
 use Laravel\Lumen\Routing\Router;
 
-$router->group(['prefix' => 'biens'], function () use ($router) {
+// Biens
+$router->group(['prefix' => 'estates'], function () use ($router) {
     $router->get('/', 'EstatesController@selectAllEstates'); // /biens/
     $router->get('/{id}', 'EstatesController@selectOneEstate'); // /biens/{id}
     $router->patch('/archive/{id}', 'EstatesController@archive'); // /biens/archive/{id}
+});
+
+// Types de biens
+$router->group(['prefix' => 'estates_types'], function () use ($router) {
+    $router->get('/', 'EstatesTypesController@getAllEstatesTypes'); // /estates_types/
 });
 
 //Appointment
@@ -28,6 +34,8 @@ $router->group(['prefix' => 'staff'], function () use ($router) {
     $router->get('/', 'StaffsController@getAllStaff'); // /staff/
     $router->get('/{id}', 'StaffsController@getOneById'); // /staff/{id}
     $router->patch('/archive/{id}', 'StaffsController@archive'); // /staff/archive/{id}
+    $router->post('/create/', 'StaffsController@create'); // /staff/create
+    $router->put('/update/{id}', 'StaffsController@update'); // /staff/update/{id}
 });
 
 /*
