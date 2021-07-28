@@ -65,6 +65,14 @@ $router->group(['prefix' => 'customer'], function () use ($router) {
     $router->delete('delete/{id}', 'CustomersController@delete');
 });
 
+// Customers searchs
+$router->group(['prefix' => 'customer_search'], function () use ($router) {
+    $router->get('/', 'CustomersSearchsController@selectAllCustomersSearchs');
+    $router->get('/{id}', 'CustomersSearchsController@selectOneCustomerSearch');
+     $router->post('create/{id_customer}','CustomersSearchsController@create');
+     $router->put('update/{id}','CustomersSearchsController@update');
+     $router->delete('delete/{id}', 'CustomersSearchsController@delete');
+});
 //Contract
 $router->group(['prefix' => 'contract'], function () use ($router) {
     $router->get('/', 'ContractsController@selectAllContracts');

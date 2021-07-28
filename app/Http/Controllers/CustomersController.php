@@ -19,14 +19,7 @@ class CustomersController extends Controller{
         return response()->json($customer);
     }
 
-    public function archive($id)
-    {
-        $customer = Customers::findOrFail($id);
-        $customer->archived_at = date("Y-m-d H:i:s");
-        $customer->save();
-
-        return response()->json('Utilisateur archivé avec succès', 200);
-    }
+ 
     
     public function create(Request $request) {
         // a faire !! Champs à valider et a nettoyer
@@ -86,5 +79,7 @@ class CustomersController extends Controller{
         $customer->delete();
         return response()->json(['success'=>'Utilisateur supprimé']);
     }
+
+  
 
 }
