@@ -18,7 +18,8 @@ Kevin Milet
 
  + Ajouter le fichier .env a la racine 
 
-`APP_NAME=Lumen
+```
+APP_NAME=Lumen
 APP_ENV=local
 APP_KEY=
 APP_DEBUG=true
@@ -36,7 +37,8 @@ DB_USERNAME=root
 DB_PASSWORD=
 
 CACHE_DRIVER=file
-QUEUE_CONNECTION=sync`
+QUEUE_CONNECTION=sync
+```
 
 # Lancer le serveur
 
@@ -45,14 +47,12 @@ QUEUE_CONNECTION=sync`
 
 # Migration de la base et des données
 
- `php artisan db:wipe`
- `php artisan migrate:fresh`
- `php artisan db:seed`
+ `php artisan migrate:refresh --seed`
 
 # Ajout des extensions
 
 - JWT :
-   `composer require tymon/jwt-auth`
+   - `composer require tymon/jwt-auth`
 
 
 # Relier le dossier storage au dossier public
@@ -60,7 +60,7 @@ QUEUE_CONNECTION=sync`
 - Ouvrir un invite de commande en tant qu'administrateur
 
 - se déplacer dans le dossier public de son projet
-      exemple : `cd c:\wamp64\www\CDA\sous_mon_toit\public`
+    - exemple : `cd c:\wamp64\www\CDA\sous_mon_toit\public`
 
 - lancer la ligne de commande suivante : ( **A adapter selon votre arborescence !!!** )
-      `mklink /D "storage\" "c:\wamp64\www\CDA\sous_mon_toit\storage\app\public\"`
+    - `mklink /D "storage\" "c:\wamp64\www\CDA\sous_mon_toit\storage\app\public\"`
