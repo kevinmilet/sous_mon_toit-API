@@ -23,7 +23,7 @@ class Staffs extends Model implements AuthenticatableContract, AuthorizableContr
     use Authenticatable, Authorizable, HasFactory;
 
     protected $fillable = [
-        'id', 'login', 'firstname', 'lastname', 'created_at', 'updated_at', 'archived_at', 'mail', 'phone', 'password', 'avatar', 'alert_reader', 'id_function', 'id_role',
+        'id', 'login', 'firstname', 'lastname', 'created_at', 'updated_at', s'archived_at', 'mail', 'phone', 'password', 'avatar', 'alert_reader', 'id_function', 'id_role',
     ];
 
     protected $hidden = [

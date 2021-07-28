@@ -19,19 +19,23 @@ class AppointmentsController extends Controller
         return Appointments::all();
     }
 
-    public function showAppointment($appointment_id) {
+    public function showAppointment($appointment_id)
+    {
         return Appointments::find($appointment_id);
     }
 
-    public function showCustomerAppointment($customer_id) {
+    public function showCustomerAppointment($customer_id)
+    {
         return Appointments::where('id_customer', $customer_id)->get();
     }
 
-    public function showStaffAppointment($staff_id) {
+    public function showStaffAppointment($staff_id)
+    {
         return Appointments::where('id_staff', $staff_id)->get();
     }
 
-    public function createAppointment(Request $request){
+    public function createAppointment(Request $request)
+    {
         Appointments::create([
             'notes' => $request->note,
             'scheduled_at' => $request->scheduled_at,
