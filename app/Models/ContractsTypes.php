@@ -13,21 +13,23 @@ class ContractsTypes extends Model implements AuthenticatableContract, Authoriza
 {
     use Authenticatable, Authorizable, HasFactory;
 
-    // /**
-    //  * The attributes that are mass assignable.
-    //  *
-    //  * @var array
-    //  */
-    // protected $fillable = [
-    //     'name', 'email',
-    // ];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'id',
+        'contract_type',
+        'template_path',
+    ];
 
-    // /**
-    //  * The attributes excluded from the model's JSON form.
-    //  *
-    //  * @var array
-    //  */
-    // protected $hidden = [
-    //     'password',
-    // ];
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        '',
+    ];
 }

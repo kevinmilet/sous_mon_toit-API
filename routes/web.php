@@ -63,6 +63,9 @@ $router->group(['prefix' => 'customer'], function () use ($router) {
 $router->group(['prefix' => 'contract'], function () use ($router){
     $router->get('/', 'ContractsController@selectAllContracts');
     $router->get('/contractsTypes', 'ContractsTypesController@selectAllContractsTypes');
-    $router->get('/{id_contract}', 'ContractsController@selectOneContract');
+    $router->get('/createForm', 'ContractsController@createContractView');
+    $router->post('/saveContract', 'ContractsController@saveNewContract');
+    $router->put('/updateContract', 'ContractsController@updateContract');
     $router->patch('/archive/{id_contract}', 'ContractsController@archiveContract');
+    $router->get('/{id_contract}', 'ContractsController@selectOneContract');
 });
