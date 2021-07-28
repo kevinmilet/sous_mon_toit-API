@@ -8,11 +8,15 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends Model implements AuthenticatableContract, AuthorizableContract
+/**
+ * @method static find($appointment_id)
+ * @method static where(string $string, $customer_id)
+ * @method static create(array $array)
+ */
+class Appointments extends Model
 {
-    use Authenticatable, Authorizable, HasFactory,SoftDeletes;
+    use Authenticatable, Authorizable, HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -20,7 +24,12 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'notes',
+        'scheduled_at',
+        'id_estate',
+        'id_staff',
+        'id_customer',
+        'id_appointment_type'
     ];
 
     /**
@@ -29,6 +38,5 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $hidden = [
-        'password',
     ];
 }

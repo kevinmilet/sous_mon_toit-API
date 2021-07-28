@@ -12,4 +12,18 @@ class CustomersSearchsController extends Controller{
         
         return CustomersSearchs::all();
     }
+
+    public function selectOneCustomerSearch($id){
+        
+        $customerSearch =  CustomersSearchs::find($id);
+        return response()->json($customerSearch);
+    }
+
+    public function update($id, Request $request){
+        $customerSearch = CustomersSearchs::findOrFail($id);
+        $customerSearch->update($request->all());
+        return response()->json(['success'=>'Modifications enregistrées']);
+            
+    
+    }
 }
