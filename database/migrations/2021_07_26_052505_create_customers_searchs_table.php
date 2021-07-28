@@ -25,7 +25,7 @@ class CreateCustomersSearchsTable extends Migration
             $table->integer('search_radius');
             $table->dateTime('created_at');
             $table->dateTime('updated_at')->default(NULL)->nullable();
-            $table->tinyInteger('alert');
+            $table->boolean('alert');
             $table->integer('id_customer')->references('id')->on('customers');;
         });
     }

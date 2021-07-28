@@ -12,7 +12,19 @@ class CustomersSearchs extends Model{
 
     use Authenticatable, Authorizable, HasFactory;
 
-    // protected $fillable = [
-           
-    // ];
+     protected $fillable = [
+         'buy_or_rent',
+         'surface_min',
+         'number_rooms',
+         'budget_min',
+         'budget_max',
+         'search_longitude',
+         'search_latitude',
+         'search_radius',
+         'created_at',
+         'updated_at',
+         'alert',
+         'id_customer'
+ 
+     ];
 }

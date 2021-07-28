@@ -26,4 +26,11 @@ class CustomersSearchsController extends Controller{
             
     
     }
+
+    public function delete($id){
+        $customerSearch = CustomersSearchs::find($id);
+        $customerSearch->delete();
+        return response()->json(['success'=>'Suppression validée ']);
+    }
+
 }
