@@ -3,7 +3,6 @@
 /** @var Router $router */
 
 use Laravel\Lumen\Routing\Router;
-<<<<<<< HEAD
 
 // Biens
 $router->group(['prefix' => 'estates'], function () use ($router) {
@@ -11,19 +10,12 @@ $router->group(['prefix' => 'estates'], function () use ($router) {
     $router->get('/{id}', 'EstatesController@selectOneEstate'); // /biens/{id}
     $router->patch('/archive/{id}', 'EstatesController@archive'); // /biens/archive/{id}
 });
-=======
-$router->get('/', function () use ($router) {
-    echo 'test';
-});
-/** @var Router $router */
->>>>>>> origin/laurent
 
 // Types de biens
 $router->group(['prefix' => 'estates_types'], function () use ($router) {
     $router->get('/', 'EstatesTypesController@getAllEstatesTypes'); // /estates_types/
 });
 
-<<<<<<< HEAD
 //Appointment
 $router->group(['prefix' => 'schedule'], function () use ($router) {
     $router->get('/', 'appointmentsController@showAllAppointments'); // /schedule/
@@ -34,14 +26,6 @@ $router->group(['prefix' => 'schedule'], function () use ($router) {
     $router->put('update/{appointment_id}', 'appointmentsController@updateAppointment'); // /schedule/update/{appointment_id} (data à passer en params)
     $router->delete('delete/{appointment_id}', 'appointmentsController@deleteAppointment'); // /schedule/delete/{appointment_id}
 });
-=======
-        $router->get('/','CustomersController@selectAllCustomers');
-        $router->get('/{id}', 'CustomersController@selectOneCustomer');
-        $router->patch('/archive/{id}','CustomersController@archive');
-        $router->post('create','CustomersController@create');
-        $router->put('update/{id}','CustomersController@update');
-        $router->delete('delete/{id}', 'CustomersController@delete');
->>>>>>> origin/laurent
 
 /*
  *  Routes pour Staffs
@@ -49,7 +33,7 @@ $router->group(['prefix' => 'schedule'], function () use ($router) {
 $router->group(['prefix' => 'staff'], function () use ($router) {
     $router->get('/', 'StaffsController@getAllStaff'); // /staff/
     $router->get('/{id}', 'StaffsController@getOneById'); // /staff/{id}
-    $router->patch('/archive/{id}', 'StaffsController@archive'); // /staff/archive/{id}
+    $router->delete('/delete/{id}', 'StaffsController@delete'); // /staff/delete/{id}
     $router->post('/create/', 'StaffsController@create'); // /staff/create
     $router->put('/update/{id}', 'StaffsController@update'); // /staff/update/{id}
 });
