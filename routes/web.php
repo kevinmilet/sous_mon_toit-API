@@ -10,6 +10,10 @@ $router->group(['prefix' => 'estates'], function () use ($router) {
     $router->get('/{id}', 'EstatesController@selectOneEstate'); // /biens/{id}
     $router->patch('/archive/{id}', 'EstatesController@archive'); // /biens/archive/{id}
 });
+$router->get('/', function () use ($router) {
+    echo 'test';
+});
+/** @var Router $router */
 
 // Types de biens
 $router->group(['prefix' => 'estates_types'], function () use ($router) {
@@ -56,7 +60,9 @@ $router->group(['prefix' => 'roles'], function () use ($router) {
 $router->group(['prefix' => 'customer'], function () use ($router) {
     $router->get('/', 'CustomersController@selectAllCustomers');
     $router->get('/{id}', 'CustomersController@selectOneCustomer');
-    $router->patch('/archive/{id}', 'CustomersController@archive');
+    $router->post('create','CustomersController@create');
+    $router->put('update/{id}','CustomersController@update');
+    $router->delete('delete/{id}', 'CustomersController@delete');
 });
 
 //Contract
