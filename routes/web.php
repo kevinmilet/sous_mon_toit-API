@@ -33,7 +33,7 @@ $router->group(['prefix' => 'schedule'], function () use ($router) {
 $router->group(['prefix' => 'staff'], function () use ($router) {
     $router->get('/', 'StaffsController@getAllStaff'); // /staff/
     $router->get('/{id}', 'StaffsController@getOneById'); // /staff/{id}
-    $router->patch('/archive/{id}', 'StaffsController@archive'); // /staff/archive/{id}
+    $router->delete('/delete/{id}', 'StaffsController@delete'); // /staff/delete/{id}
     $router->post('/create/', 'StaffsController@create'); // /staff/create
     $router->put('/update/{id}', 'StaffsController@update'); // /staff/update/{id}
 });

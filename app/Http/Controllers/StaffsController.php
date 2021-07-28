@@ -33,11 +33,10 @@ class StaffsController extends Controller
      * @param $id
      * @return Response|ResponseFactory
      */
-    public function archive($id)
+    public function delete($id)
     {
         $staff = Staffs::findOrFail($id);
-        $staff->archived_at = date("Y-m-d H:i:s");
-        $staff->save();
+        $staff->delete();
 
         return response('Utilisateur archivé avec succès', 200);
     }
