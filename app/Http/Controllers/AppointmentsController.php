@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointments;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,7 @@ class AppointmentsController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @return Appointments[]|Collection
      */
     public function showAllAppointments()
     {
