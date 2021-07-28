@@ -33,4 +33,26 @@ class CustomersSearchsController extends Controller{
         return response()->json(['success'=>'Suppression validée ']);
     }
 
+    public function create(Request $request) {
+        // a faire !! Champs à valider et a nettoyer
+        CustomersSearchs::create([
+
+            'buy_or_rent'=>$request->buy_or_rent,
+            'surface_min'=>$request->surface_min,
+            'number_rooms'=>$request->number_rooms,
+            'budget_min'=>$request->budget_min,
+            'budget_max'=>$request->budget_max,
+            'search_longitude'=>$request->longitude,
+            'search_latitude'=>$request->latitude,
+            'search_radius'=>$request->radius,
+            'created_at'=>$request->created_at,
+            'updated_at'=>$request->update_at,
+            'alert'=>$request->alert,
+            'id_customer'=>$request->id_customer,
+        
+        ]);
+        return response()->json(['success'=>'Recherche enregistrée']);
+        
+    }
+
 }

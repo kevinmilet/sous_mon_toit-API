@@ -69,7 +69,7 @@ $router->group(['prefix' => 'customer'], function () use ($router) {
 $router->group(['prefix' => 'customer_search'], function () use ($router) {
     $router->get('/', 'CustomersSearchsController@selectAllCustomersSearchs');
     $router->get('/{id}', 'CustomersSearchsController@selectOneCustomerSearch');
-     $router->post('create','CustomersSearchsController@create');
+     $router->post('create/{id_customer}','CustomersSearchsController@create');
      $router->put('update/{id}','CustomersSearchsController@update');
      $router->delete('delete/{id}', 'CustomersSearchsController@delete');
 });

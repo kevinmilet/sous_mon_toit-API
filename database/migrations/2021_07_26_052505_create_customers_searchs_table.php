@@ -18,11 +18,11 @@ class CreateCustomersSearchsTable extends Migration
             $table->string('buy_or_rent');
             $table->integer('surface_min')->default(NULL)->nullable();
             $table->integer('number_rooms')->default(NULL)->nullable();
-            $table->decimal('budget_min', $precision = 15, $scale = 2);
-            $table->decimal('budget_max', $precision = 15, $scale = 2);
-            $table->decimal('search_longitude', $precision = 10, $scale = 2);
-            $table->decimal('search_latitude', $precision = 10, $scale = 2);
-            $table->integer('search_radius');
+            $table->decimal('budget_min', $precision = 15, $scale = 2)->default(NULL)->nullable();
+            $table->decimal('budget_max', $precision = 15, $scale = 2)->default(NULL)->nullable();
+            $table->decimal('search_longitude', $precision = 10, $scale = 2)->default(NULL)->nullable();
+            $table->decimal('search_latitude', $precision = 10, $scale = 2)->default(NULL)->nullable();
+            $table->integer('search_radius')->default(NULL)->nullable();
             $table->dateTime('created_at');
             $table->dateTime('updated_at')->default(NULL)->nullable();
             $table->boolean('alert');

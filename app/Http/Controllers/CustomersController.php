@@ -80,4 +80,6 @@ class CustomersController extends Controller{
         return response()->json(['success'=>'Utilisateur supprimé']);
     }
 
+  
+
 }
