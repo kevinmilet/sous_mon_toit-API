@@ -13,7 +13,7 @@ class SousMonToitStaffs extends Migration
      */
     public function up()
     {
-        Schema::create('staffs', function(Blueprint $table) {
+        Schema::create('staffs', function (Blueprint $table) {
             $table->id('id');
             $table->string('login', 50);
             $table->string('firstname', 50);

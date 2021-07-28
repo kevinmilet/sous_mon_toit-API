@@ -24,10 +24,10 @@ class CreateAppointmentsTable extends Migration
             $table->dateTime('created_at');
             $table->dateTime('updated_at')->nullable()->default(NULL);
             $table->text('notes')->nullable();
-            $table->foreignId('id_estate')->constrained()->references('id')->on('estates');
+            $table->foreignId('id_estate')->nullable()->constrained()->references('id')->on('estates');
             $table->foreignId('id_staff')->constrained()->references('id')->on('staffs');
-            $table->foreignId('id_customer')->constrained()->references('id')->on('customers');
-            $table->foreignId('id_appointment_type')->constrained()->references('id')->on('appointments_types');
+            $table->foreignId('id_customer')->nullable()->constrained()->references('id')->on('customers');
+            $table->foreignId('id_appointment_type')->nullable()->constrained()->references('id')->on('appointments_types');
         });
     }
 

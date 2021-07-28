@@ -30,11 +30,8 @@ class SousMonToitCustomers extends Migration
             $table->integer('first_met');
             $table->string('token', 255)->nullable();
             $table->integer('password_request')->nullable();
-
         });
-
-        //
-    }
+            }
 
     /**
      * Reverse the migrations.
