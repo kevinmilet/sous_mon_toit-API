@@ -18,7 +18,31 @@ class InsertEstatesTypesSeeder extends Seeder
             [
                 'id' => 1,
                 'estate_type_name' => "Appartement",
-            ]
+            ],
+            [
+                'id' => 2,
+                'estate_type_name' => "Maison",
+            ],
+            [
+                'id' => 3,
+                'estate_type_name' => "Garage",
+            ],
+            [
+                'id' => 4,
+                'estate_type_name' => "Parking",
+            ],
+            [
+                'id' => 5,
+                'estate_type_name' => "Terrain",
+            ],
+            [
+                'id' => 6,
+                'estate_type_name' => "Commerce",
+            ],
+            [
+                'id' => 7,
+                'estate_type_name' => "Autre",
+            ],
         ]);
     }
 }
