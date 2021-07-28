@@ -67,10 +67,10 @@ class ContractsController extends Controller
         ]);
 
         if ($request->hasFile('file')) {
-            $image = $request->file('file');
-            $name = time().'.'.$image->getClientOriginalExtension();
-            $destinationPath = storage_path('/app/documents/' . $request->folder);
-            $image->move($destinationPath, $name);
+            $contrat = $request->file('file');
+            $name = time().'.'.$contrat->getClientOriginalExtension();
+            $destinationPath = storage_path('/app/public/documents/' . $request->folder);
+            $contrat->move($destinationPath, $name);
         }
 
         Contracts::create([
