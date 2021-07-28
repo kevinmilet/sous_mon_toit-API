@@ -30,5 +30,14 @@ $router->get('/', function () use ($router) {
         $router->delete('delete/{id}', 'CustomersController@delete');
 
     });
+    $router->group(['prefix' => 'customer_search'], function () use ($router) {
 
+        $router->get('/','CustomersSearchsController@selectAllCustomersSearchs');
+        // $router->get('/{id}', 'CustomersController@selectOneCustomer');
+        // $router->patch('/archive/{id}','CustomersController@archive');
+        // $router->post('create','CustomersController@create');
+        // $router->put('update/{id}','CustomersController@update');
+        // $router->delete('delete/{id}', 'CustomersController@delete');
+
+    });
 
