@@ -25,7 +25,7 @@ class SousMonToitCustomers extends Migration
             $table->date('birthdate')->nullable();
             $table->string('address', 255)->nullable();
             $table->dateTime('created_at');
-            $table->dateTime('archived_at')->nullable();
+            $table->dateTime('deleted_at')->nullable();
             $table->dateTime('updated_at')->nullable();
             $table->integer('first_met');
             $table->string('token', 255)->nullable();

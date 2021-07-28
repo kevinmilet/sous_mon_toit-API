@@ -13,21 +13,30 @@ class Contracts extends Model implements AuthenticatableContract, AuthorizableCo
 {
     use Authenticatable, Authorizable, HasFactory;
 
-    // /**
-    //  * The attributes that are mass assignable.
-    //  *
-    //  * @var array
-    //  */
-    // protected $fillable = [
-    //     'name', 'email',
-    // ];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'id',
+        'folder',
+        'name',
+        'id_estate',
+        'id_customer',
+        'id_staff',
+        'id_contract_type',
+        'created_at',
+        'updated_at',
+        'archived_at',
+    ];
 
-    // /**
-    //  * The attributes excluded from the model's JSON form.
-    //  *
-    //  * @var array
-    //  */
-    // protected $hidden = [
-    //     'password',
-    // ];
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        
+    ];
 }

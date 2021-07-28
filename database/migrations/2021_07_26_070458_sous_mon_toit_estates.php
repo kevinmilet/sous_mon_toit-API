@@ -60,7 +60,7 @@ class SousMonToitEstates extends Migration
             $table->decimal('coownership_charge')->nullable();
             $table->dateTime('created_at');
             $table->dateTime('updated_at')->nullable();
-            $table->dateTime('archived_at')->nullable();
+            $table->dateTime('deleted_at')->nullable();
 
 
         });
