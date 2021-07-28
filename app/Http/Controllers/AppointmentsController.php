@@ -32,6 +32,7 @@ class AppointmentsController extends Controller
     }
 
     public function createAppointment(Request $request){
+        //validation à ajouter
         Appointments::create([
             'notes' => $request->notes,
             'scheduled_at' => $request->scheduled_at,
@@ -42,16 +43,14 @@ class AppointmentsController extends Controller
         ]);
     }
 
-    public function updateAppointment(Request $request) {
-        Appointments::where('id', $request->id)
-            ->update([
-                'notes' => $request->notes,
-                'scheduled_at' => $request->scheduled_at,
-                'id_estate' => $request->id_estate,
-                'id_staff' => $request->id_staff,
-                'id_customer' => $request->id_customer,
-                'id_appointment_type' => $request->id_appointment_type
-            ]);
+    public function updateAppointment($appointment_id, Request $request) {
+        $appointments = Appointments::findOrFail($appointment_id);
+        //validation à ajouter
+        $appointments->update($request->all());
+    }
+
+    public function deleteAppointment() {
+
     }
     //
 }

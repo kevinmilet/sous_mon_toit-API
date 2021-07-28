@@ -17,7 +17,7 @@ $router->group(['prefix' => 'schedule'], function () use ($router){
     $router->get('customer/{customer_id}', 'appointmentsController@showCustomerAppointment'); // /scheduled/customer/{customer_id}
     $router->get('staff/{staff_id}', 'appointmentsController@showStaffAppointment'); // /scheduled/customer/{staff_id}
     $router->post('createAppt', 'appointmentsController@createAppointment'); // /schedule/createAppt
-    $router->patch('update', 'appointmentsController@updateAppointment'); // /schedule/update
+    $router->put('update/{appointment_id}', 'appointmentsController@updateAppointment'); // /schedule/update/{appointment_id} (data à passer en params)
     $router->delete('delete/{appointment_id}', 'appointmentsController@deleteAppointment'); // /schedule/delete/{appointment_id}
 });
 
