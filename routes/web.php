@@ -73,6 +73,12 @@ $router->group(['prefix' => 'customer_search'], function () use ($router) {
      $router->put('update/{id}','CustomersSearchsController@update');
      $router->delete('delete/{id}', 'CustomersSearchsController@delete');
 });
+// Customers types 
+$router->group(['prefix' => 'customer_type'], function () use ($router) {
+    $router->get('/', 'CustomersTypesController@selectAllCustomersTypes');
+    $router->get('/{id}', 'CustomersTypesController@selectOneCustomerType');
+});
+
 //Contract
 $router->group(['prefix' => 'contract'], function () use ($router) {
     $router->get('/', 'ContractsController@selectAllContracts');
