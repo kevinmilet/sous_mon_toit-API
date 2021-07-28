@@ -18,12 +18,15 @@ class StaffsController extends Controller
      */
     private function validation($request): array
     {
+//        var_dump($request->hasFile('avatar'));
+//        die;
         return $this->validate($request,
             [
                 'firstname' => 'string|required',
                 'lastname' => 'string|required',
                 'mail' => 'email|required|unique:App\Models\Staffs,mail',
                 'phone' => 'string|min:10|max:15|required',
+                'avatar' => ['sometimes', 'max:2048', 'mimetypes:image/jpeg,image/png'],
                 'id_function' => 'numeric|required',
                 'id_role' => 'numeric|required'
             ]);
@@ -79,7 +82,7 @@ class StaffsController extends Controller
             $destinationPath = storage_path('/app/public/avatars/');
             $avatar->move($destinationPath, $name);
         } else {
-            $name = null;
+            $name = 'user.png';
         }
 
         $staff = new Staffs;
