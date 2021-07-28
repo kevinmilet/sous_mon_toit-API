@@ -32,7 +32,9 @@ class SousMonToitCustomers extends Migration
             $table->integer('password_request')->nullable();
 
         });
-
+        Schema::table('customers', function (Blueprint $table) {
+            $table->softDeletes();
+        });
         //
     }
 
