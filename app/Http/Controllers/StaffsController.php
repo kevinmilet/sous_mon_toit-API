@@ -18,17 +18,15 @@ class StaffsController extends Controller
      */
     private function validation($request): array
     {
-//        var_dump($request->hasFile('avatar'));
-//        die;
         return $this->validate($request,
             [
                 'firstname' => 'string|required',
                 'lastname' => 'string|required',
-                'mail' => 'email|required|unique:App\Models\Staffs,mail',
+                'mail' => 'email|unique:App\Models\Staffs,mail|required',
                 'phone' => 'string|min:10|max:15|required',
-                'avatar' => ['sometimes', 'max:2048', 'mimetypes:image/jpeg,image/png'],
-                'id_function' => 'numeric|required',
-                'id_role' => 'numeric|required'
+//                'avatar' => 'nullable|sometimes|image|mimes:jpeg,jpg,png|max:2048',
+                'id_function' => 'numeric|integer|required',
+                'id_role' => 'numeric|integer|required'
             ]);
     }
 
@@ -39,7 +37,6 @@ class StaffsController extends Controller
     {
         return response()->json(Staffs::all());
     }
-
 
     /**
      * @param $id
@@ -71,14 +68,14 @@ class StaffsController extends Controller
         $validated = $this->validation($request);
 
         // Set login
-        $login = strtolower(substr($validated['firstname'],0 , 1)) . strtolower($validated['lastname']);
+        $login = strtolower(substr($validated['firstname'], 0, 1)) . strtolower($validated['lastname']);
         // Set temp random password
-        $rndPassword =bin2hex(random_bytes(4));
+        $rndPassword = bin2hex(random_bytes(4));
         $rndPasswordHash = password_hash($rndPassword, PASSWORD_DEFAULT);
 
         if ($request->hasFile('avatar')) {
             $avatar = $request->file('avatar');
-            $name = uniqid('avatar_').'.'.$avatar->getClientOriginalExtension();
+            $name = uniqid('avatar_') . '.' . $avatar->getClientOriginalExtension();
             $destinationPath = storage_path('/app/public/avatars/');
             $avatar->move($destinationPath, $name);
         } else {
@@ -110,8 +107,8 @@ class StaffsController extends Controller
      */
     public function update($id, Request $request): array
     {
-       $staff = Staffs::findOrFail($id);
-       $staff->update($request->all());
+        $staff = Staffs::findOrFail($id);
+        $staff->update($request->all());
 
         return [$staff];
     }
