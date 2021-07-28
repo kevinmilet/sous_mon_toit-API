@@ -46,17 +46,25 @@ class AppointmentsController extends Controller
     public function createAppointment(Request $request){
         $validated = $this->validation($request);
         Appointments::create([
-            'notes' => $validated['notes'],
-            'scheduled_at' => $validated['scheduled_at'],
-            'id_estate' => $validated['id_estate'],
-            'id_staff' => $validated['id_staff'],
-            'id_customer' => $validated['id_customer'],
-            'id_appointment_type' => $validated['id_appointment_type']
+            'notes' => $request->notes,
+            'scheduled_at' => $request->scheduled_at,
+            'id_estate' => $request->id_estate,
+            'id_staff' => $request->id_staff,
+            'id_customer' => $request->id_customer,
+            'id_appointment_type' => $request->id_appointment_type
+            // 'notes' => $validated['notes'],
+            // 'scheduled_at' => $validated['scheduled_at'],
+            // 'id_estate' => $validated['id_estate'],
+            // 'id_staff' => $validated['id_staff'],
+            // 'id_customer' => $validated['id_customer'],
+            // 'id_appointment_type' => $validated['id_appointment_type']
         ]);
     }
 
     public function updateAppointment($appointment_id, Request $request) {
         $appointments = Appointments::findOrFail($appointment_id);
+        $validated = $this->validation($request);
+
         //validation à ajouter
         $appointments->update($request->all());
         return $appointments;

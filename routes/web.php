@@ -12,14 +12,17 @@ $router->group(['prefix' => 'biens'], function () use ($router) {
 
 //Appointment
 $router->group(['prefix' => 'schedule'], function () use ($router){
-    $router->get('/', 'appointmentsController@showAllAppointments'); // /schedule/
-    $router->get('{appointment_id}', 'appointmentsController@showAppointment'); // /schedule/{appointment_id}
-    $router->get('customer/{customer_id}', 'appointmentsController@showCustomerAppointment'); // /scheduled/customer/{customer_id}
-    $router->get('staff/{staff_id}', 'appointmentsController@showStaffAppointment'); // /scheduled/customer/{staff_id}
-    $router->post('createAppt', 'appointmentsController@createAppointment'); // /schedule/createAppt
-    $router->put('update/{appointment_id}', 'appointmentsController@updateAppointment'); // /schedule/update/{appointment_id} (data à passer en params)
-    $router->delete('delete/{appointment_id}', 'appointmentsController@deleteAppointment'); // /schedule/delete/{appointment_id}
+    $router->get('/', 'AppointmentsController@showAllAppointments'); // /schedule/
+    $router->get('{appointment_id}', 'AppointmentsController@showAppointment'); // /schedule/{appointment_id}
+    $router->get('customer/{customer_id}', 'AppointmentsController@showCustomerAppointment'); // /scheduled/customer/{customer_id}
+    $router->get('staff/{staff_id}', 'AppointmentsController@showStaffAppointment'); // /scheduled/customer/{staff_id}
+    $router->post('createAppt', 'AppointmentsController@createAppointment'); // /schedule/createAppt
+    $router->put('update/{appointment_id}', 'AppointmentsController@updateAppointment'); // /schedule/update/{appointment_id} (data à passer en params)
+    $router->delete('delete/{appointment_id}', 'AppointmentsController@deleteAppointment'); // /schedule/delete/{appointment_id}
 });
+
+//AppointmentType
+$router->get('apptTypes', 'AppointmentsTypesController@showAllTypes'); // /apptTypes
 
 /*
  *  Routes pour Staffs
