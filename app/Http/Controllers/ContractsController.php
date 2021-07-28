@@ -34,7 +34,7 @@ class ContractsController extends Controller
      */
     public function selectOneContract($id_contract)
     {
-        return Contracts::find($id_contract);
+        return Contracts::findOrFail($id_contract);
     }
 
     /**
@@ -57,8 +57,6 @@ class ContractsController extends Controller
      */
     public function saveNewContract(Request $request){
 
-        var_dump($request);
-
         $this->validate($request, [
             'folder'=> '',
             'id_estate' => 'required',
@@ -67,27 +65,21 @@ class ContractsController extends Controller
             'id_contract_type' => 'required',
             'file' => 'required',
         ]);
-        // $validated = $request->validate([
-        //     'folder'=> '',
-        //     'id_estate' => 'required',
-        //     'id_customer' => 'required',
-        //     'id_staff' => 'required',
-        //     'id_contract_type' => 'required',
-        //     'file' => 'required|mimes:pdf',
-        // ]);
 
-
-        $filename = "nom de l'image";
+        if ($request->hasFile('file')) {
+            $image = $request->file('file');
+            $name = time().'.'.$image->getClientOriginalExtension();
+            $destinationPath = storage_path('/app/documents/' . $request->folder);
+            $image->move($destinationPath, $name);
+        }
 
         Contracts::create([
             'folder' => $request->folder,
-            'name' => $filename,
+            'name' => $name, // nom du fichier enregistré
             'id_estate' => $request->id_estate,
             'id_staff' => $request->id_staff,
             'id_customer' => $request->id_customer,
-            'id_contract_type' => $request->id_appointment_type,
-            // 'updated_at' => null,
-            // 'archived_at' => null,
+            'id_contract_type' => $request->id_contract_type,
 
         ]);
         // //Création du contrat

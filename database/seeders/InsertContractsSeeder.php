@@ -24,6 +24,7 @@ class InsertContractsSeeder extends Seeder
                 'name' => 'Dombal_Michel_Bail_1234_20210726.pdf',
                 'id_staff' => 3,
                 'id_estate' => 1,
+                'id_customer' => 1,
                 'id_contract_type' => 1,
             ],
             [
@@ -35,6 +36,7 @@ class InsertContractsSeeder extends Seeder
                 'name' => 'Guilbert_Laura_Offre_1234_20210726.pdf',
                 'id_staff' => 4,
                 'id_estate' => 1,
+                'id_customer' => 2,
                 'id_contract_type' => 3,
             ],
         ]);
