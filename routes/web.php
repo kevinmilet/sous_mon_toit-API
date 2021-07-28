@@ -10,10 +10,6 @@ $router->group(['prefix' => 'estates'], function () use ($router) {
     $router->get('/{id}', 'EstatesController@selectOneEstate'); // /biens/{id}
     $router->patch('/archive/{id}', 'EstatesController@archive'); // /biens/archive/{id}
 });
-$router->get('/', function () use ($router) {
-    echo 'test';
-});
-/** @var Router $router */
 
 // Types de biens
 $router->group(['prefix' => 'estates_types'], function () use ($router) {
@@ -69,11 +65,12 @@ $router->group(['prefix' => 'customer'], function () use ($router) {
 $router->group(['prefix' => 'customer_search'], function () use ($router) {
     $router->get('/', 'CustomersSearchsController@selectAllCustomersSearchs');
     $router->get('/{id}', 'CustomersSearchsController@selectOneCustomerSearch');
-     $router->post('create/{id_customer}','CustomersSearchsController@create');
-     $router->put('update/{id}','CustomersSearchsController@update');
-     $router->delete('delete/{id}', 'CustomersSearchsController@delete');
+    $router->post('create/{id_customer}','CustomersSearchsController@create');
+    $router->put('update/{id}','CustomersSearchsController@update');
+    $router->delete('delete/{id}', 'CustomersSearchsController@delete');
 });
-// Customers types 
+
+// Customers types
 $router->group(['prefix' => 'customer_type'], function () use ($router) {
     $router->get('/', 'CustomersTypesController@selectAllCustomersTypes');
     $router->get('/{id}', 'CustomersTypesController@selectOneCustomerType');
