@@ -13,6 +13,7 @@ class AppointmentsController extends Controller
      *
      * @return void
      */
+    
     public function showAllAppointments()
     {
         return Appointments::all();
@@ -32,13 +33,25 @@ class AppointmentsController extends Controller
 
     public function createAppointment(Request $request){
         Appointments::create([
-            'notes' => $request->note,
+            'notes' => $request->notes,
             'scheduled_at' => $request->scheduled_at,
             'id_estate' => $request->id_estate,
             'id_staff' => $request->id_staff,
             'id_customer' => $request->id_customer,
             'id_appointment_type' => $request->id_appointment_type
         ]);
+    }
+
+    public function updateAppointment(Request $request) {
+        Appointments::where('id', $request->id)
+            ->update([
+                'notes' => $request->notes,
+                'scheduled_at' => $request->scheduled_at,
+                'id_estate' => $request->id_estate,
+                'id_staff' => $request->id_staff,
+                'id_customer' => $request->id_customer,
+                'id_appointment_type' => $request->id_appointment_type
+            ]);
     }
     //
 }
