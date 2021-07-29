@@ -21,7 +21,8 @@ class EstatesController extends Controller
                 'id' => 'numeric|integer|required',
                 'id_estate_type' => 'numeric|integer|required',
                 'id_customer' => 'numeric|integer|required',
-                'reference_estate' => 'string|nullable',
+                'title' => 'string|required',
+                'reference' => 'string|nullable',
                 'dpe_file' => 'string|nullable',
                 'buy_or_rent' => 'string|required',
                 'address' => 'string|required',
@@ -72,7 +73,7 @@ class EstatesController extends Controller
      */
     public function selectAllEstates()
     {
-       return Estates::all();
+        return Estates::all();
     }
 
     /**
@@ -108,7 +109,8 @@ class EstatesController extends Controller
         $response = $estate->create([
             'id_estate_type' => $validated['id_estate_type'],
             'id_customer' => $validated['id_customer'],
-            'reference_estate' => $validated['reference_estate'],
+            'title' => $validated['title'],
+            'reference_estate' => $validated['reference'],
             'dpe_file' => $validated['dpe_file'],
             'buy_or_rent' => $validated['buy_or_rent'],
             'address' => $validated['address'],
