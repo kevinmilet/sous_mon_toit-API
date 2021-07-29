@@ -6,6 +6,7 @@ use App\Models\CustomersSearchs;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class CustomersSearchsController extends Controller{
 
@@ -17,6 +18,23 @@ class CustomersSearchsController extends Controller{
         return CustomersSearchs::all();
     }
 
+    private function validation($request) {
+        $validated = $this->validate($request, [
+           'buy_or_rent'=> 'required|string',
+           'surface_min'=> 'numeric|interger',
+            'number_rooms'=> 'numeric|integer',
+            'budget_min'=> 'float',
+            'budget_max'=>'float',
+            'search_longitude'=>'float',
+            'search_latitude'=>'float',
+            'search_radius'=>'numeric|integer',
+            'created_at'=>'date',
+            'updated_at'=>'date',
+            'alert'=>'boolean|required',
+            'id_customer'=>'integer|required'
+        ]);
+        return $validated;
+    }
     /**
      * @param $id
      * @return JsonResponse
@@ -54,23 +72,24 @@ class CustomersSearchsController extends Controller{
      * @param Request $request
      * @return JsonResponse
      */
-    public function create(Request $request): JsonResponse
+    public function create(Request $request): array
     {
-        // a faire !! Champs à valider et a nettoyer
-        CustomersSearchs::create([
+        $validated = $this->validation($request);
 
-            'buy_or_rent'=>$request->buy_or_rent,
-            'surface_min'=>$request->surface_min,
-            'number_rooms'=>$request->number_rooms,
-            'budget_min'=>$request->budget_min,
-            'budget_max'=>$request->budget_max,
-            'search_longitude'=>$request->longitude,
-            'search_latitude'=>$request->latitude,
-            'search_radius'=>$request->radius,
-            'created_at'=>$request->created_at,
-            'updated_at'=>$request->update_at,
-            'alert'=>$request->alert,
-            'id_customer'=>$request->id_customer,
+        CustomersSearchs::create([
+         
+            'buy_or_rent'=>$validated['buy_or_rent'],
+            'surface_min'=>$validated['surface_min'],
+            'number_rooms'=>$validated['number_rooms'],
+            'budget_min'=>$validated['budget_min'],
+            'budget_max'=>$validated['budget_max'],
+            'search_longitude'=>$validated['search_longitude'],
+            'search_latitude'=>$validated['search_latitude'],
+            'search_radius'=>$validated['search_radius'],
+            'created_at'=>$validated['created_at'],
+            'updated_at'=>$validated['update_at'],
+            'alert'=>$validated['alert'],
+            'id_customer'=>$validated['id_customer'],
 
         ]);
         return response()->json(['success'=>'Recherche enregistrée']);

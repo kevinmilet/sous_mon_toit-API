@@ -37,51 +37,50 @@ class CustomersController extends Controller{
         return response()->json($customer);
     }
 
+    private function validation($request) {
+        $validated = $this->validate($request, [
+            'n_customer' => 'required|string',
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+            'gender' => 'required|string',
+            'mail' => 'string|email|unique:customers',
+            'phone' => 'required|string',
+            'birthdate' => 'date',
+            'address' => 'string',
+            'created_at' => 'date',
+            'archived_at' => 'date',
+            'update_at' => 'date',
+            'first_met' => 'required|integer',
+            'token' => 'string',
+            'password_request' => 'integer',
 
+        ]);
+        return $validated;
+    }
     /**
      * @param Request $request
      * @return JsonResponse
      */
-    public function create(Request $request): JsonResponse
+    public function create(Request $request): array
     {
-        // a faire !! Champs à valider et a nettoyer
-        // // Validate if the input for each field is correct
-        // $this->validate($request, [
-        //     'n_customer' => 'required|string',
-        //     'firstname' => 'required|integer',
-        //     'lastname' => 'required|string',
-        //     'gender' => 'required|string',
-        //     'mail' => 'string',
-        //     'phone' => 'required|string',
-        //     'birthdate' => 'date',
-        //     'address' => 'string',
-        //     'created_at' => 'required|date',
-        //     'archived_at' => 'date',
-        //     'update_at' => 'date',
-        //     'first_met' => 'required|integer',
-        //     'token' => 'string',
-        //     'password_request' => 'integer',
-        //    ]);
 
-        // Create the player
-        // $customer = $this->customers->create([
-
-            Customers::create([
-            'n_customer' => $request->n_customer,
-            'firstname' => $request->firstname,
-            'lastname' => $request->lastname,
-            'gender' => $request->gender,
-            'mail' => $request->mail,
-            'phone' => $request->phone,
-            'password'=>$request->password,
-            'birthdate' => $request->birthdate,
-            'address' => $request->address,
-            'created_at' => $request->created_at,
-            'archived_at' => $request->archived_at,
-            'updated_at' => $request->updated_at,
-            'first_met' => $request->first_met,
-            'token' => $request->token,
-            'password_request' => $request->password_request
+       $validated = $this->validation($request);
+        Customers::create([
+            'n_customer' => $validated['n_customer'],
+            'firstname' => $validated['firstname'],
+            'lastname' => $validated['lastname'],
+            'gender' => $validated['gender'],
+            'mail' => $validated['mail'],
+            'phone' => $validated['phone'],
+            'password'=>$validated['password'],
+            'birthdate' => $validated['birthdate'],
+            'address' => $validated['address'],
+            'created_at' => $validated['created_at'],
+            'archived_at' => $validated['archived_at'],
+            'updated_at' => $validated['updated_at'],
+            'first_met' => $validated['first_met'],
+            'token' => $validated['token'],
+            'password_request' => $validated['password_request']
 
         ]);
         return response()->json(['success'=>'Utisateur créer']);
@@ -96,6 +95,7 @@ class CustomersController extends Controller{
     public function update($id, Request $request): JsonResponse
     {
         $customer = Customers::findOrFail($id);
+        $this->validation($request);
         $customer->update($request->all());
         return response()->json(['success'=>'Modifications enregistrées']);
     }
