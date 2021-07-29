@@ -4,6 +4,22 @@
 
 use Laravel\Lumen\Routing\Router;
 
+//Auth
+$router->group(['prefix' => 'login'], function($router) {
+    $router->post('customer', 'AuthController@loginCustomer'); // /login/customer
+    $router->post('staff', 'AuthController@loginStaff'); // /login/staff
+});
+$router->group(['prefix'=>'register'], function($router){
+    $router->post('customer', 'AuthController@registerCustomer'); // /register/customer
+    $router->post('staff', 'AuthController@registerStaff'); // /register/staff
+});
+
+$router->group(['prefix' => 'api', 'middleware' => 'auth'], function ($router) {
+    $router->post('logout', 'AuthController@logout');
+    // $router->post('refresh', 'AuthController@refresh');
+    // $router->post('me', 'AuthController@me');
+});
+
 // Biens
 $router->group(['prefix' => 'estates'], function () use ($router) {
     $router->get('/', 'EstatesController@selectAllEstates'); // /biens/
