@@ -28,4 +28,6 @@ class SousMonToitFunctions extends Migration
     {
         Schema::drop('functions');
     }
+
+    
 }

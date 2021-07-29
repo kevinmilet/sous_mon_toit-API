@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\Pictures;
+use Illuminate\Http\JsonResponse;
+
 class PicturesController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * @param $id
+     * @return JsonResponse
      */
-    public function __construct()
+    public function getOnePicture($id): JsonResponse
     {
-        //
+        return response()->json(Pictures::find($id));
     }
-
-    //
 }
+
