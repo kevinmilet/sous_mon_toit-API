@@ -76,7 +76,7 @@ class StaffsController extends Controller
         if ($request->hasFile('avatar')) {
             $avatar = $request->file('avatar');
             $name = uniqid('avatar_') . '.' . $avatar->getClientOriginalExtension();
-            $destinationPath = storage_path('/app/public/avatars/');
+            $destinationPath = storage_path('/app/public/pictures/avatars/');
             $avatar->move($destinationPath, $name);
         } else {
             $name = 'user.png';

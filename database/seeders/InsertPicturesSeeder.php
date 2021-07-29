@@ -21,6 +21,8 @@ class InsertPicturesSeeder extends Seeder
                 'name' => 'fc26eb10-ee19-11eb-9a03-0242ac130003.jpg',
                 'cover' => true,
                 'alt' => 'fc26eb10-ee19-11eb-9a03-0242ac130003.jpg',
+                'created_at' => '2021-07-26 16:18:00',
+                'updated_at' => null,
                 'id_estate' => 1,
             ],
             [
@@ -29,6 +31,8 @@ class InsertPicturesSeeder extends Seeder
                 'name' => 'a4619d90-f03e-11eb-9a03-0242ac130003.jpg',
                 'cover' => false,
                 'alt' => 'a4619d90-f03e-11eb-9a03-0242ac130003.jpg',
+                'created_at' => '2021-07-26 16:18:00',
+                'updated_at' => null,
                 'id_estate' => 1,
             ],[
                 'id' => 3,
@@ -36,6 +40,8 @@ class InsertPicturesSeeder extends Seeder
                 'name' => 'b172aa06-f03e-11eb-9a03-0242ac130003.jpg',
                 'cover' => false,
                 'alt' => 'b172aa06-f03e-11eb-9a03-0242ac130003.jpg',
+                'created_at' => '2021-07-26 16:18:00',
+                'updated_at' => null,
                 'id_estate' => 1,
             ],[
                 'id' => 4,
@@ -43,6 +49,8 @@ class InsertPicturesSeeder extends Seeder
                 'name' => 'ba8a3a14-f03e-11eb-9a03-0242ac130003.jpg',
                 'cover' => false,
                 'alt' => 'ba8a3a14-f03e-11eb-9a03-0242ac130003.jpg',
+                'created_at' => '2021-07-26 16:18:00',
+                'updated_at' => null,
                 'id_estate' => 1,
             ],[
                 'id' => 5,
@@ -50,6 +58,8 @@ class InsertPicturesSeeder extends Seeder
                 'name' => 'c1ff0bc6-f03e-11eb-9a03-0242ac130003.jpg',
                 'cover' => false,
                 'alt' => 'c1ff0bc6-f03e-11eb-9a03-0242ac130003.jpg',
+                'created_at' => '2021-07-26 16:18:00',
+                'updated_at' => null,
                 'id_estate' => 1,
             ],
             [
@@ -58,6 +68,8 @@ class InsertPicturesSeeder extends Seeder
                 'name' => 'caa61f3a-f03e-11eb-9a03-0242ac130003.jpg',
                 'cover' => true,
                 'alt' => 'caa61f3a-f03e-11eb-9a03-0242ac130003.jpg',
+                'created_at' => '2021-07-26 16:18:00',
+                'updated_at' => null,
                 'id_estate' => 2,
             ],
             [
@@ -66,6 +78,8 @@ class InsertPicturesSeeder extends Seeder
                 'name' => 'd2688ffa-f03e-11eb-9a03-0242ac130003.jpg',
                 'cover' => false,
                 'alt' => 'd2688ffa-f03e-11eb-9a03-0242ac130003.jpg',
+                'created_at' => '2021-07-26 16:18:00',
+                'updated_at' => null,
                 'id_estate' => 2,
             ],[
                 'id' => 8,
@@ -73,6 +87,8 @@ class InsertPicturesSeeder extends Seeder
                 'name' => 'dccd82b6-f03e-11eb-9a03-0242ac130003.jpg',
                 'cover' => false,
                 'alt' => 'dccd82b6-f03e-11eb-9a03-0242ac130003.jpg',
+                'created_at' => '2021-07-26 16:18:00',
+                'updated_at' => null,
                 'id_estate' => 2,
             ],[
                 'id' => 9,
@@ -80,6 +96,8 @@ class InsertPicturesSeeder extends Seeder
                 'name' => 'e310caca-f03e-11eb-9a03-0242ac130003.jpg',
                 'cover' => false,
                 'alt' => 'e310caca-f03e-11eb-9a03-0242ac130003.jpg',
+                'created_at' => '2021-07-26 16:18:00',
+                'updated_at' => null,
                 'id_estate' => 2,
             ],[
                 'id' => 10,
@@ -87,6 +105,8 @@ class InsertPicturesSeeder extends Seeder
                 'name' => 'e959c17a-f03e-11eb-9a03-0242ac130003.jpg',
                 'cover' => false,
                 'alt' => 'e959c17a-f03e-11eb-9a03-0242ac130003.jpg',
+                'created_at' => '2021-07-26 16:18:00',
+                'updated_at' => null,
                 'id_estate' => 2,
             ],
         ]);

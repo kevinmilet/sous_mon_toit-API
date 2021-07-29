@@ -3,6 +3,7 @@
 /** @var Router $router */
 
 use Laravel\Lumen\Routing\Router;
+use Tymon\JWTAuth\Http\Middleware\BaseMiddleware;
 
 //Auth
 $router->group(['prefix' => 'login'], function($router) {
@@ -33,7 +34,7 @@ $router->group(['prefix' => 'estates_types'], function () use ($router) {
 });
 
 //Appointment
-$router->group(['prefix' => 'schedule'], function () use ($router) {
+$router->group(['prefix' => 'schedule', 'middleware' => 'auth:staff'], function () use ($router) {
     $router->get('/', 'appointmentsController@showAllAppointments'); // /schedule/
     $router->get('{appointment_id}', 'appointmentsController@showAppointment'); // /schedule/{appointment_id}
     $router->get('customer/{customer_id}', 'appointmentsController@showCustomerAppointment'); // /scheduled/customer/{customer_id}
@@ -109,4 +110,5 @@ $router->group(['prefix' => 'estates_pictures'], function () use ($router) {
     $router->get('/cover/{id_estate}', 'PicturesController@getEstateCover');
     $router->delete('delete/{id_estate}/{id}', 'PicturesController@delete');
     $router->delete('delete_all/{id_estate}', 'PicturesController@deleteAll');
+    $router->post('upload/{id_estate}', 'PicturesController@uploadPicture');
 });

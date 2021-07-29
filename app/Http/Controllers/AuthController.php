@@ -37,11 +37,6 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
-    /**
-     * @param Request $request
-     * @return JsonResponse
-     * @throws ValidationException
-     */
     public function loginStaff(Request $request): JsonResponse
     {
         //validate incoming request
