@@ -46,8 +46,7 @@ class AuthController extends Controller
         ]);
 
         $credentials = $request->only(['login', 'password']);
-        // dd($this->getGuard());
-
+        
         if (!$token = Auth::guard('staff')->attempt($credentials)) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
