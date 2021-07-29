@@ -152,7 +152,7 @@ class EstatesController extends Controller
     }
 
 
-    public function update($id, Request $request): array
+    public function update($id, Request $request): arrgitay
     {
         $estate = Estates::findOrFail($id);
         $estate->update($request->all());
