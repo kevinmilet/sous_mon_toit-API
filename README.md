@@ -53,11 +53,13 @@ QUEUE_CONNECTION=sync
 
 - JWT :
    - `composer require tymon/jwt-auth`
+   > (mettre a jour sa version de composer si besoin)
+   - `php artisan jwt:secret`
 
 
 ## Relier le dossier storage au dossier public
 
-- Ouvrir un invite de commande en tant qu'administrateur
+- Ouvrir un invite de commande **en tant qu'administrateur**
 
 - se déplacer dans le dossier public de son projet
     - par exemple : `cd c:\wamp64\www\CDA\sous_mon_toit\public`
