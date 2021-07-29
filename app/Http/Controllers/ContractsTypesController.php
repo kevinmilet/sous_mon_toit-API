@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Contracts;
 use App\Models\ContractsTypes;
+use Illuminate\Database\Eloquent\Collection;
 
 class ContractsTypesController extends Controller
 {
@@ -18,9 +20,9 @@ class ContractsTypesController extends Controller
     /**
      * Retourne la liste des contrats
      *
-     * @return Contracts[]|\Illuminate\Database\Eloquent\Collection
+     * @return Collection
      */
-    public function selectAllContractsTypes()
+    public function selectAllContractsTypes(): Collection
     {
         return ContractsTypes::all();
     }

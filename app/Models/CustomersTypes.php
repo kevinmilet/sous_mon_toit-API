@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @method static find($id)
+ */
 class CustomersTypes extends Model{
 
     use Authenticatable, Authorizable, HasFactory;

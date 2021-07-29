@@ -9,8 +9,13 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+/**
+ * @method static find($id)
+ * @method static create(array $array)
+ * @method static findOrFail($id)
+ */
 class Customers extends Model implements AuthenticatableContract, AuthorizableContract, JWTSubject{
-    
+
     use Authenticatable, Authorizable;
 
     /**

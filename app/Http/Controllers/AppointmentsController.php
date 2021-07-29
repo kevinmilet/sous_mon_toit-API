@@ -3,18 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointments;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class AppointmentsController extends Controller
 {
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @param $request
+     * @return array
+     * @throws ValidationException
      */
 
-    private function validation($request) {
-        $validated = $this->validate($request, [
+    private function validation($request): array
+    {
+        return $this->validate($request, [
             'notes' => 'nullable|string',
             'scheduled_at' => 'date',
             'id_estate' => 'numeric|integer',
@@ -23,27 +28,47 @@ class AppointmentsController extends Controller
             'id_appointment_type' => 'numeric|integer'
 
         ]);
-        return $validated;
     }
-    
+
+    /**
+     * @return Appointments[]|Collection
+     */
     public function showAllAppointments()
     {
         return Appointments::all();
     }
 
+    /**
+     * @param $appointment_id
+     * @return mixed
+     */
     public function showAppointment($appointment_id) {
         return Appointments::findOrFail($appointment_id);
     }
 
+    /**
+     * @param $customer_id
+     * @return mixed
+     */
     public function showCustomerAppointment($customer_id) {
         return Appointments::where('id_customer', $customer_id)->get();
     }
 
+    /**
+     * @param $staff_id
+     * @return mixed
+     */
     public function showStaffAppointment($staff_id) {
         return Appointments::where('id_staff', $staff_id)->get();
     }
 
-    public function createAppointment(Request $request){
+    /**
+     * @param Request $request
+     * @return array
+     * @throws ValidationException
+     */
+    public function createAppointment(Request $request): array
+    {
         $validated = $this->validation($request);
         Appointments::create([
             'notes' => $validated['notes'],
@@ -57,6 +82,12 @@ class AppointmentsController extends Controller
         return $validated;
     }
 
+    /**
+     * @param $appointment_id
+     * @param Request $request
+     * @return mixed
+     * @throws ValidationException
+     */
     public function updateAppointment($appointment_id, Request $request) {
         $appointments = Appointments::findOrFail($appointment_id);
         $validated = $this->validation($request);
@@ -66,9 +97,12 @@ class AppointmentsController extends Controller
         return $appointments;
     }
 
+    /**
+     * @param $appointment_id
+     * @return mixed
+     */
     public function deleteAppointment($appointment_id) {
-        $deleted_appt = Appointments::find($appointment_id)->delete();
-        return $deleted_appt;
+        return Appointments::find($appointment_id)->delete();
     }
-    
+
 }

@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @method static find($id)
+ * @method static findOrFail($id)
+ * @method static create(array $array)
+ */
 class CustomersSearchs extends Model{
 
     use Authenticatable, Authorizable, HasFactory;
@@ -25,6 +30,6 @@ class CustomersSearchs extends Model{
          'updated_at',
          'alert',
          'id_customer'
- 
+
      ];
 }

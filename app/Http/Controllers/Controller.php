@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class Controller extends BaseController
 {
-    protected function respondWithToken($token)
+    protected function respondWithToken($token): \Illuminate\Http\JsonResponse
     {
         return response()->json([
             'token' => $token,
