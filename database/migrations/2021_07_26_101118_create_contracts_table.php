@@ -26,10 +26,10 @@ class CreateContractsTable extends Migration
             $table->dateTime('deleted_at')->nullable()->default(NULL);
             $table->string('folder')->nullable()->default("");
             $table->string('name');
-            $table->foreignId('id_staff')->references('id')->on('staffs');
-            $table->foreignId('id_estate')->references('id')->on('estates');
-            $table->foreignId('id_customer')->references('id')->on('customers');
-            $table->foreignId('id_contract_type')->references('id')->on('contracts_types');
+            $table->foreignId('id_staff')->nullable()->references('id')->on('staffs');
+            $table->foreignId('id_estate')->nullable()->references('id')->on('estates');
+            $table->foreignId('id_customer')->nullable()->references('id')->on('customers');
+            $table->foreignId('id_contract_type')->nullable()->references('id')->on('contracts_types');
         });
     }
 

@@ -112,16 +112,20 @@ class ContractsController extends Controller
     public function updateContract($id_contract , Request $request){
 
         $oldContract = Contracts::findOrFail($id_contract);
+        var_dump($oldContract);
 
         //Validation du formulaire
         $this->validate($request, [
-            'folder'=> '',
-            'id_estate' => 'sometimes|required',
-            'id_customer' => 'sometimes|required',
-            'id_staff' => 'sometimes|required',
-            'id_contract_type' => 'sometimes|required',
-            'file' => 'sometimes|required',
+            // 'folder'=> '',
+            // 'id_estate' => 'required',
+            // 'id_customer' => 'required',
+            // 'id_staff' => 'required',
+            // 'id_contract_type' => 'required',
+            // 'file' => 'required',
         ]);
+
+        var_dump('je suis la');
+        // die();
 
         //Enregistrement du fichier dans storage
         if ($request->hasFile('file')) {
@@ -129,6 +133,9 @@ class ContractsController extends Controller
             $name = time().'.'.$fileContract->getClientOriginalExtension();
             $destinationPath = storage_path('/app/public/documents/' . $request->folder);
             $fileContract->move($destinationPath, $name);
+
+            var_dump('je suis dans file');
+            // die();
 
             // Suppression de l'ancien contract
             $oldName = $oldContract->name;
@@ -144,6 +151,6 @@ class ContractsController extends Controller
 
         // Enregistrement en base des données modifiées
         $oldContract->update($request->all());
-
+        return $oldContract;
     }
 }

@@ -53,7 +53,7 @@ QUEUE_CONNECTION=sync
 
 - JWT :
    - `composer require tymon/jwt-auth`
-   > (mettre a jour sa version de composer si besoin)
+   > ( installer composer si vous ne l'avait pas !)
    - `php artisan jwt:secret`
 
 
