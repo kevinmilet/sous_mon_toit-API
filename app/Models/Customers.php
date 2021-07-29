@@ -4,7 +4,7 @@ namespace App\Models;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-// use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -16,7 +16,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  */
 class Customers extends Model implements AuthenticatableContract, AuthorizableContract, JWTSubject{
 
-    use Authenticatable, Authorizable;
+    use Authenticatable, Authorizable, HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -24,9 +24,22 @@ class Customers extends Model implements AuthenticatableContract, AuthorizableCo
      * @var array
      */
     protected $fillable = [
-        'name', 'mail'
+        'n_customer',
+        'firstname',
+        'lastname',
+        'gender' ,
+        'mail' ,
+        'phone' ,
+        'password',
+        'birthdate',
+        'address' ,
+        'created_at',
+        'deleted_at',
+        'updated_at',
+        'first_met',
+        'token',
+        'password_request' 
     ];
-
     /**
      * The attributes excluded from the model's JSON form.
      *

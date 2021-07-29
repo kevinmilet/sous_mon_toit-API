@@ -11,14 +11,6 @@ use Illuminate\Support\Facades\DB;
 class CustomersController extends Controller{
 
     /**
-     *
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
      * @return Customers[]|Collection
      */
     public function selectAllCustomers(){
@@ -65,7 +57,6 @@ class CustomersController extends Controller{
 
         // Create the player
         // $customer = $this->customers->create([
-
             Customers::create([
             'n_customer' => $request->n_customer,
             'firstname' => $request->firstname,
@@ -76,9 +67,6 @@ class CustomersController extends Controller{
             'password'=>$request->password,
             'birthdate' => $request->birthdate,
             'address' => $request->address,
-            'created_at' => $request->created_at,
-            'archived_at' => $request->archived_at,
-            'updated_at' => $request->updated_at,
             'first_met' => $request->first_met,
             'token' => $request->token,
             'password_request' => $request->password_request
