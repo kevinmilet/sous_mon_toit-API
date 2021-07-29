@@ -86,3 +86,11 @@ $router->group(['prefix' => 'contract'], function () use ($router) {
     $router->patch('/archive/{id_contract}', 'ContractsController@archiveContract');
     $router->get('/{id_contract}', 'ContractsController@selectOneContract');
 });
+
+// Pictures
+$router->group(['prefix' => 'estates_pictures'], function () use ($router) {
+    $router->get('/{id_estate}', 'PicturesController@getEstatePictures');
+    $router->get('/cover/{id_estate}', 'PicturesController@getEstateCover');
+    $router->delete('delete/{id_estate}/{id}', 'PicturesController@delete');
+    $router->delete('delete_all/{id_estate}', 'PicturesController@deleteAll');
+});
