@@ -19,32 +19,32 @@ class CustomersController extends Controller{
         return response()->json($customer);
     }
 
- 
+    private function validation($request) {
+        $validated = $this->validate($request, [
+            'n_customer' => 'required|string',
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+            'gender' => 'required|string',
+            'mail' => 'string|email|unique:customers',
+            'phone' => 'required|string',
+            'birthdate' => 'date',
+            'address' => 'string',
+            'created_at' => 'date',
+            'archived_at' => 'date',
+            'update_at' => 'date',
+            'first_met' => 'required|integer',
+            'token' => 'string',
+            'password_request' => 'integer',
+
+        ]);
+        return $validated;
+    }
     
     public function create(Request $request) {
         // a faire !! Champs à valider et a nettoyer
-        // // Validate if the input for each field is correct 
-        // $this->validate($request, [
-        //     'n_customer' => 'required|string',
-        //     'firstname' => 'required|integer',
-        //     'lastname' => 'required|string',
-        //     'gender' => 'required|string',
-        //     'mail' => 'string',
-        //     'phone' => 'required|string',
-        //     'birthdate' => 'date',
-        //     'address' => 'string',
-        //     'created_at' => 'required|date',
-        //     'archived_at' => 'date',
-        //     'update_at' => 'date',
-        //     'first_met' => 'required|integer',
-        //     'token' => 'string',
-        //     'password_request' => 'integer',
-        //    ]);
+        $this->validation($request);
 
-        // Create the player
-        // $customer = $this->customers->create([
-
-            Customers::create([
+        Customers::create([
             'n_customer' => $request->n_customer,
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
@@ -67,11 +67,12 @@ class CustomersController extends Controller{
     }
 
     public function update($id, Request $request){
+
         $customer = Customers::findOrFail($id);
+        $this->validation($request);
         $customer->update($request->all());
         return response()->json(['success'=>'Modifications enregistrées']);
             
-    
     }
 
     public function delete($id){
