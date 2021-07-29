@@ -4,11 +4,29 @@
 
 use Laravel\Lumen\Routing\Router;
 
+//Auth
+$router->group(['prefix' => 'login'], function($router) {
+    $router->post('customer', 'AuthController@loginCustomer'); // /login/customer
+    $router->post('staff', 'AuthController@loginStaff'); // /login/staff
+});
+$router->group(['prefix'=>'register'], function($router){
+    $router->post('customer', 'AuthController@registerCustomer'); // /register/customer
+    $router->post('staff', 'AuthController@registerStaff'); // /register/staff
+});
+
+$router->group(['prefix' => 'api', 'middleware' => 'auth'], function ($router) {
+    $router->post('logout', 'AuthController@logout');
+    // $router->post('refresh', 'AuthController@refresh');
+    // $router->post('me', 'AuthController@me');
+});
+
 // Biens
 $router->group(['prefix' => 'estates'], function () use ($router) {
     $router->get('/', 'EstatesController@selectAllEstates'); // /biens/
     $router->get('/{id}', 'EstatesController@selectOneEstate'); // /biens/{id}
-    $router->patch('/archive/{id}', 'EstatesController@archive'); // /biens/archive/{id}
+    $router->post('/create', 'EstatesController@create'); // /biens/create/{id}
+    $router->put('/update/{id}', 'EstatesController@update'); // /biens/update/{id}
+    $router->delete('/delete/{id}', 'EstatesController@delete'); // /biens/delete/{id}
 });
 
 // Types de biens
@@ -17,7 +35,7 @@ $router->group(['prefix' => 'estates_types'], function () use ($router) {
 });
 
 //Appointment
-$router->group(['prefix' => 'schedule'], function () use ($router) {
+$router->group(['prefix' => 'schedule', 'middleware' => 'auth'], function () use ($router) {
     $router->get('/', 'appointmentsController@showAllAppointments'); // /schedule/
     $router->get('{appointment_id}', 'appointmentsController@showAppointment'); // /schedule/{appointment_id}
     $router->get('customer/{customer_id}', 'appointmentsController@showCustomerAppointment'); // /scheduled/customer/{customer_id}
@@ -85,4 +103,12 @@ $router->group(['prefix' => 'contract'], function () use ($router) {
     $router->put('/updateContract', 'ContractsController@updateContract');
     $router->patch('/archive/{id_contract}', 'ContractsController@archiveContract');
     $router->get('/{id_contract}', 'ContractsController@selectOneContract');
+});
+
+// Pictures
+$router->group(['prefix' => 'estates_pictures'], function () use ($router) {
+    $router->get('/{id_estate}', 'PicturesController@getEstatePictures');
+    $router->get('/cover/{id_estate}', 'PicturesController@getEstateCover');
+    $router->delete('delete/{id_estate}/{id}', 'PicturesController@delete');
+    $router->delete('delete_all/{id_estate}', 'PicturesController@deleteAll');
 });
