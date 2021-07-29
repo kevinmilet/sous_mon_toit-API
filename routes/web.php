@@ -5,17 +5,17 @@
 use Laravel\Lumen\Routing\Router;
 
 //Auth
-$router->group(['prefix' => 'auth'], function ($router) {
-    $router->group(['prefix' => 'login'], function($router) {
-        $router->post('customer', 'AuthController@loginCustomer');
-        $router->post('staff', 'AuthController@loginStaff');
-    });
-    $router->group(['prefix'=>'register'], function($router){
-        $router->post('customer', 'AuthController@registerCustomer');
-        $router->post('staff', 'AuthController@registerStaff');
-    });
+$router->group(['prefix' => 'login'], function($router) {
+    $router->post('customer', 'AuthController@loginCustomer'); // /login/customer
+    $router->post('staff', 'AuthController@loginStaff'); // /login/staff
+});
+$router->group(['prefix'=>'register'], function($router){
+    $router->post('customer', 'AuthController@registerCustomer'); // /register/customer
+    $router->post('staff', 'AuthController@registerStaff'); // /register/staff
+});
 
-    // $router->post('logout', 'AuthController@logout');
+$router->group(['prefix' => 'api', 'middleware' => 'auth'], function ($router) {
+    $router->post('logout', 'AuthController@logout');
     // $router->post('refresh', 'AuthController@refresh');
     // $router->post('me', 'AuthController@me');
 });
@@ -23,14 +23,25 @@ $router->group(['prefix' => 'auth'], function ($router) {
 
 // Biens
 $router->group(['prefix' => 'estates'], function () use ($router) {
-    $router->get('/', 'EstatesController@selectAllEstates'); // /biens/
-    $router->get('/{id}', 'EstatesController@selectOneEstate'); // /biens/{id}
-    $router->patch('/archive/{id}', 'EstatesController@archive'); // /biens/archive/{id}
+    $router->get('/', 'EstatesController@selectAllEstates'); // /estates/
+    $router->get('/{id}', 'EstatesController@selectOneEstate'); // /estates/{id}
+    $router->patch('/archive/{id}', 'EstatesController@archive'); // /estates/archive/{id}
 });
 
 // Types de biens
 $router->group(['prefix' => 'estates_types'], function () use ($router) {
     $router->get('/', 'EstatesTypesController@getAllEstatesTypes'); // /estates_types/
+});
+
+//Appointment
+$router->group(['prefix' => 'schedule', 'middleware' => 'auth'], function () use ($router){
+    $router->get('/', 'AppointmentsController@showAllAppointments'); // /schedule/
+    $router->get('{appointment_id}', 'AppointmentsController@showAppointment'); // /schedule/{appointment_id}
+    $router->get('customer/{customer_id}', 'AppointmentsController@showCustomerAppointment'); // /scheduled/customer/{customer_id}
+    $router->get('staff/{staff_id}', 'AppointmentsController@showStaffAppointment'); // /scheduled/customer/{staff_id}
+    $router->post('createAppt', 'AppointmentsController@createAppointment'); // /schedule/createAppt
+    $router->put('update/{appointment_id}', 'AppointmentsController@updateAppointment'); // /schedule/update/{appointment_id} (data à passer en params)
+    $router->delete('delete/{appointment_id}', 'AppointmentsController@deleteAppointment'); // /schedule/delete/{appointment_id}
 });
 
 //Appointment

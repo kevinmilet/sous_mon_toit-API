@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Lumen\Auth\Authorizable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
+
 
 /**
  * @method static find($id)
@@ -19,7 +21,7 @@ use Laravel\Lumen\Auth\Authorizable;
  * @method static create(array $array)
  * @method static update(array $array)
  */
-class Staffs extends Model implements AuthenticatableContract, AuthorizableContract
+class Staffs extends Model implements AuthenticatableContract, AuthorizableContract, JWTSubject
 {
     use Authenticatable, Authorizable, HasFactory, SoftDeletes;
 
@@ -30,4 +32,21 @@ class Staffs extends Model implements AuthenticatableContract, AuthorizableContr
     protected $hidden = [
         'password',
     ];
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
 }

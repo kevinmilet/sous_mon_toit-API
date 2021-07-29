@@ -2,21 +2,29 @@
 
 return [
     'defaults' => [
-        'guard' => 'auth',
+        'guard' => 'customer',
         'passwords' => 'customers',
     ],
 
     'guards' => [
-        'auth' => [
+        'customer' => [
             'driver' => 'jwt',
             'provider' => 'customers',
         ],
+        'staff' => [
+            'driver' => 'jwt',
+            'provider' => 'staffs',
+        ]
     ],
 
     'providers' => [
         'customers' => [
             'driver' => 'eloquent',
             'model' => \App\Models\Customers::class
+        ],
+        'staffs' => [
+            'driver' => 'eloquent',
+            'model' => \App\Models\Staffs::class
         ]
     ]
 ];
