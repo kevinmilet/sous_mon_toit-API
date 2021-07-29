@@ -12,6 +12,7 @@ use Laravel\Lumen\Auth\Authorizable;
 /**
  * @method static find($id)
  * @method static where(string $string, $id_estate)
+ * @method create(array $array)
  */
 class Pictures extends Model implements AuthenticatableContract, AuthorizableContract
 {
