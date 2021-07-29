@@ -33,7 +33,7 @@ $router->group(['prefix' => 'estates_types'], function () use ($router) {
 });
 
 //Appointment
-$router->group(['prefix' => 'schedule'], function () use ($router) {
+$router->group(['prefix' => 'schedule', 'middleware' => 'auth'], function () use ($router) {
     $router->get('/', 'appointmentsController@showAllAppointments'); // /schedule/
     $router->get('{appointment_id}', 'appointmentsController@showAppointment'); // /schedule/{appointment_id}
     $router->get('customer/{customer_id}', 'appointmentsController@showCustomerAppointment'); // /scheduled/customer/{customer_id}

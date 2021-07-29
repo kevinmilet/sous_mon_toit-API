@@ -53,7 +53,7 @@ class Customers extends Model implements AuthenticatableContract, AuthorizableCo
      * @return array
      */
 
-    public function getJWTCustomClaims()
+    public function getJWTCustomClaims(): array
     {
         return [];
     }
