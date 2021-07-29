@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\DB;
 
 class CustomersController extends Controller{
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function selectAllCustomers(){
         
         return Customers::all();
