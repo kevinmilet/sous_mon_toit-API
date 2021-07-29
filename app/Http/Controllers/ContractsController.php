@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Contracts;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 
 class ContractsController extends Controller
@@ -29,7 +30,7 @@ class ContractsController extends Controller
     }
 
     /**
-     * Retourne un contrats
+     * Retourne un contrat
      *
      * @return Contracts[]|Collection
      */
@@ -58,6 +59,7 @@ class ContractsController extends Controller
      */
     public function saveNewContract(Request $request){
 
+        //Validation du formulaire
         $this->validate($request, [
             'folder'=> '',
             'id_estate' => 'required',
@@ -67,6 +69,7 @@ class ContractsController extends Controller
             'file' => 'required',
         ]);
 
+        //Enregistrement du fichier dans storage
         if ($request->hasFile('file')) {
             $contrat = $request->file('file');
             $name = time().'.'.$contrat->getClientOriginalExtension();
@@ -74,6 +77,7 @@ class ContractsController extends Controller
             $contrat->move($destinationPath, $name);
         }
 
+        // Enregistrement du contract en base de données
         Contracts::create([
             'folder' => $request->folder,
             'name' => $name, // nom du fichier enregistré
@@ -97,5 +101,56 @@ class ContractsController extends Controller
         // //Enregistrement
         // $contract->save();
 
+    }
+
+    /**
+     * Modification d'un contrat
+     * 
+     * @param $id_contract
+     * @return Response|ResponseFactory
+     */
+    public function updateContract($id_contract , Request $request){
+
+        $oldContract = Contracts::findOrFail($id_contract);
+        var_dump($oldContract);
+
+        //Validation du formulaire
+        $this->validate($request, [
+            // 'folder'=> '',
+            // 'id_estate' => 'required',
+            // 'id_customer' => 'required',
+            // 'id_staff' => 'required',
+            // 'id_contract_type' => 'required',
+            // 'file' => 'required',
+        ]);
+
+        var_dump('je suis la');
+        // die();
+
+        //Enregistrement du fichier dans storage
+        if ($request->hasFile('file')) {
+            $fileContract = $request->file('file');
+            $name = time().'.'.$fileContract->getClientOriginalExtension();
+            $destinationPath = storage_path('/app/public/documents/' . $request->folder);
+            $fileContract->move($destinationPath, $name);
+
+            var_dump('je suis dans file');
+            // die();
+
+            // Suppression de l'ancien contract
+            $oldName = $oldContract->name;
+            $oldDestinationPath = storage_path('/app/public/documents/' . $oldContract->folder );
+            File::delete($oldDestinationPath.'/' . $oldName);
+
+            //On enregistre le nouveau nom 
+            $contract = Contracts::find($id_contract);
+            $contract->name = $name;
+            $contract->save();
+
+        }
+
+        // Enregistrement en base des données modifiées
+        $oldContract->update($request->all());
+        return $oldContract;
     }
 }
