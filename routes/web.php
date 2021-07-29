@@ -110,4 +110,5 @@ $router->group(['prefix' => 'estates_pictures'], function () use ($router) {
     $router->get('/cover/{id_estate}', 'PicturesController@getEstateCover');
     $router->delete('delete/{id_estate}/{id}', 'PicturesController@delete');
     $router->delete('delete_all/{id_estate}', 'PicturesController@deleteAll');
+    $router->post('upload/{id_estate}', 'PicturesController@uploadPicture');
 });
