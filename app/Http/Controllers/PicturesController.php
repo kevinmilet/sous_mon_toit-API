@@ -127,7 +127,7 @@ class PicturesController extends Controller
 
                 return response('Les images de ce bien ont été supprimées avec succès', 200);
             } catch (Exception $e) {
-                throw new Exception('Suppression de l\image impossible. ' . $e->getMessage());
+                throw new Exception('Suppression des images impossible. ' . $e->getMessage());
             }
         } else {
             return response('Images introuvables', 404);
