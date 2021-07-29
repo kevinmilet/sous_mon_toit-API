@@ -13,6 +13,7 @@ use Laravel\Lumen\Auth\Authorizable;
  * @method static find($appointment_id)
  * @method static where(string $string, $customer_id)
  * @method static create(array $array)
+ * @method static findOrFail($appointment_id)
  */
 class Appointments extends Model
 {

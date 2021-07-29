@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Contracts;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -21,7 +22,7 @@ class ContractsController extends Controller
     /**
      * Retourne la liste des contrats
      *
-     * @return Contracts[]|\Illuminate\Database\Eloquent\Collection
+     * @return Contracts[]|Collection
      */
     public function selectAllContracts()
     {
@@ -31,7 +32,7 @@ class ContractsController extends Controller
     /**
      * Retourne un contrat
      *
-     * @return Contracts[]|\Illuminate\Database\Eloquent\Collection
+     * @return Contracts[]|Collection
      */
     public function selectOneContract($id_contract)
     {
@@ -53,7 +54,7 @@ class ContractsController extends Controller
 
     /**
      * Enregistrement d'un contrat
-     * 
+     *
      * @return Response|ResponseFactory
      */
     public function saveNewContract(Request $request){

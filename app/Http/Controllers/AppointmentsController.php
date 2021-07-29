@@ -3,64 +3,91 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointments;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class AppointmentsController extends Controller
 {
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @param $request
+     * @return array
+     * @throws ValidationException
      */
 
-    private function validation($request) {
-        $validated = $this->validate($request, [
+    private function validation($request): array
+    {
+        return $this->validate($request, [
             'notes' => 'nullable|string',
             'scheduled_at' => 'date',
-            'id_estate' => 'numeric',
-            'id_staff' =>'numeric',
-            'id_customer' => 'numeric',
-            'id_appointment_type' => 'numeric'
+            'id_estate' => 'numeric|integer',
+            'id_staff' =>'numeric|integer',
+            'id_customer' => 'numeric|integer',
+            'id_appointment_type' => 'numeric|integer'
 
         ]);
-        return $validated;
     }
-    
+
+    /**
+     * @return Appointments[]|Collection
+     */
     public function showAllAppointments()
     {
         return Appointments::all();
     }
 
+    /**
+     * @param $appointment_id
+     * @return mixed
+     */
     public function showAppointment($appointment_id) {
-        return Appointments::find($appointment_id);
+        return Appointments::findOrFail($appointment_id);
     }
 
+    /**
+     * @param $customer_id
+     * @return mixed
+     */
     public function showCustomerAppointment($customer_id) {
         return Appointments::where('id_customer', $customer_id)->get();
     }
 
+    /**
+     * @param $staff_id
+     * @return mixed
+     */
     public function showStaffAppointment($staff_id) {
         return Appointments::where('id_staff', $staff_id)->get();
     }
 
-    public function createAppointment(Request $request){
+    /**
+     * @param Request $request
+     * @return array
+     * @throws ValidationException
+     */
+    public function createAppointment(Request $request): array
+    {
         $validated = $this->validation($request);
         Appointments::create([
-            'notes' => $request->notes,
-            'scheduled_at' => $request->scheduled_at,
-            'id_estate' => $request->id_estate,
-            'id_staff' => $request->id_staff,
-            'id_customer' => $request->id_customer,
-            'id_appointment_type' => $request->id_appointment_type
-            // 'notes' => $validated['notes'],
-            // 'scheduled_at' => $validated['scheduled_at'],
-            // 'id_estate' => $validated['id_estate'],
-            // 'id_staff' => $validated['id_staff'],
-            // 'id_customer' => $validated['id_customer'],
-            // 'id_appointment_type' => $validated['id_appointment_type']
+            'notes' => $validated['notes'],
+            'scheduled_at' => $validated['scheduled_at'],
+            'id_estate' => $validated['id_estate'],
+            'id_staff' => $validated['id_staff'],
+            'id_customer' => $validated['id_customer'],
+            'id_appointment_type' => $validated['id_appointment_type']
         ]);
+
+        return $validated;
     }
 
+    /**
+     * @param $appointment_id
+     * @param Request $request
+     * @return mixed
+     * @throws ValidationException
+     */
     public function updateAppointment($appointment_id, Request $request) {
         $appointments = Appointments::findOrFail($appointment_id);
         $validated = $this->validation($request);
@@ -70,8 +97,12 @@ class AppointmentsController extends Controller
         return $appointments;
     }
 
+    /**
+     * @param $appointment_id
+     * @return mixed
+     */
     public function deleteAppointment($appointment_id) {
-        Appointments::find($appointment_id)->delete();
+        return Appointments::find($appointment_id)->delete();
     }
-    //
+
 }

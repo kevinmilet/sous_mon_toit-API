@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 
+/**
+ * @method static findOrFail($id_contract)
+ */
 class Contracts extends Model implements AuthenticatableContract, AuthorizableContract
 {
     use Authenticatable, Authorizable, HasFactory;
@@ -37,6 +40,6 @@ class Contracts extends Model implements AuthenticatableContract, AuthorizableCo
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 }
