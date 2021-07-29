@@ -11,12 +11,12 @@ Kevin Milet
 
 # Installation 
 
- + Ligne de commande 
+ - Ligne de commande 
 
-    `git init`
-    `git remote add origin https://github.com/kevinmilet/sous_mon_toit.git`
+    - `git init`
+    - `git remote add origin https://github.com/kevinmilet/sous_mon_toit.git`
 
- + Ajouter le fichier .env a la racine 
+ - Ajouter le fichier .env a la racine 
 
 ```
 APP_NAME=Lumen
@@ -40,27 +40,28 @@ CACHE_DRIVER=file
 QUEUE_CONNECTION=sync
 ```
 
-# Lancer le serveur
+## Lancer le serveur
 
  `php -S localhost:8000 -t public`
 
-
-# Migration de la base et des données
+## Migration de la base et des données
 
  `php artisan migrate:refresh --seed`
 
-# Ajout des extensions
+## Ajout des extensions
 
 - JWT :
+   > ( installer composer si vous ne l'avait pas !)
    - `composer require tymon/jwt-auth`
+   - `php artisan jwt:secret`
 
 
-# Relier le dossier storage au dossier public
+## Relier le dossier storage au dossier public
 
-- Ouvrir un invite de commande en tant qu'administrateur
+- Ouvrir un invite de commande **en tant qu'administrateur**
 
 - se déplacer dans le dossier public de son projet
-    - exemple : `cd c:\wamp64\www\CDA\sous_mon_toit\public`
+    - par exemple : `cd c:\wamp64\www\CDA\sous_mon_toit\public`
 
 - lancer la ligne de commande suivante : ( **A adapter selon votre arborescence !!!** )
     - `mklink /D "storage\" "c:\wamp64\www\CDA\sous_mon_toit\storage\app\public\"`

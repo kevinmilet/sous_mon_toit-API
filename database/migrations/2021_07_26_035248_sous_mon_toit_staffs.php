@@ -27,7 +27,7 @@ class SousMonToitStaffs extends Migration
             $table->string('avatar', 255)->nullable()->default(NULL);
             $table->boolean('alert_reader');
             $table->foreignId('id_function')->constrained()->references('id')->on('functions');
-            $table->foreignId('id_role')->constrained()->references('id')->on('roles');;
+            $table->foreignId('id_role')->constrained()->references('id')->on('roles');
 
         });
     }
