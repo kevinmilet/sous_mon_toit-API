@@ -25,7 +25,9 @@ $router->group(['prefix' => 'api', 'middleware' => 'auth'], function ($router) {
 $router->group(['prefix' => 'estates'], function () use ($router) {
     $router->get('/', 'EstatesController@selectAllEstates'); // /biens/
     $router->get('/{id}', 'EstatesController@selectOneEstate'); // /biens/{id}
-    $router->patch('/archive/{id}', 'EstatesController@archive'); // /biens/archive/{id}
+    $router->post('/create', 'EstatesController@create'); // /biens/create/{id}
+    $router->put('/update/{id}', 'EstatesController@update'); // /biens/update/{id}
+    $router->delete('/delete/{id}', 'EstatesController@delete'); // /biens/delete/{id}
 });
 
 // Types de biens
