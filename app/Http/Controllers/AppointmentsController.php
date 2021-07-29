@@ -68,7 +68,7 @@ class AppointmentsController extends Controller
 
     public function deleteAppointment($appointment_id) {
         $deleted_appt = Appointments::find($appointment_id)->delete();
-        return $deleted_appt
+        return $deleted_appt;
     }
-    //
+    
 }

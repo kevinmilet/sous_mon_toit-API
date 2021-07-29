@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Estates;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\JsonResponse;
 
 class EstatesController extends Controller
 {
     /**
      * Retourne la liste des biens immobilier
      *
-     * @return Estates[]|\Illuminate\Database\Eloquent\Collection
+     * @return Estates[]|Collection
      */
     public function selectAllEstates()
     {
@@ -18,15 +20,19 @@ class EstatesController extends Controller
 
     /**
      * @param $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function selectOneEstate($id)
+    public function selectOneEstate($id): JsonResponse
     {
         $estate =  Estates::find($id);
         return response()->json($estate);
     }
 
-    public function archive($id)
+    /**
+     * @param $id
+     * @return JsonResponse
+     */
+    public function archive($id): JsonResponse
     {
         $estate = Estates::findOrFail($id);
         $estate->archived_at = date("Y-m-d H:i:s");

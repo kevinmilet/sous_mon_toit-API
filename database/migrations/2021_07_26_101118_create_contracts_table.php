@@ -22,13 +22,14 @@ class CreateContractsTable extends Migration
         Schema::create('contracts', function (Blueprint $table) {
             $table->id('id');
             $table->dateTime('created_at');
-            $table->dateTime('updated_at')->nullable();
-            $table->dateTime('archived_at')->nullable();
-            $table->string('folder');
+            $table->dateTime('updated_at')->nullable()->default(NULL);
+            $table->dateTime('deleted_at')->nullable()->default(NULL);
+            $table->string('folder')->nullable()->default("");
             $table->string('name');
-            $table->foreignId('id_staff')->references('id')->on('staffs');;
-            $table->foreignId('id_estate')->references('id')->on('estates');;
-            $table->foreignId('id_contract_type')->references('id')->on('contracts_types');;
+            $table->foreignId('id_staff')->references('id')->on('staffs');
+            $table->foreignId('id_estate')->references('id')->on('estates');
+            $table->foreignId('id_customer')->references('id')->on('customers');
+            $table->foreignId('id_contract_type')->references('id')->on('contracts_types');
         });
     }
 
