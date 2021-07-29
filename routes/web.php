@@ -15,7 +15,7 @@ $router->group(['prefix'=>'register'], function($router){
     $router->post('staff', 'AuthController@registerStaff'); // /register/staff
 });
 
-$router->group(['prefix' => 'api', 'middleware' => 'auth'], function ($router) {
+$router->group(['prefix' => 'api'], function ($router) {
     $router->post('logout', 'AuthController@logout');
     // $router->post('refresh', 'AuthController@refresh');
     // $router->post('me', 'AuthController@me');
@@ -34,7 +34,7 @@ $router->group(['prefix' => 'estates_types'], function () use ($router) {
 });
 
 //Appointment
-$router->group(['prefix' => 'schedule', 'middleware' => 'auth:staff'], function () use ($router) {
+$router->group(['prefix' => 'schedule'], function () use ($router) {
     $router->get('/', 'appointmentsController@showAllAppointments'); // /schedule/
     $router->get('{appointment_id}', 'appointmentsController@showAppointment'); // /schedule/{appointment_id}
     $router->get('customer/{customer_id}', 'appointmentsController@showCustomerAppointment'); // /scheduled/customer/{customer_id}
@@ -51,7 +51,7 @@ $router->group(['prefix' => 'staff'], function () use ($router) {
     $router->get('/', 'StaffsController@getAllStaff'); // /staff/
     $router->get('/{id}', 'StaffsController@getOneById'); // /staff/{id}
     $router->delete('/delete/{id}', 'StaffsController@delete'); // /staff/delete/{id}
-    $router->post('/create/', 'StaffsController@create'); // /staff/create
+    $router->post('/create', 'StaffsController@create'); // /staff/create
     $router->put('/update/{id}', 'StaffsController@update'); // /staff/update/{id}
 });
 
@@ -73,18 +73,18 @@ $router->group(['prefix' => 'roles'], function () use ($router) {
 $router->group(['prefix' => 'customer'], function () use ($router) {
     $router->get('/', 'CustomersController@selectAllCustomers');
     $router->get('/{id}', 'CustomersController@selectOneCustomer');
-    $router->post('create','CustomersController@create');
-    $router->put('update/{id}','CustomersController@update');
-    $router->delete('delete/{id}', 'CustomersController@delete');
+    $router->post('/create','CustomersController@create');
+    $router->put('/update/{id}','CustomersController@update');
+    $router->delete('/delete/{id}', 'CustomersController@delete');
 });
 
 // Customers searchs
 $router->group(['prefix' => 'customer_search'], function () use ($router) {
     $router->get('/', 'CustomersSearchsController@selectAllCustomersSearchs');
     $router->get('/{id}', 'CustomersSearchsController@selectOneCustomerSearch');
-    $router->post('create/{id_customer}','CustomersSearchsController@create');
-    $router->put('update/{id}','CustomersSearchsController@update');
-    $router->delete('delete/{id}', 'CustomersSearchsController@delete');
+    $router->post('/create/{id_customer}','CustomersSearchsController@create');
+    $router->put('/update/{id}','CustomersSearchsController@update');
+    $router->delete('/delete/{id}', 'CustomersSearchsController@delete');
 });
 
 // Customers types

@@ -33,9 +33,9 @@ class Customers extends Model implements AuthenticatableContract, AuthorizableCo
             'password',
             'birthdate',
             'address' ,
-            'created_at',
-            'archived_at',
-            'updated_at',
+            // 'created_at',
+            // 'deleted_at',
+            // 'updated_at',
             'first_met',
             'token',
             'password_request' 
