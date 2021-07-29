@@ -40,19 +40,6 @@ class ContractsController extends Controller
     }
 
     /**
-     * @param $id_contract
-     * @return Response|ResponseFactory
-     */
-    public function archiveContract($id_contract)
-    {
-        $contract = Contracts::findOrFail($id_contract);
-        $contract->archived_at = date("Y-m-d H:i:s");
-        $contract->save();
-
-        return response('Contrat archivé avec succès', 200);
-    }
-
-    /**
      * Enregistrement d'un contrat
      *
      * @return Response|ResponseFactory
@@ -111,23 +98,20 @@ class ContractsController extends Controller
      */
     public function updateContract($id_contract , Request $request){
 
+        //Récupération du contrat a modifier
         $oldContract = Contracts::findOrFail($id_contract);
-        var_dump($oldContract);
 
         //Validation du formulaire
-        $this->validate($request, [
+        // $this->validate($request, [
             // 'folder'=> '',
             // 'id_estate' => 'required',
             // 'id_customer' => 'required',
             // 'id_staff' => 'required',
             // 'id_contract_type' => 'required',
             // 'file' => 'required',
-        ]);
+        // ]);
 
-        var_dump('je suis la');
-        // die();
-
-        //Enregistrement du fichier dans storage
+        //Enregistrement du fichier dans storage ( si fichier reçu )
         if ($request->hasFile('file')) {
             $fileContract = $request->file('file');
             $name = time().'.'.$fileContract->getClientOriginalExtension();
@@ -153,4 +137,16 @@ class ContractsController extends Controller
         $oldContract->update($request->all());
         return $oldContract;
     }
+
+    /**
+     * @param $id_contract
+     * @return Response|ResponseFactory
+     */
+    public function archiveContract($id_contract)
+    {
+        Contracts::findOrFail($id_contract)->delete();
+
+        return response('Contrat archivé avec succès', 200);
+    }
+
 }

@@ -44,7 +44,6 @@ QUEUE_CONNECTION=sync
 
  `php -S localhost:8000 -t public`
 
-
 ## Migration de la base et des données
 
  `php artisan migrate:refresh --seed`
@@ -52,8 +51,8 @@ QUEUE_CONNECTION=sync
 ## Ajout des extensions
 
 - JWT :
-   - `composer require tymon/jwt-auth`
    > ( installer composer si vous ne l'avait pas !)
+   - `composer require tymon/jwt-auth`
    - `php artisan jwt:secret`
 
 
