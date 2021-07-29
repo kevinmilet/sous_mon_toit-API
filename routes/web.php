@@ -15,7 +15,7 @@ $router->group(['prefix'=>'register'], function($router){
     $router->post('staff', 'AuthController@registerStaff'); // /register/staff
 });
 
-$router->group(['prefix' => 'api', 'middleware' => 'auth'], function ($router) {
+$router->group(['prefix' => 'api', ['middleware' => 'auth:staff', 'middleware' => 'auth:customer']], function ($router) {
     $router->post('logout', 'AuthController@logout');
     // $router->post('refresh', 'AuthController@refresh');
     // $router->post('me', 'AuthController@me');
@@ -53,7 +53,7 @@ $router->group(['prefix' => 'staff'], function () use ($router) {
     $router->get('/', 'StaffsController@getAllStaff'); // /staff/
     $router->get('/{id}', 'StaffsController@getOneById'); // /staff/{id}
     $router->delete('/delete/{id}', 'StaffsController@delete'); // /staff/delete/{id}
-    $router->post('/create/', 'StaffsController@create'); // /staff/create
+    $router->post('create', 'StaffsController@create'); // /staff/create
     $router->put('/update/{id}', 'StaffsController@update'); // /staff/update/{id}
 });
 
