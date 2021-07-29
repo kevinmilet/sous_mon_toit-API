@@ -27,16 +27,16 @@ class EstatesController extends Controller
                 'address' => 'string|required',
                 'city' => 'string|required',
                 'zipcode' => 'string|required',
-                'estate_longitude' => 'float|required',
-                'estate_latitude' => 'float|required',
-                'price' => 'float|nullable',
-                'description' => 'text|nullable',
+                'estate_longitude' => 'numeric|required',
+                'estate_latitude' => 'numeric|required',
+                'price' => 'numeric|nullable',
+                'description' => 'string|nullable',
                 'year_of_construction' => 'date|nullable',
-                'linving_surface' => 'integer|nullable',
+                'living_surface' => 'integer|nullable',
                 'carrez_law' => 'integer|nullable',
                 'land_surface' => 'integer|nullable',
-                'nd_rooms' => 'integer|nullable',
-                'nd_bedrooms' => 'integer|nullable',
+                'nb_rooms' => 'integer|nullable',
+                'nb_bedrooms' => 'integer|nullable',
                 'nb_bathrooms' => 'integer|nullable',
                 'nb_sanitary' => 'integer|nullable',
                 'nb_toilet' => 'integer|nullable',
@@ -54,13 +54,13 @@ class EstatesController extends Controller
                 'terrace' => 'boolean|nullable',
                 'swimming_pool' => 'boolean|nullable',
                 'fireplace' => 'boolean|nullable',
-                'all_in_serwer' => 'boolean|nullable',
+                'all_in_sewer' => 'boolean|nullable',
                 'septik_tank' => 'boolean|nullable',
-                'propeety_charge' => 'float|nullable',
+                'property_charge' => 'numeric|nullable',
                 'attic' => 'boolean|nullable',
                 'elevator' => 'boolean|nullable',
-                'rental_charge' => 'float|nullable',
-                'coownership_charge' => 'float|nullable',
+                'rental_charge' => 'numeric|nullable',
+                'coownership_charge' => 'numeric|nullable',
                 'created_at' => 'date|required',
             ]);
     }
@@ -97,12 +97,15 @@ class EstatesController extends Controller
     }
 
 
+    /**
+     * @throws ValidationException
+     */
     public function create(Request $request): array
     {
         $validated = $this->validation($request);
 
         $estate = new Estates();
-        return $estate->create([
+        $response = $estate->create([
             'id_estate_type' => $validated['id_estate_type'],
             'id_customer' => $validated['id_customer'],
             'reference_estate' => $validated['reference_estate'],
@@ -111,16 +114,16 @@ class EstatesController extends Controller
             'address' => $validated['address'],
             'city' => $validated['city'],
             'zipcode' => $validated['zipcode'],
-            'estate_longitude' => $validated['float|required'],
+            'estate_longitude' => $validated['estate_longitude'],
             'estate_latitude' => $validated['estate_latitude'],
             'price' => $validated['price'],
             'description' => $validated['description'],
             'year_of_construction' => $validated['year_of_construction'],
-            'linving_surface' => $validated['linving_surface'],
+            'living_surface' => $validated['living_surface'],
             'carrez_law' => $validated['carrez_law'],
             'land_surface' => $validated['land_surface'],
-            'nd_rooms' => $validated['nd_rooms'],
-            'nd_bedrooms' => $validated['nd_bedrooms'],
+            'nb_rooms' => $validated['nb_rooms'],
+            'nb_bedrooms' => $validated['nb_bedrooms'],
             'nb_bathrooms' => $validated['nb_bathrooms'],
             'nb_sanitary' => $validated['nb_sanitary'],
             'nb_toilet' => $validated['nb_toilet'],
@@ -138,9 +141,9 @@ class EstatesController extends Controller
             'terrace' => $validated['terrace'],
             'swimming_pool' => $validated['swimming_pool'],
             'fireplace' => $validated['fireplace'],
-            'all_in_serwer' => $validated['all_in_serwer'],
+            'all_in_sewer' => $validated['all_in_sewer'],
             'septik_tank' => $validated['septik_tank'],
-            'propeety_charge' => $validated['propeety_charge'],
+            'property_charge' => $validated['property_charge'],
             'attic' => $validated['attic'],
             'elevator' => $validated['elevator'],
             'rental_charge' => $validated['rental_charge'],
@@ -149,6 +152,8 @@ class EstatesController extends Controller
             'deleted_at' => null,
             'created_at' => $validated['created_at'],
         ]);
+
+        return [$response];
     }
 
 
