@@ -90,7 +90,7 @@ $router->group(['prefix' => 'customer_search',[['middleware' => 'auth:staff'], [
     $router->get('/customer/{id_customer}', 'CustomersSearchsController@selectAllCustomersSearchsForCustomer');
     $router->post('/create/{id_customer}','CustomersSearchsController@create');
     $router->put('/update/{id}','CustomersSearchsController@update');
-    $router->delete('/sdelete/{id}', 'CustomersSearchsController@delete');
+    $router->delete('/delete/{id}', 'CustomersSearchsController@delete');
     $router->group(['middleware' => 'auth:staff'], function() use ($router) {
         $router->get('/', 'CustomersSearchsController@selectAllCustomersSearchs');
     });
