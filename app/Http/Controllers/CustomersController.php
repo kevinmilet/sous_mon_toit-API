@@ -29,34 +29,38 @@ class CustomersController extends Controller{
         return response()->json($customer);
     }
 
+    private function validation($request) {
+        return $this->validate($request, [
+            'n_customer' => 'required|string',
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+            'gender' => 'required|string',
+            'mail' => 'string|email|unique:customers',
+            'mail' => 'string|email',
+            'phone' => 'required|string',
+            'password'=> 'string',
+            'birthdate' => 'date',
+            'address' => 'string',
+            'created_at' => 'date',
+            'archived_at' => 'date',
+            'update_at' => 'date',
+            'created_at' => 'date',
+            'archived_at' => 'date',
+            'updated_at' => 'date',
+            'first_met' => 'required|integer',
+            'token' => 'string',
+            'password_request' => 'integer',
+        ]);
 
+    }
     /**
      * @param Request $request
      * @return JsonResponse
      */
     public function create(Request $request): JsonResponse
     {
-        // a faire !! Champs à valider et a nettoyer
-        // // Validate if the input for each field is correct
-        // $this->validate($request, [
-        //     'n_customer' => 'required|string',
-        //     'firstname' => 'required|integer',
-        //     'lastname' => 'required|string',
-        //     'gender' => 'required|string',
-        //     'mail' => 'string',
-        //     'phone' => 'required|string',
-        //     'birthdate' => 'date',
-        //     'address' => 'string',
-        //     'created_at' => 'required|date',
-        //     'archived_at' => 'date',
-        //     'update_at' => 'date',
-        //     'first_met' => 'required|integer',
-        //     'token' => 'string',
-        //     'password_request' => 'integer',
-        //    ]);
-
-        // Create the player
-        // $customer = $this->customers->create([
+        $validated = $this->validation($request);
+    
             Customers::create([
             'n_customer' => $request->n_customer,
             'firstname' => $request->firstname,
@@ -84,6 +88,7 @@ class CustomersController extends Controller{
     public function update($id, Request $request): JsonResponse
     {
         $customer = Customers::findOrFail($id);
+        $validated = $this->validation($request);
         $customer->update($request->all());
         return response()->json(['success'=>'Modifications enregistrées']);
     }

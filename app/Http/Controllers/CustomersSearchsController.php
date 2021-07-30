@@ -72,7 +72,7 @@ class CustomersSearchsController extends Controller{
      * @param Request $request
      * @return JsonResponse
      */
-    public function create(Request $request): array
+    public function create(Request $request): JsonResponse
     {
         $validated = $this->validation($request);
 
