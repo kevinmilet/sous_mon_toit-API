@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Estates;
 use App\Models\Pictures;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -58,6 +59,7 @@ class PicturesController extends Controller
             if ($request->hasFile('name')) {
                 $img = $request->file('name');
                 $name = uniqid('estate_id_' . $id_estate . '_') . '.' . $img->getClientOriginalExtension();
+                $altAttribute = Estates::find($id_estate)->title . ' - ' . Estates::find($id_estate)->reference . ' - ' . time();
                 $destinationPath = storage_path('/app/public/pictures/estates/');
                 $img->move($destinationPath, $name);
             } else {
@@ -69,7 +71,7 @@ class PicturesController extends Controller
                 'folder' => '/estates',
                 'name' => $name,
                 'cover' => $validated['cover'],
-                'alt' => $name,
+                'alt' => $altAttribute,
                 'id_estate' => $id_estate
             ]);
 
