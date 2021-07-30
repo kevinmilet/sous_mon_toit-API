@@ -108,6 +108,7 @@ class StaffsController extends Controller
     public function update($id, Request $request): array
     {
         $staff = Staffs::findOrFail($id);
+        $this->validation($request);
         $staff->update($request->all());
 
         return [$staff];
