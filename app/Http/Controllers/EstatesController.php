@@ -20,11 +20,9 @@ class EstatesController extends Controller
     {
         return $this->validate($request,
             [
-                'id' => 'numeric|integer|required',
                 'id_estate_type' => 'numeric|integer|required',
                 'id_customer' => 'numeric|integer|required',
                 'title' => 'string|required',
-                'reference' => 'string|required',
                 'dpe_file' => 'string|nullable',
                 'buy_or_rent' => 'string|required',
                 'address' => 'string|required',
@@ -111,7 +109,7 @@ class EstatesController extends Controller
             'id_estate_type' => $validated['id_estate_type'],
             'id_customer' => $validated['id_customer'],
             'title' => $validated['title'],
-            'reference' => $validated['reference'],
+            'reference' => 'SMT'.substr(time(), 5, 9),
             'dpe_file' => $validated['dpe_file'],
             'buy_or_rent' => $validated['buy_or_rent'],
             'address' => $validated['address'],
