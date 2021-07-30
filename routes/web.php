@@ -87,7 +87,7 @@ $router->group(['prefix' => 'customer'], function () use ($router) {
 // Customers searchs
 $router->group(['prefix' => 'customer_search',['middleware' => 'auth:staff', 'middleware' => 'auth:customer']], function () use ($router) {
     $router->get('/{id_search}', 'CustomersSearchsController@selectOneCustomerSearch');
-    //ajouter route pour toutes les search d'un customer
+    $router->get('customer_searchs/{id_customer}', 'CustomersSearchsController@selectAllCustomerSearchForCustomer');
     $router->post('create/{id_customer}','CustomersSearchsController@create');
     $router->put('update/{id}','CustomersSearchsController@update');
     $router->delete('delete/{id}', 'CustomersSearchsController@delete');
