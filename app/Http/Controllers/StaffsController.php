@@ -24,7 +24,7 @@ class StaffsController extends Controller
                 'lastname' => 'string|required',
                 'mail' => 'email|unique:App\Models\Staffs,mail|required',
                 'phone' => 'string|min:10|max:15|required',
-//                'avatar' => 'nullable|sometimes|image|mimes:jpeg,jpg,png|max:2048',
+                'avatar' => 'nullable|sometimes|image|mimes:jpeg,jpg,png,gif|max:2048',
                 'id_function' => 'numeric|integer|required',
                 'id_role' => 'numeric|integer|required'
             ]);
@@ -75,7 +75,8 @@ class StaffsController extends Controller
 
         if ($request->hasFile('avatar')) {
             $avatar = $request->file('avatar');
-            $name = uniqid('avatar_') . '.' . $avatar->getClientOriginalExtension();
+
+            $name = uniqid('avatar_') . '.' . $avatar->guessExtension();
             $destinationPath = storage_path('/app/public/pictures/avatars/');
             $avatar->move($destinationPath, $name);
         } else {
