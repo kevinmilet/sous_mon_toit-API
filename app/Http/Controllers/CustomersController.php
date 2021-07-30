@@ -59,9 +59,9 @@ class CustomersController extends Controller{
      */
     public function create(Request $request): JsonResponse
     {
-        $validated = $this->validation($request);
+        $this->validation($request);
 
-            Customers::create([
+        $response = Customers::create([
             'n_customer' => $request->n_customer,
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
@@ -76,7 +76,7 @@ class CustomersController extends Controller{
             'password_request' => $request->password_request
 
         ]);
-        return response()->json(['success'=>'Utisateur créer']);
+        return response()->json(['success'=>'Utisateur créé', $response]);
 
     }
 
@@ -89,7 +89,7 @@ class CustomersController extends Controller{
     public function update($id, Request $request): JsonResponse
     {
         $customer = Customers::findOrFail($id);
-        $validated = $this->validation($request);
+        $this->validation($request);
         $customer->update($request->all());
         return response()->json(['success'=>'Modifications enregistrées']);
     }

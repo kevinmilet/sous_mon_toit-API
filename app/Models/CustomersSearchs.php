@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static find($id)
  * @method static findOrFail($id)
  * @method static create(array $array)
+ * @method static where(string $string, $id_customer)
  */
 class CustomersSearchs extends Model{
 
