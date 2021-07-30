@@ -39,9 +39,9 @@ class CustomersSearchsController extends Controller{
      * @param $id
      * @return JsonResponse
      */
-    public function selectOneCustomerSearch($id): JsonResponse
+    public function selectOneCustomerSearch($id_search): JsonResponse
     {
-        $customerSearch =  CustomersSearchs::find($id);
+        $customerSearch =  CustomersSearchs::find($id_search);
         return response()->json($customerSearch);
     }
 

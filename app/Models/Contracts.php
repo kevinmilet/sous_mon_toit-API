@@ -32,7 +32,7 @@ class Contracts extends Model implements AuthenticatableContract, AuthorizableCo
         'id_contract_type',
         'created_at',
         'updated_at',
-        'archived_at',
+        'deleted_at',
     ];
 
     /**

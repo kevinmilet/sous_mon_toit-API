@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
+use Laravel\Lumen\Http\ResponseFactory;
 
 class EstatesController extends Controller
 {
@@ -22,7 +24,7 @@ class EstatesController extends Controller
                 'id_estate_type' => 'numeric|integer|required',
                 'id_customer' => 'numeric|integer|required',
                 'title' => 'string|required',
-                'reference' => 'string|nullable',
+                'reference' => 'string|required',
                 'dpe_file' => 'string|nullable',
                 'buy_or_rent' => 'string|required',
                 'address' => 'string|required',
@@ -62,7 +64,6 @@ class EstatesController extends Controller
                 'elevator' => 'boolean|nullable',
                 'rental_charge' => 'numeric|nullable',
                 'coownership_charge' => 'numeric|nullable',
-                'created_at' => 'date|required',
             ]);
     }
 
@@ -88,7 +89,7 @@ class EstatesController extends Controller
 
     /**
      * @param $id
-     * @return \Illuminate\Http\Response|\Laravel\Lumen\Http\ResponseFactory
+     * @return Response|ResponseFactory
      */
     public function delete($id)
     {
@@ -110,7 +111,7 @@ class EstatesController extends Controller
             'id_estate_type' => $validated['id_estate_type'],
             'id_customer' => $validated['id_customer'],
             'title' => $validated['title'],
-            'reference_estate' => $validated['reference'],
+            'reference' => $validated['reference'],
             'dpe_file' => $validated['dpe_file'],
             'buy_or_rent' => $validated['buy_or_rent'],
             'address' => $validated['address'],
@@ -150,9 +151,6 @@ class EstatesController extends Controller
             'elevator' => $validated['elevator'],
             'rental_charge' => $validated['rental_charge'],
             'coownership_charge' => $validated['coownership_charge'],
-            'updated_at' => null,
-            'deleted_at' => null,
-            'created_at' => $validated['created_at'],
         ]);
 
         return [$response];
