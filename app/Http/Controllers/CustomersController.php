@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class CustomersController extends Controller{
 
@@ -29,38 +30,37 @@ class CustomersController extends Controller{
         return response()->json($customer);
     }
 
-    private function validation($request) {
+    /**
+     * @throws ValidationException
+     */
+    private function validation($request): array
+    {
         return $this->validate($request, [
             'n_customer' => 'required|string',
             'firstname' => 'required|string',
             'lastname' => 'required|string',
             'gender' => 'required|string',
             'mail' => 'string|email|unique:customers',
-            'mail' => 'string|email',
             'phone' => 'required|string',
             'password'=> 'string',
             'birthdate' => 'date',
             'address' => 'string',
-            'created_at' => 'date',
-            'archived_at' => 'date',
-            'update_at' => 'date',
-            'created_at' => 'date',
-            'archived_at' => 'date',
-            'updated_at' => 'date',
             'first_met' => 'required|integer',
             'token' => 'string',
             'password_request' => 'integer',
         ]);
 
     }
+
     /**
      * @param Request $request
      * @return JsonResponse
+     * @throws ValidationException
      */
     public function create(Request $request): JsonResponse
     {
         $validated = $this->validation($request);
-    
+
             Customers::create([
             'n_customer' => $request->n_customer,
             'firstname' => $request->firstname,
@@ -84,6 +84,7 @@ class CustomersController extends Controller{
      * @param $id
      * @param Request $request
      * @return JsonResponse
+     * @throws ValidationException
      */
     public function update($id, Request $request): JsonResponse
     {
