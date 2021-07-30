@@ -20,10 +20,10 @@ class StaffsController extends Controller
     {
         return $this->validate($request,
             [
-                'firstname' => 'string|required',
-                'lastname' => 'string|required',
+                'firstname' => 'string|required|regex:/^[a-zA-Z \'-]+$/',
+                'lastname' => 'string|required|regex:/^[a-zA-Z \'-]+$/',
                 'mail' => 'email|unique:App\Models\Staffs,mail|required',
-                'phone' => 'string|min:10|max:15|required',
+                'phone' => 'string|min:10|max:15|required|regex:/^[0-9 -\/\.]+$/',
                 'avatar' => 'nullable|sometimes|image|mimes:jpeg,jpg,png,gif|max:2048',
                 'id_function' => 'numeric|integer|required',
                 'id_role' => 'numeric|integer|required'
@@ -68,7 +68,7 @@ class StaffsController extends Controller
         $validated = $this->validation($request);
 
         // Set login
-        $login = strtolower(substr($validated['firstname'], 0, 1)) . strtolower($validated['lastname']);
+        $login = str_replace([' ', '\'', '-'], '', strtolower(substr($validated['firstname'], 0, 1)) . strtolower($validated['lastname']));
         // Set temp random password
         $rndPassword = bin2hex(random_bytes(4));
         $rndPasswordHash = password_hash($rndPassword, PASSWORD_DEFAULT);
