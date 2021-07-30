@@ -97,7 +97,6 @@ class StaffsController extends Controller
             'id_function' => $validated['id_function'],
             'id_role' => $validated['id_role'],
         ]);
-
         return [$response, 'tmp_pwd' => $rndPassword];
     }
 

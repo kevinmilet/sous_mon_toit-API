@@ -22,7 +22,7 @@ class EstatesController extends Controller
                 'id_estate_type' => 'numeric|integer|required',
                 'id_customer' => 'numeric|integer|required',
                 'title' => 'string|required',
-                'reference' => 'string|nullable',
+                'reference' => 'string|required',
                 'dpe_file' => 'string|nullable',
                 'buy_or_rent' => 'string|required',
                 'address' => 'string|required',
@@ -62,7 +62,7 @@ class EstatesController extends Controller
                 'elevator' => 'boolean|nullable',
                 'rental_charge' => 'numeric|nullable',
                 'coownership_charge' => 'numeric|nullable',
-                'created_at' => 'date|required',
+                'created_at' => 'date|nullable',
             ]);
     }
 
@@ -110,7 +110,7 @@ class EstatesController extends Controller
             'id_estate_type' => $validated['id_estate_type'],
             'id_customer' => $validated['id_customer'],
             'title' => $validated['title'],
-            'reference_estate' => $validated['reference'],
+            'reference' => $validated['reference'],
             'dpe_file' => $validated['dpe_file'],
             'buy_or_rent' => $validated['buy_or_rent'],
             'address' => $validated['address'],
