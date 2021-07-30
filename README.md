@@ -14,7 +14,7 @@ Kevin Milet
  - Ligne de commande 
 
     - `git init`
-    - `git remote add origin https://github.com/kevinmilet/sous_mon_toit.git`
+    - `git remote add origin https://github.com/kevinmilet/sous_mon_toit-API.git`
 
  - Ajouter le fichier .env a la racine 
 
@@ -40,21 +40,23 @@ CACHE_DRIVER=file
 QUEUE_CONNECTION=sync
 ```
 
+   - Installer le vendor avec composer
+      - `composer install`
+
 ## Lancer le serveur
 
- `php -S localhost:8000 -t public`
+   - `php -S localhost:8000 -t public`
+
 
 ## Migration de la base et des données
 
- `php artisan migrate:refresh --seed`
+   - `php artisan migrate:refresh --seed`
 
 ## Ajout des extensions
 
 - JWT :
-   > ( installer composer si vous ne l'avait pas !)
    - `composer require tymon/jwt-auth`
    - `php artisan jwt:secret`
-
 
 ## Relier le dossier storage au dossier public
 
