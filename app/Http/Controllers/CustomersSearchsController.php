@@ -45,6 +45,8 @@ class CustomersSearchsController extends Controller{
         return response()->json($customerSearch);
     }
 
+    
+
     /**
      * @param $id
      * @param Request $request
