@@ -74,19 +74,6 @@ class ContractsController extends Controller
             'id_contract_type' => $request->id_contract_type,
 
         ]);
-        // //Création du contrat
-        // $contract = new Contracts;
-        // //Set des données
-        // $contract->folder = $request->folder;
-        // $contract->name = $filename;
-        // $contract->id_estate = $request->id_estate;
-        // $contract->id_customer = $request->id_customer;
-        // $contract->id_staff = $request->id_staff;
-        // $contract->id_contract_type = $request->id_contract_type;
-        // $contract->updated_at = null;
-        // $contract->archived_at = null;
-        // //Enregistrement
-        // $contract->save();
 
     }
 
@@ -118,9 +105,6 @@ class ContractsController extends Controller
             $destinationPath = storage_path('/app/public/documents/' . $request->folder);
             $fileContract->move($destinationPath, $name);
 
-            var_dump('je suis dans file');
-            // die();
-
             // Suppression de l'ancien contract
             $oldName = $oldContract->name;
             $oldDestinationPath = storage_path('/app/public/documents/' . $oldContract->folder );
@@ -130,7 +114,6 @@ class ContractsController extends Controller
             $contract = Contracts::find($id_contract);
             $contract->name = $name;
             $contract->save();
-
         }
 
         // Enregistrement en base des données modifiées
