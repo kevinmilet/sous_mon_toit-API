@@ -62,7 +62,7 @@ class EstatesController extends Controller
                 'elevator' => 'boolean|nullable',
                 'rental_charge' => 'numeric|nullable',
                 'coownership_charge' => 'numeric|nullable',
-                'created_at' => 'date|required',
+                // 'created_at' => 'date|required',
             ]);
     }
 
@@ -110,7 +110,7 @@ class EstatesController extends Controller
             'id_estate_type' => $validated['id_estate_type'],
             'id_customer' => $validated['id_customer'],
             'title' => $validated['title'],
-            'reference_estate' => $validated['reference'],
+            'reference' => $validated['reference'],
             'dpe_file' => $validated['dpe_file'],
             'buy_or_rent' => $validated['buy_or_rent'],
             'address' => $validated['address'],
@@ -150,9 +150,9 @@ class EstatesController extends Controller
             'elevator' => $validated['elevator'],
             'rental_charge' => $validated['rental_charge'],
             'coownership_charge' => $validated['coownership_charge'],
-            'updated_at' => null,
-            'deleted_at' => null,
-            'created_at' => $validated['created_at'],
+            // 'updated_at' => null,
+            // 'deleted_at' => null,
+            // 'created_at' => $validated['created_at'],
         ]);
 
         return [$response];

@@ -10,24 +10,22 @@ $router->group(['prefix' => 'login'], function($router) {
     $router->post('customer', 'AuthController@loginCustomer'); // /login/customer
     $router->post('staff', 'AuthController@loginStaff'); // /login/staff
 });
-// $router->group(['prefix'=>'register'], function($router){
-//     $router->post('customer', 'AuthController@registerCustomer'); // /register/customer
-//     $router->post('staff', 'AuthController@registerStaff'); // /register/staff
-// });
 
 $router->group(['prefix' => 'api', ['middleware' => 'auth:staff', 'middleware' => 'auth:customer']], function ($router) {
-    $router->post('logout', 'AuthController@logout');
-    $router->post('me', 'AuthController@me');
-    $router->post('refresh', 'AuthController@refresh');
+    $router->post('logout', 'AuthController@logout'); // /api/logout
+    $router->post('me', 'AuthController@me'); // /api/me
+    $router->post('refresh', 'AuthController@refresh'); // /api/refresh
 });
 
 // Biens
 $router->group(['prefix' => 'estates'], function () use ($router) {
-    $router->get('/', 'EstatesController@selectAllEstates'); // /biens/
-    $router->get('/{id}', 'EstatesController@selectOneEstate'); // /biens/{id}
-    $router->post('/create', 'EstatesController@create'); // /biens/create/{id}
-    $router->put('/update/{id}', 'EstatesController@update'); // /biens/update/{id}
-    $router->delete('/delete/{id}', 'EstatesController@delete'); // /biens/delete/{id}
+    $router->get('/', 'EstatesController@selectAllEstates'); // /estates/
+    $router->get('/{id}', 'EstatesController@selectOneEstate'); // /estates/{id}
+    $router->group(['middleware' => 'auth:staff'], function() use ($router) {
+        $router->post('/create', 'EstatesController@create'); // /estates/create/{id}
+        $router->put('/update/{id}', 'EstatesController@update'); // /estates/update/{id}
+        $router->delete('/delete/{id}', 'EstatesController@delete'); // /estates/delete/{id}
+    });
 });
 
 // Types de biens
@@ -52,41 +50,50 @@ $router->group(['prefix' => 'schedule', 'middleware' => 'auth:staff'], function 
 $router->group(['prefix' => 'staff'], function () use ($router) {
     $router->get('/', 'StaffsController@getAllStaff'); // /staff/
     $router->get('/{id}', 'StaffsController@getOneById'); // /staff/{id}
-    $router->delete('/delete/{id}', 'StaffsController@delete'); // /staff/delete/{id}
-    $router->post('create', 'StaffsController@create'); // /staff/create
-    $router->put('/update/{id}', 'StaffsController@update'); // /staff/update/{id}
+    $router->group(['middleware' => 'auth:staff'], function() use ($router) {
+        $router->post('create', 'StaffsController@create'); // /staff/create
+        $router->put('/update/{id}', 'StaffsController@update'); // /staff/update/{id}
+        $router->delete('/delete/{id}', 'StaffsController@delete'); // /staff/delete/{id}
+    });
 });
 
 /*
  * Routes pour Functions
  */
-$router->group(['prefix' => 'functions'], function () use ($router) {
+$router->group(['prefix' => 'functions','middleware' => 'auth:staff'], function () use ($router) {
     $router->get('/', 'FunctionsController@getAllFunctions'); // /functions/
 });
 
 /*
  * Routes pour Roles
  */
-$router->group(['prefix' => 'roles'], function () use ($router) {
+$router->group(['prefix' => 'roles','middleware' => 'auth:staff'], function () use ($router) {
     $router->get('/', 'RolesController@getAllRoles'); // /roles/
 });
 
 // Customers
 $router->group(['prefix' => 'customer'], function () use ($router) {
-    $router->get('/', 'CustomersController@selectAllCustomers');
-    $router->get('/{id}', 'CustomersController@selectOneCustomer');
     $router->post('create','CustomersController@create');
-    $router->put('update/{id}','CustomersController@update');
-    $router->delete('delete/{id}', 'CustomersController@delete');
+    $router->group(['middleware' => 'auth:staff', 'middleware' => 'auth:customer'], function() use ($router) {
+        $router->get('/{id}', 'CustomersController@selectOneCustomer');
+        $router->put('update/{id}','CustomersController@update');
+        $router->delete('delete/{id}', 'CustomersController@delete');
+    });
+    $router->group(['middleware' => 'auth:staff'], function() use ($router) {
+        $router->get('/', 'CustomersController@selectAllCustomers');
+    });
 });
 
 // Customers searchs
-$router->group(['prefix' => 'customer_search'], function () use ($router) {
-    $router->get('/', 'CustomersSearchsController@selectAllCustomersSearchs');
-    $router->get('/{id}', 'CustomersSearchsController@selectOneCustomerSearch');
+$router->group(['prefix' => 'customer_search',['middleware' => 'auth:staff', 'middleware' => 'auth:customer']], function () use ($router) {
+    $router->get('/{id_search}', 'CustomersSearchsController@selectOneCustomerSearch');
+    //ajouter route pour toutes les search d'un customer
     $router->post('create/{id_customer}','CustomersSearchsController@create');
     $router->put('update/{id}','CustomersSearchsController@update');
     $router->delete('delete/{id}', 'CustomersSearchsController@delete');
+    $router->group(['middleware' => 'auth:staff'], function() use ($router) {
+        $router->get('/', 'CustomersSearchsController@selectAllCustomersSearchs');
+    });
 });
 
 // Customers types
@@ -96,7 +103,7 @@ $router->group(['prefix' => 'customer_type'], function () use ($router) {
 });
 
 //Contract
-$router->group(['prefix' => 'contract'], function () use ($router) {
+$router->group(['prefix' => 'contract', 'middleware' => 'auth:staff'], function () use ($router) {
     $router->get('/', 'ContractsController@selectAllContracts');
     $router->get('/contractsTypes', 'ContractsTypesController@selectAllContractsTypes');
     $router->post('/saveContract', 'ContractsController@saveNewContract');
@@ -109,7 +116,9 @@ $router->group(['prefix' => 'contract'], function () use ($router) {
 $router->group(['prefix' => 'estates_pictures'], function () use ($router) {
     $router->get('/{id_estate}', 'PicturesController@getEstatePictures');
     $router->get('/cover/{id_estate}', 'PicturesController@getEstateCover');
-    $router->delete('delete/{id_estate}/{id}', 'PicturesController@delete');
-    $router->delete('delete_all/{id_estate}', 'PicturesController@deleteAll');
-    $router->post('upload/{id_estate}', 'PicturesController@uploadPicture');
+    $router->group(['middleware' => 'auth:staff'], function() use ($router) {
+        $router->delete('delete/{id_estate}/{id}', 'PicturesController@delete');
+        $router->delete('delete_all/{id_estate}', 'PicturesController@deleteAll');
+        $router->post('upload/{id_estate}', 'PicturesController@uploadPicture');
+    });
 });
