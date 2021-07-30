@@ -162,6 +162,6 @@ class EstatesController extends Controller
         $estate = Estates::findOrFail($id);
         $estate->update($request->all());
 
-        return $estate;
+        return [$estate];
     }
 }
