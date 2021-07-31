@@ -24,7 +24,7 @@ class EstatesController extends Controller
                 'id_customer' => 'numeric|integer|required',
                 'title' => 'string|required|regex:/^[a-zA-Z \'-]+$/',
                 'dpe_file' => 'string|nullable|regex:/^[a-zA-Z \'-]+$/',
-                'buy_or_rent' => 'string|required|regex:/^[Achat]|[achat]|[Location]|[location]$/',
+                'buy_or_rent' => 'string|required|regex:/^^(achat)$|^(Achat)$|^(location)$|^(Location)$$/',
                 'address' => 'string|required|regex:/^[a-zA-Z \'-]+$/',
                 'city' => 'string|required|regex:/^[a-zA-Z \'-]+$/',
                 'zipcode' => 'string|required|regex:/^([0-9]{1}[0-5]{1}[0-9]{3})|(9[7-8]{1}[2-8]{1}[0-9]{2})$/',
