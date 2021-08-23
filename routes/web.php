@@ -150,3 +150,7 @@ $router->group(['prefix' => 'estates_pictures'], function () use ($router) {
         $router->post('upload/{id_estate}', 'PicturesController@uploadPicture');
     });
 });
+
+$router->get('/key', function() {
+    return \Illuminate\Support\Str::random(32);
+});
