@@ -115,8 +115,7 @@ class PicturesController extends Controller
      * @param $id_estate
      * @return Response|ResponseFactory
      */
-    public
-    function deleteAll($id_estate)
+    public function deleteAll($id_estate)
     {
         if (!empty($id_estate)) {
             try {
