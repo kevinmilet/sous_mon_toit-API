@@ -11,10 +11,21 @@ $router->group(['prefix' => 'login'], function($router) {
     $router->post('staff', 'AuthController@loginStaff'); // /login/staff
 });
 
-$router->group(['prefix' => 'api', [['middleware' => 'auth:staff'], ['middleware' => 'auth:customer']]], function ($router) {
-    $router->post('logout', 'AuthController@logout'); // /api/logout
-    $router->post('me', 'AuthController@me'); // /api/me
-    $router->post('refresh', 'AuthController@refresh'); // /api/refresh
+$router->group(['prefix' => 'api'], function() use ($router) {
+    $router->group(['prefix' => 's'], function() use ($router) {
+        $router->group(['middleware' => 'auth:staff'],function() use ($router) {
+            $router->post('logout', 'AuthController@logout'); // /api/logout
+            $router->post('me', 'AuthController@me'); // /api/me
+            $router->post('refresh', 'AuthController@refresh'); // /api/refresh
+        });
+    });
+    $router->group(['prefix' => 'c'], function() use ($router) {
+        $router->group(['middleware' => 'auth:customer'],function() use ($router) {
+            $router->post('logout', 'AuthController@logout'); // /api/logout
+            $router->post('me', 'AuthController@me'); // /api/me
+            $router->post('refresh', 'AuthController@refresh'); // /api/refresh
+        });
+    });
 });
 
 // Biens
@@ -74,25 +85,42 @@ $router->group(['prefix' => 'roles','middleware' => 'auth:staff'], function () u
 // Customers
 $router->group(['prefix' => 'customer'], function () use ($router) {
     $router->post('create','CustomersController@create');
-    $router->group([['middleware' => 'auth:staff'], ['middleware' => 'auth:customer']], function() use ($router) {
-        $router->get('/{id}', 'CustomersController@selectOneCustomer');
-        $router->put('update/{id}','CustomersController@update');
-        $router->delete('delete/{id}', 'CustomersController@delete');
+    $router->group(['prefix' => 's'], function() use ($router) {
+        $router->group(['middleware' => 'auth:staff'],function() use ($router) {
+            $router->get('/{id}', 'CustomersController@selectOneCustomer');
+            $router->put('update/{id}','CustomersController@update');
+            $router->delete('delete/{id}', 'CustomersController@delete');
+        });
     });
-    $router->group(['middleware' => 'auth:staff'], function() use ($router) {
-        $router->get('/', 'CustomersController@selectAllCustomers');
+    $router->group(['prefix' => 'c'], function() use ($router) {
+        $router->group(['middleware' => 'auth:customer'],function() use ($router) {
+            $router->get('/{id}', 'CustomersController@selectOneCustomer');
+            $router->put('update/{id}','CustomersController@update');
+            $router->delete('delete/{id}', 'CustomersController@delete');
+        });
     });
 });
 
 // Customers searchs
-$router->group(['prefix' => 'customer_search',[['middleware' => 'auth:staff'], ['middleware' => 'auth:customer']]], function () use ($router) {
-    $router->get('/{id_search}', 'CustomersSearchsController@selectOneCustomerSearch');
-    $router->get('/customer/{id_customer}', 'CustomersSearchsController@selectAllCustomersSearchsForCustomer');
-    $router->post('/create/{id_customer}','CustomersSearchsController@create');
-    $router->put('/update/{id}','CustomersSearchsController@update');
-    $router->delete('/delete/{id}', 'CustomersSearchsController@delete');
-    $router->group(['middleware' => 'auth:staff'], function() use ($router) {
-        $router->get('/', 'CustomersSearchsController@selectAllCustomersSearchs');
+$router->group(['prefix' => 'customer_search'], function () use ($router) {
+    $router->group(['prefix' => 's'], function() use ($router) {
+        $router->group(['middleware' => 'auth:staff'], function() use ($router) {
+            $router->get('/', 'CustomersSearchsController@selectAllCustomersSearchs');
+            $router->get('/{id_search}', 'CustomersSearchsController@selectOneCustomerSearch');
+            $router->get('/customer/{id_customer}', 'CustomersSearchsController@selectAllCustomersSearchsForCustomer');
+            $router->post('/create/{id_customer}','CustomersSearchsController@create');
+            $router->put('/update/{id}','CustomersSearchsController@update');
+            $router->delete('/delete/{id}', 'CustomersSearchsController@delete');
+        });
+    });
+    $router->group(['prefix' => 'c'], function() use ($router) {
+        $router->group(['middleware' => 'auth:costumer'], function() use ($router) {
+            $router->get('/{id_search}', 'CustomersSearchsController@selectOneCustomerSearch');
+            $router->get('/customer/{id_customer}', 'CustomersSearchsController@selectAllCustomersSearchsForCustomer');
+            $router->post('/create/{id_customer}','CustomersSearchsController@create');
+            $router->put('/update/{id}','CustomersSearchsController@update');
+            $router->delete('/delete/{id}', 'CustomersSearchsController@delete');
+        });
     });
 });
 
