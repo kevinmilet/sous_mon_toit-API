@@ -74,13 +74,19 @@ $router->group(['prefix' => 'roles','middleware' => 'auth:staff'], function () u
 // Customers
 $router->group(['prefix' => 'customer'], function () use ($router) {
     $router->post('create','CustomersController@create');
-    $router->group([['middleware' => 'auth:staff'], ['middleware' => 'auth:customer']], function() use ($router) {
-        $router->get('/{id}', 'CustomersController@selectOneCustomer');
-        $router->put('update/{id}','CustomersController@update');
-        $router->delete('delete/{id}', 'CustomersController@delete');
+    $router->group(['prefix' => 's'], function() use ($router) {
+        $router->group(['middleware' => 'auth:staff'],function() use ($router) {
+            $router->get('/{id}', 'CustomersController@selectOneCustomer');
+            $router->put('update/{id}','CustomersController@update');
+            $router->delete('delete/{id}', 'CustomersController@delete');
+        });
     });
-    $router->group(['middleware' => 'auth:staff'], function() use ($router) {
-        $router->get('/', 'CustomersController@selectAllCustomers');
+    $router->group(['prefix' => 'c'], function() use ($router) {
+        $router->group(['middleware' => 'auth:customer'],function() use ($router) {
+            $router->get('/{id}', 'CustomersController@selectOneCustomer');
+            $router->put('update/{id}','CustomersController@update');
+            $router->delete('delete/{id}', 'CustomersController@delete');
+        });
     });
 });
 
