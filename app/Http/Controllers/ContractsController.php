@@ -21,14 +21,14 @@ class ContractsController extends Controller
 
     /**
      * Retourne la liste des contrats
-     * 
+     *
      * @OA\Get(
      *      path="/contract",
      *      summary="list all contracts",
      *      operationId="getContractsList",
      *      tags={"Contracts"},
-     *      @OA\Response( 
-     *          response=200, 
+     *      @OA\Response(
+     *          response=200,
      *          description="A list with contracts",
      *          @OA\JsonContent(
      *              type="array",
@@ -38,17 +38,17 @@ class ContractsController extends Controller
      *      @OA\Response(
      *          response=401,
      *          description="Unauthenticated",
-     *      ), 
+     *      ),
      *      @OA\Response(
      *          response=403,
      *          description="Forbidden"
      *      ),
-     *      @OA\Response( 
-     *          response="default", 
+     *      @OA\Response(
+     *          response="default",
      *          description="une erreur ""inattendue""",
      *      ),
      * )
-     * 
+     *
      *
      * @return Contracts[]|Collection
      */
@@ -107,7 +107,7 @@ class ContractsController extends Controller
 
     /**
      * Modification d'un contrat
-     * 
+     *
      * @param $id_contract
      * @return Response|ResponseFactory
      */
@@ -138,7 +138,7 @@ class ContractsController extends Controller
             $oldDestinationPath = storage_path('/app/public/documents/' . $oldContract->folder );
             File::delete($oldDestinationPath.'/' . $oldName);
 
-            //On enregistre le nouveau nom 
+            //On enregistre le nouveau nom
             $contract = Contracts::find($id_contract);
             $contract->name = $name;
             $contract->save();
