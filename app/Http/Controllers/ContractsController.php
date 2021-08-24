@@ -21,6 +21,34 @@ class ContractsController extends Controller
 
     /**
      * Retourne la liste des contrats
+     * 
+     * @OA\Get(
+     *      path="/contract",
+     *      summary="list all contracts",
+     *      operationId="getContractsList",
+     *      tags={"Contracts"},
+     *      @OA\Response( 
+     *          response=200, 
+     *          description="A list with contracts",
+     *          @OA\JsonContent(
+     *              type="array",
+     *              @OA\Items(ref="Contract"),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ), 
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response( 
+     *          response="default", 
+     *          description="une erreur ""inattendue""",
+     *      ),
+     * )
+     * 
      *
      * @return Contracts[]|Collection
      */
