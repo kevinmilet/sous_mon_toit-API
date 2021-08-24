@@ -76,6 +76,10 @@ class StaffsController extends Controller
      *      summary="get a staff member",
      *      operationId="getOneById",
      *      tags={"Staff"},
+     *     @OA\Parameter(
+     *         name="include",
+     *         in="query",
+     *         required=false,
      *      @OA\Response(
      *          response=200,
      *          description="A staff member",
