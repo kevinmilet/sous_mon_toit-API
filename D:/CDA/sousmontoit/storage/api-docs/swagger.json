@@ -36,7 +36,7 @@
             "description" : "Forbidden"
           },
           "default" : {
-            "description" : "une erreur \"inattendue\""
+            "description" : "une erreur inattendue"
           }
         }
       }
