@@ -86,22 +86,19 @@ class PicturesController extends Controller
      * @param $id
      * @return Response|ResponseFactory
      */
-    public function delete($id_estate, $id)
+    public function delete($id_picture)
     {
-        if (!empty($id) && !empty($id_estate)) {
+        if (!empty($id_picture)) {
             try {
+
                 $path = storage_path('/app/public/pictures/estates/');
-                $estate = Pictures::where('id_estate', $id_estate)->get();
+                $filename = Pictures::findOrFail($id_picture)->name;
+                // Suppression du fichier 
+                File::delete($path . $filename);
+                // Supression de l'image en base de données
+                Pictures::findOrFail($id_picture)->delete();
 
-                if ($estate->find($id) != null) {
-                    $file = $estate->find($id)->name;
-                } else {
-                    return response('Image introuvable', 404);
-                }
-
-                File::delete($path . $file);
-                $estate->find($id)->delete();
-                return response('Image supprimée avec succès - ' . $file, 200);
+                return response('Image "' . $filename . '" supprimée avec succès', 200);
 
             } catch (Exception $e) {
                 throw new Exception('Suppression de l\image impossible. ' . $e->getMessage());
