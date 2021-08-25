@@ -1,7 +1,7 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.16.0"
 
-set :application, "Sousmontoit-API"
+set :application, "sous_mon_toit-API"
 set :repo_url, "git@github.com:kevinmilet/sous_mon_toit-API.git"
 
 # Default branch is :master
@@ -38,8 +38,15 @@ set :keep_releases, 3
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
 
+# set :github_access_token, "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"
+
 namespace :deploy do
 	after :updated, "composer:install"
 	after :updated, "laravel:fix_permissions"
 	after :updated, "migration:make_migration"
 end
+
+# before 'deploy:starting', 'github:deployment:create'
+# after  'deploy:starting', 'github:deployment:pending'
+# after  'deploy:finished', 'github:deployment:success'
+# after  'deploy:failed',   'github:deployment:failure'
