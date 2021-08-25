@@ -87,6 +87,7 @@ $router->group(['prefix' => 'customer'], function () use ($router) {
     $router->post('create','CustomersController@create');
     $router->group(['prefix' => 's'], function() use ($router) {
         $router->group(['middleware' => 'auth:staff'],function() use ($router) {
+            $router->get('/', 'CustomersController@selectAllCustomers');
             $router->get('/{id}', 'CustomersController@selectOneCustomer');
             $router->put('update/{id}','CustomersController@update');
             $router->delete('delete/{id}', 'CustomersController@delete');
