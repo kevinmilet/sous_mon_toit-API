@@ -14,6 +14,28 @@ use Laravel\Lumen\Auth\Authorizable;
  * @method static findOrFail($id)
  * @method static create(array $array)
  * @method static update(array $array)
+ * 
+ *  @OA\Schema(
+ *   schema="Estate",
+ *   title="Estates",
+ *   description="Estates model",
+ *   @OA\Property(
+ *     property="id", description="ID of the estate",
+ *     @OA\Schema(type="number", example=1)
+ *  ),
+ *   @OA\Property(
+ *     property="created_at", description="Date of created",
+ *     @OA\Schema(type="date", example="16-06-1994")
+ *  ),
+ *   @OA\Property(
+ *     property="updated_at", description="Date of updated",
+ *     @OA\Schema(type="date", example="18-01-2008")
+ *  ),
+ *   @OA\Property(
+ *     property="deleted_at", description="Date of archived",
+ *     @OA\Schema(type="date", example="24-08-2021")
+ *  ),
+ * )
  */
 class Estates extends Model implements AuthenticatableContract, AuthorizableContract
 {

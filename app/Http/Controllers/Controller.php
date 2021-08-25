@@ -11,11 +11,50 @@ class Controller extends BaseController
 {
 
     /** 
-    * @OA\Info(title="Ma première API", version="0.1") 
+    * @OA\Info(title="Sous Mon Toit", version="0.1")
+    *
     * @OA\Server(
-    *      url="http://localhost:8000",
+    *      url="https://localhost:8000",
     *      description = "API de l'agence immobiliere Sous Mon Toit",
+    *      @OA\Contact(
+    *           email="laforet.gerard.smt@gmail.com",
+    *           name="Gérard Laforêt - Directeur de l'agence SousMonToit"
+    *      )    
     * )
+    *
+    * @OA\Parameter(
+    *     name = "id",
+    *     in = "path",
+    *     description = "Id of resource",
+    *     required = true,
+    *     @OA\Schema(type="integer"),
+    * )
+    *
+    * @OA\Response(
+    *     response=400,
+    *     description="Bad Request",
+    * )
+    * @OA\Response(
+    *     response=401,
+    *     description="Unauthenticated",
+    * )
+    * @OA\Response(
+    *     response=403,
+    *     description="Forbidden"
+    * )
+    * @OA\Response(
+    *     response=404,
+    *     description="Resource Not Found",
+    *     @OA\JsonContent(
+    *          @OA\Property(property="message", type="string", example="Resource Not Found")
+    *     ),
+    * )
+    * @OA\Response( 
+    *     response="default", 
+    *     description="une erreur ""inattendue""",
+    * )
+    *
+    * @OA\SecurityScheme(bearerFormat="JWT", type="apiKey" , securityScheme="bearer")
     */
     protected function respondWithToken($token): \Illuminate\Http\JsonResponse
     {

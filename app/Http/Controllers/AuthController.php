@@ -14,7 +14,41 @@ class AuthController extends Controller
 {
     /**
      * Get a JWT via given credentials.
-     *
+     * 
+     *  @OA\Get(
+     *      path="/login/customer",
+     *      summary="Get token for Customer",
+     *      description="Return the token of the customer",
+     *      operationId="getTokenCustomer",
+     *      tags={"Authentification"},
+     *      @OA\Parameter(
+     *          name = "mail",
+     *          in = "path",
+     *          description = "mail of customer",
+     *          required = true,
+     *          @OA\Schema(type="string"),
+     *      ),
+     *      @OA\Parameter(
+     *          name = "password",
+     *          in = "path",
+     *          description = "password of customer",
+     *          required = true,
+     *          @OA\Schema(type="string"),
+     *      ),
+     *      @OA\Response( 
+     *          response=200, 
+     *          description="A token for customer",
+     *          @OA\JsonContent(
+     *              type="string",
+     *          ),
+     *      ),
+     *      @OA\Response(response="400", ref="#/components/responses/400"),
+     *      @OA\Response(response="401", ref="#/components/responses/401"),
+     *      @OA\Response(response="403", ref="#/components/responses/403"),
+     *      @OA\Response(response="default", ref="#/components/responses/default"),
+     * )
+     * 
+     * 
      * @param Request $request
      * @return JsonResponse
      * @throws ValidationException
@@ -37,6 +71,47 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
+        /**
+     * Get a JWT via given credentials.
+     *  
+     *  @OA\Get(
+     *      path="/login/staff",
+     *      summary="Get token for staff",
+     *      description="Return the token of the staff",
+     *      operationId="getTokenStaff",
+     *      tags={"Authentification"},
+     *      @OA\Parameter(
+     *          name = "login",
+     *          in = "path",
+     *          description = "mail of staff",
+     *          required = true,
+     *          @OA\Schema(type="string"),
+     *      ),
+     *      @OA\Parameter(
+     *          name = "password",
+     *          in = "path",
+     *          description = "password of staff",
+     *          required = true,
+     *          @OA\Schema(type="string"),
+     *      ),
+     *      @OA\Response( 
+     *          response=200, 
+     *          description="A token for staff",
+     *          @OA\JsonContent(
+     *              type="string",
+     *          ),
+     *      ),
+     *      @OA\Response(response="400", ref="#/components/responses/400"),
+     *      @OA\Response(response="401", ref="#/components/responses/401"),
+     *      @OA\Response(response="403", ref="#/components/responses/403"),
+     *      @OA\Response(response="default", ref="#/components/responses/default"),
+     * )
+     * 
+     * 
+     * @param Request $request
+     * @return JsonResponse
+     * @throws ValidationException
+     */
     public function loginStaff(Request $request): JsonResponse
     {
         //validate incoming request
