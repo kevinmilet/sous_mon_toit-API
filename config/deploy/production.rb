@@ -43,21 +43,22 @@ server "54.37.71.121",  user: "am_laforetgapi-sousmontoit", roles: %w{app db web
 # --------------
   set :ssh_options, {
 #     keys: %w(/var/www/clients/client290/web388/home/am_laforetgapi-sousmontoit/.ssh/id_rsa),
-    forward_agent: false,
-    #keys: %w(/var/www/clients/client290/web388/home/am_laforetgapi-sousmontoit/.ssh/id_ed25519),
+#     user: "am_laforetgapi-sousmontoit",
+    forward_agent: true,
+#     keys: %w(~/.ssh/id_rsa),
     auth_methods: %w(password),
-     password: "9#9rkTmJ"
+    password: "9#9rkTmJ"
   }
 #
 # The server-based syntax can be used to override options:
 # ------------------------------------
-# server "example.com",
-#   user: "user_name",
-#   roles: %w{web app},
-#   ssh_options: {
+server "54.37.71.121",
+  user: "am_laforetgapi-sousmontoit",
+  roles: %w{web app db},
+  ssh_options: {
 #     user: "user_name", # overrides user setting above
-#     keys: %w(/home/user_name/.ssh/id_rsa),
-#     forward_agent: false,
-#     auth_methods: %w(publickey password)
-#     # password: "please use keys"
-#   }
+    keys: %w(~/.ssh/id_rsa),
+    forward_agent: true,
+    auth_methods: %w(publickey password),
+    password: "9#9rkTmJ"
+  }
