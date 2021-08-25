@@ -1,6 +1,9 @@
 # Load DSL and set up stages
 require "capistrano/setup"
 
+# require "capistrano/github"
+# require "octokit"
+
 # Include default deployment tasks
 require "capistrano/deploy"
 

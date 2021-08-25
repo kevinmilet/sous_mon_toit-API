@@ -42,10 +42,11 @@ server "54.37.71.121",  user: "am_laforetgapi-sousmontoit", roles: %w{app db web
 # Global options
 # --------------
   set :ssh_options, {
-#    keys: %w(/home/user_name/.ssh/id_rsa),
-#    forward_agent: false,
+#     keys: %w(/var/www/clients/client290/web388/home/am_laforetgapi-sousmontoit/.ssh/id_rsa),
+    forward_agent: false,
+    #keys: %w(/var/www/clients/client290/web388/home/am_laforetgapi-sousmontoit/.ssh/id_ed25519),
     auth_methods: %w(password),
-    password: "9#9rkTmJ"
+     password: "9#9rkTmJ"
   }
 #
 # The server-based syntax can be used to override options:
