@@ -1,0 +1,119 @@
+# Logfile created on 2021-08-24 14:27:19 +0200 by logger.rb/v1.4.3
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-08-24 14:27:19 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [7640e0c1] Running /usr/bin/env mkdir -p /tmp as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [7640e0c1] Command: /usr/bin/env mkdir -p /tmp
+  INFO [5b902361] Running /usr/bin/env #<StringIO:0x0000020f4fb13450> /tmp/git-ssh-bc4804c3813902cb7370.sh as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [5b902361] Command: /usr/bin/env #<StringIO:0x0000020f4fb13450> /tmp/git-ssh-bc4804c3813902cb7370.sh
+  INFO [d1f8e0fe] Running /usr/bin/env chmod 700 /tmp/git-ssh-bc4804c3813902cb7370.sh as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [d1f8e0fe] Command: /usr/bin/env chmod 700 /tmp/git-ssh-bc4804c3813902cb7370.sh
+  INFO [e7746a5f] Running /usr/bin/env git ls-remote git@github.com:kevinmilet/sous_mon_toit-API.git HEAD as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [e7746a5f] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-bc4804c3813902cb7370.sh" ; /usr/bin/env git ls-remote git@github.com:kevinmilet/sous_mon_toit-API.git HEAD )
+  INFO [b8eca749] Running /usr/bin/env mkdir -p /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/shared /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [b8eca749] Command: /usr/bin/env mkdir -p /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/shared /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases
+  INFO [3366517f] Running /usr/bin/env mkdir -p /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/shared/public/uploads as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [3366517f] Command: /usr/bin/env mkdir -p /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/shared/public/uploads
+  INFO [9fdd2b7e] Running /usr/bin/env mkdir -p /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/shared as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [9fdd2b7e] Command: /usr/bin/env mkdir -p /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/shared
+ DEBUG [c940ce56] Running [ -f /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/shared/.env ] as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [c940ce56] Command: [ -f /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/shared/.env ]
+ DEBUG [38e43232] Running [ -f /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/current/REVISION ] as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [38e43232] Command: [ -f /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/current/REVISION ]
+ DEBUG [c9a6221d] Running /usr/bin/env cat /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/current/REVISION 2>/dev/null as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [c9a6221d] Command: /usr/bin/env cat /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/current/REVISION 2>/dev/null
+ DEBUG [26d81d19] Running [ -f /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/repo/HEAD ] as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [26d81d19] Command: [ -f /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/repo/HEAD ]
+  INFO The repository mirror is at /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/repo
+ DEBUG [e3464e5e] Running if test ! -d /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/repo; then echo "Directory does not exist '/var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/repo'" 1>&2; false; fi as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [e3464e5e] Command: if test ! -d /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/repo; then echo "Directory does not exist '/var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/repo'" 1>&2; false; fi
+  INFO [1342154e] Running /usr/bin/env git remote set-url origin git@github.com:kevinmilet/sous_mon_toit-API.git as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [1342154e] Command: cd /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-bc4804c3813902cb7370.sh" ; /usr/bin/env git remote set-url origin git@github.com:kevinmilet/sous_mon_toit-API.git )
+  INFO [7cc1492d] Running /usr/bin/env git remote update --prune as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [7cc1492d] Command: cd /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-bc4804c3813902cb7370.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [e6683e4e] Running if test ! -d /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/repo; then echo "Directory does not exist '/var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/repo'" 1>&2; false; fi as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [e6683e4e] Command: if test ! -d /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/repo; then echo "Directory does not exist '/var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/repo'" 1>&2; false; fi
+  INFO [768d3904] Running /usr/bin/env mkdir -p /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719 as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [768d3904] Command: cd /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-bc4804c3813902cb7370.sh" ; /usr/bin/env mkdir -p /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719 )
+  INFO [671bd27f] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719 as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [671bd27f] Command: cd /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-bc4804c3813902cb7370.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719 )
+ DEBUG [f8fbc665] Running if test ! -d /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/repo; then echo "Directory does not exist '/var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/repo'" 1>&2; false; fi as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [f8fbc665] Command: if test ! -d /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/repo; then echo "Directory does not exist '/var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/repo'" 1>&2; false; fi
+ DEBUG [00deaf7e] Running /usr/bin/env git rev-list --max-count=1 master as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [00deaf7e] Command: cd /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-bc4804c3813902cb7370.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [6c57348c] Running if test ! -d /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719; then echo "Directory does not exist '/var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719'" 1>&2; false; fi as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [6c57348c] Command: if test ! -d /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719; then echo "Directory does not exist '/var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719'" 1>&2; false; fi
+  INFO [044d13f9] Running /usr/bin/env echo "" > REVISION as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [044d13f9] Command: cd /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719 && /usr/bin/env echo "" > REVISION
+  INFO [799b6b6f] Running /usr/bin/env mkdir -p /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719 as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [799b6b6f] Command: /usr/bin/env mkdir -p /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719
+ DEBUG [df2c7ab7] Running [ -L /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719/.env ] as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [df2c7ab7] Command: [ -L /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719/.env ]
+  INFO [e6b67dde] Running /usr/bin/env mkdir -p /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719/public as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [e6b67dde] Command: /usr/bin/env mkdir -p /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719/public
+ DEBUG [8fb44eed] Running [ -L /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719/public/uploads ] as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [8fb44eed] Command: [ -L /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719/public/uploads ]
+ DEBUG [b174c60e] Running if test ! -d /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719; then echo "Directory does not exist '/var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719'" 1>&2; false; fi as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [b174c60e] Command: if test ! -d /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719; then echo "Directory does not exist '/var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719'" 1>&2; false; fi
+  INFO [bc02cc78] Running /usr/bin/env composer install as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [bc02cc78] Command: cd /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719 && /usr/bin/env composer install
+  INFO [2de4e273] Running /usr/bin/env composer dump-autoload -o as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [2de4e273] Command: cd /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719 && /usr/bin/env composer dump-autoload -o
+ DEBUG [1da3c522] Running if test ! -d /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719; then echo "Directory does not exist '/var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719'" 1>&2; false; fi as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [1da3c522] Command: if test ! -d /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719; then echo "Directory does not exist '/var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719'" 1>&2; false; fi
+  INFO [723a9eb3] Running /usr/bin/env chmod 777 -R storage/ as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [723a9eb3] Command: cd /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719 && /usr/bin/env chmod 777 -R storage/
+ DEBUG [94eba399] Running if test ! -d /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719; then echo "Directory does not exist '/var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719'" 1>&2; false; fi as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [94eba399] Command: if test ! -d /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719; then echo "Directory does not exist '/var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719'" 1>&2; false; fi
+  INFO [7c4cd9ad] Running /usr/bin/env chmod 755 artisan as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [7c4cd9ad] Command: cd /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719 && /usr/bin/env chmod 755 artisan
+  INFO [880d6cfc] Running /usr/bin/env php artisan migrate:refresh as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [880d6cfc] Command: cd /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719 && /usr/bin/env php artisan migrate:refresh
+  INFO [072cdbb1] Running /usr/bin/env php artisan db:seed as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [072cdbb1] Command: cd /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719 && /usr/bin/env php artisan db:seed
+  INFO [b4bef057] Running /usr/bin/env ln -s /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719 /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/current as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [b4bef057] Command: /usr/bin/env ln -s /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/20210824122719 /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/current
+  INFO [669865eb] Running /usr/bin/env mv /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/current /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [669865eb] Command: /usr/bin/env mv /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases/current /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web
+ DEBUG [533e67b7] Running /usr/bin/env ls -x /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [533e67b7] Command: /usr/bin/env ls -x /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases
+ DEBUG [523cc426] Running if test ! -d /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases; then echo "Directory does not exist '/var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases'" 1>&2; false; fi as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [523cc426] Command: if test ! -d /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases; then echo "Directory does not exist '/var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases'" 1>&2; false; fi
+  INFO [b4e1c530] Running /usr/bin/env echo "Branch master (at ) deployed as release 20210824122719 by kevin" >> /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/revisions.log as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [b4e1c530] Command: cd /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/releases && /usr/bin/env echo "Branch master (at ) deployed as release 20210824122719 by kevin" >> /var/www/api-sousmontoit.am.manusien-ecolelamanu.fr/web/revisions.log
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-08-24 14:27:30 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [2872a30a] Running /usr/bin/env mkdir -p /tmp as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [2872a30a] Command: /usr/bin/env mkdir -p /tmp
+  INFO [2872a30a] Finished in 0.433 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-1836a0e1b9d6557c9244.sh 0.0%
+  INFO Uploading /tmp/git-ssh-1836a0e1b9d6557c9244.sh 100.0%
+  INFO [2006209c] Running /usr/bin/env chmod 700 /tmp/git-ssh-1836a0e1b9d6557c9244.sh as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [2006209c] Command: /usr/bin/env chmod 700 /tmp/git-ssh-1836a0e1b9d6557c9244.sh
+  INFO [2006209c] Finished in 0.140 seconds with exit status 0 (successful).
+  INFO [e08f390e] Running /usr/bin/env git ls-remote git@github.com:kevinmilet/sous_mon_toit-API.git HEAD as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [e08f390e] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-1836a0e1b9d6557c9244.sh" ; /usr/bin/env git ls-remote git@github.com:kevinmilet/sous_mon_toit-API.git HEAD )
+ DEBUG [e08f390e] 	git@github.com: Permission denied (publickey).
+ DEBUG [e08f390e] 	fatal: Impossible de lire le dépôt distant.
+
+Veuillez vérifier que vous avez les droits d'accès
+et que le dépôt existe.
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-08-24 14:34:43 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [1aac630f] Running /usr/bin/env mkdir -p /tmp as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [1aac630f] Command: /usr/bin/env mkdir -p /tmp
+  INFO [1aac630f] Finished in 0.429 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-b87f843432526baf52b8.sh 0.0%
+  INFO Uploading /tmp/git-ssh-b87f843432526baf52b8.sh 100.0%
+  INFO [356410ae] Running /usr/bin/env chmod 700 /tmp/git-ssh-b87f843432526baf52b8.sh as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [356410ae] Command: /usr/bin/env chmod 700 /tmp/git-ssh-b87f843432526baf52b8.sh
+  INFO [356410ae] Finished in 0.127 seconds with exit status 0 (successful).
+  INFO [93c7023e] Running /usr/bin/env git ls-remote git@github.com:kevinmilet/sous_mon_toit-API.git HEAD as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [93c7023e] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-b87f843432526baf52b8.sh" ; /usr/bin/env git ls-remote git@github.com:kevinmilet/sous_mon_toit-API.git HEAD )
+ DEBUG [93c7023e] 	git@github.com: Permission denied (publickey).
+ DEBUG [93c7023e] 	fatal: Impossible de lire le dépôt distant.
+
+Veuillez vérifier que vous avez les droits d'accès
+et que le dépôt existe.
