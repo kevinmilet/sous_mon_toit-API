@@ -2,43 +2,392 @@
     "openapi": "3.0.0",
     "info": {
         "title": "Sous Mon Toit",
+        "description": "Documentation for the API SousMonToit",
         "version": "0.1"
     },
     "servers": [
         {
-            "url": "https://localhost:8000",
-            "description": "API de l'agence immobiliere Sous Mon Toit"
+            "url": "http://localhost:8000",
+            "description": "Server of the real estate agency Sous Mon Toit"
+        },
+        {
+            "url": "https://sousmontoit.herokuapp.com/",
+            "description": "Server heroku of the real estate agency Sous Mon Toit"
         }
     ],
     "paths": {
-        "/login/customer": {
+        "/schedule/": {
             "get": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Get list of all appointment",
+                "description": "Return list of all appointments",
+                "operationId": "getAppointmentList",
+                "responses": {
+                    "200": {
+                        "description": "A list with appointment",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Appointments"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/default"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/schedule/{id}": {
+            "get": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Get appointment information",
+                "description": "Return one appointment",
+                "operationId": "getAppointment",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Appointments"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/default"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/schedule/customer/{id}": {
+            "get": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Get all appointments information for customer selected",
+                "description": "Return all appointments for customer selected",
+                "operationId": "getAppointmentCustomer",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Appointments"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/default"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/schedule/staff/{id}": {
+            "get": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Get all appointments information for staff selected",
+                "description": "Return all appointments for staff selected",
+                "operationId": "getAppointmentStaff",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Appointments"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/default"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/schedule/createAppt": {
+            "post": {
+                "tags": [
+                    "Appointment"
+                ],
+                "summary": "Store new appointment",
+                "description": "Returns successful message",
+                "operationId": "storeAppointment",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Appointments"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Appointments"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/default"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/schedule/update/{id}": {
+            "put": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Update existing appointment",
+                "description": "Returns updated appointment data",
+                "operationId": "updateAppointments",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Appointments"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Appointments"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/default"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/schedule/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Appointments"
+                ],
+                "summary": "Delete existing appointment",
+                "description": "Return succesfull message",
+                "operationId": "deleteAppointment",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/404"
+                    },
+                    "default": {
+                        "$ref": "#/components/responses/default"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/login/customer": {
+            "post": {
                 "tags": [
                     "Authentification"
                 ],
                 "summary": "Get token for Customer",
                 "description": "Return the token of the customer",
                 "operationId": "getTokenCustomer",
-                "parameters": [
-                    {
-                        "name": "mail",
-                        "in": "path",
-                        "description": "mail of customer",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "password",
-                        "in": "path",
-                        "description": "password of customer",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "mail",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "mail": {
+                                        "description": "mail of the customer member",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "Password of the customer member",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
                         }
                     }
-                ],
+                },
                 "responses": {
                     "200": {
                         "description": "A token for customer",
@@ -66,33 +415,37 @@
             }
         },
         "/login/staff": {
-            "get": {
+            "post": {
                 "tags": [
                     "Authentification"
                 ],
                 "summary": "Get token for staff",
                 "description": "Return the token of the staff",
                 "operationId": "getTokenStaff",
-                "parameters": [
-                    {
-                        "name": "login",
-                        "in": "path",
-                        "description": "mail of staff",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "password",
-                        "in": "path",
-                        "description": "password of staff",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "login",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "login": {
+                                        "description": "login of the staff member",
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "description": "Password of the staff member",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
                         }
                     }
-                ],
+                },
                 "responses": {
                     "200": {
                         "description": "A token for staff",
@@ -135,7 +488,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Contract"
+                                        "$ref": "#/components/schemas/Contracts"
                                     }
                                 }
                             }
@@ -153,7 +506,12 @@
                     "default": {
                         "$ref": "#/components/responses/default"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/contract/{id}": {
@@ -175,7 +533,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Contract"
+                                    "$ref": "#/components/schemas/Contracts"
                                 }
                             }
                         }
@@ -195,7 +553,12 @@
                     "default": {
                         "$ref": "#/components/responses/default"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/contract/saveContract": {
@@ -211,7 +574,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Contract"
+                                "$ref": "#/components/schemas/Contracts"
                             }
                         }
                     }
@@ -222,7 +585,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Contract"
+                                    "$ref": "#/components/schemas/Contracts"
                                 }
                             }
                         }
@@ -242,7 +605,7 @@
                 },
                 "security": [
                     {
-                        "scalar": "bearer"
+                        "bearerAuth": []
                     }
                 ]
             }
@@ -265,7 +628,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Contract"
+                                "$ref": "#/components/schemas/Contracts"
                             }
                         }
                     }
@@ -276,7 +639,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Contract"
+                                    "$ref": "#/components/schemas/Contracts"
                                 }
                             }
                         }
@@ -296,7 +659,12 @@
                     "default": {
                         "$ref": "#/components/responses/default"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/contract/archive/{id}": {
@@ -336,7 +704,12 @@
                     "default": {
                         "$ref": "#/components/responses/default"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
             }
         },
         "/contract/contractsTypes": {
@@ -376,13 +749,12 @@
                 }
             }
         },
-        "/estate": {
+        "/estates": {
             "get": {
                 "tags": [
                     "Estates"
                 ],
                 "summary": "Return the list of all estates",
-                "description": "Retourne la liste des biens immobilier",
                 "operationId": "getEstatesList",
                 "responses": {
                     "200": {
@@ -392,7 +764,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Estate"
+                                        "$ref": "#/components/schemas/Estates"
                                     }
                                 }
                             }
@@ -413,7 +785,62 @@
     },
     "components": {
         "schemas": {
-            "Contract": {
+            "Appointments": {
+                "title": "Appointments",
+                "description": "Appointments model",
+                "required": [
+                    "id",
+                    "scheduled_at",
+                    "created_at",
+                    "id_staff"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "ID of appointment",
+                        "format": "int64"
+                    },
+                    "scheduled_at": {
+                        "description": "Date of appointment"
+                    },
+                    "created_at": {
+                        "description": "Date of created"
+                    },
+                    "updated_at": {
+                        "description": "Date of updated"
+                    },
+                    "notes": {
+                        "description": "all you need to know for the appointment"
+                    },
+                    "id_estate": {
+                        "description": "Id of the estate"
+                    },
+                    "id_staff": {
+                        "description": "Id of the staff"
+                    },
+                    "id_customer": {
+                        "description": "Id of the customer"
+                    },
+                    "id_appointment_type": {
+                        "description": "Id of the appointment type"
+                    }
+                },
+                "type": "object"
+            },
+            "AppointmentsTypes": {
+                "title": "AppointmentsTypes",
+                "description": "AppointmentsTypes model",
+                "properties": {
+                    "id": {
+                        "description": "ID of appointment type",
+                        "format": "int64"
+                    },
+                    "appointment_type": {
+                        "description": "Appointment type"
+                    }
+                },
+                "type": "object"
+            },
+            "Contracts": {
                 "title": "Contracts",
                 "description": "Contracts model",
                 "properties": {
@@ -427,7 +854,7 @@
                         "description": "Date of updated"
                     },
                     "deleted_at": {
-                        "description": "Name of the user"
+                        "description": "Date of archived"
                     },
                     "folder": {
                         "description": "Folder where the contract is stocked"
@@ -466,12 +893,280 @@
                 },
                 "type": "object"
             },
-            "Estate": {
+            "Customers": {
+                "title": "Customers",
+                "description": "Customers model",
+                "properties": {
+                    "id": {
+                        "description": "ID of the customer"
+                    },
+                    "n_customer": {
+                        "description": "Number of the customer"
+                    },
+                    "firstname": {
+                        "description": ""
+                    },
+                    "lastname": {
+                        "description": ""
+                    },
+                    "gender": {
+                        "description": "Male or Female or Agender",
+                        "enum": [
+                            "M",
+                            "F",
+                            "A"
+                        ]
+                    },
+                    "mail": {
+                        "description": ""
+                    },
+                    "phone": {
+                        "description": ""
+                    },
+                    "password": {
+                        "description": ""
+                    },
+                    "birthdate": {
+                        "description": ""
+                    },
+                    "address": {
+                        "description": ""
+                    },
+                    "created_at": {
+                        "description": "Date of created"
+                    },
+                    "deleted_at": {
+                        "description": "Date of archived"
+                    },
+                    "updated_at": {
+                        "description": "Date of updated"
+                    },
+                    "first_met": {
+                        "description": "if there has already been a meeting with the client"
+                    },
+                    "token": {
+                        "description": "?"
+                    },
+                    "password_request": {
+                        "description": "if there is a password change request"
+                    }
+                },
+                "type": "object"
+            },
+            "CustomersSearchs": {
+                "title": "CustomersSearchs",
+                "description": "CustomersSearchs model",
+                "properties": {
+                    "id": {
+                        "description": "ID of the customer"
+                    },
+                    "buy_or_rent": {
+                        "description": "it is a search to buy a property or sell a property",
+                        "enum": [
+                            "BUY",
+                            "RENT"
+                        ]
+                    },
+                    "surface_min": {
+                        "description": ""
+                    },
+                    "number_rooms": {
+                        "description": ""
+                    },
+                    "budget_min": {
+                        "description": ""
+                    },
+                    "budget_max": {
+                        "description": ""
+                    },
+                    "search_longitude": {
+                        "description": ""
+                    },
+                    "search_latitude": {
+                        "description": ""
+                    },
+                    "search_radius": {
+                        "description": ""
+                    },
+                    "created_at": {
+                        "description": "Date of created"
+                    },
+                    "updated_at": {
+                        "description": "Date of updated"
+                    },
+                    "alert": {
+                        "description": "if there is a password change request"
+                    },
+                    "id_customer": {
+                        "description": "ID of the customer"
+                    },
+                    "id_estate_type": {
+                        "description": "ID of the estate type"
+                    }
+                },
+                "type": "object"
+            },
+            "CustomersTypes": {
+                "title": "CustomersTypes",
+                "description": "CustomersTypes model",
+                "properties": {
+                    "id": {
+                        "description": "ID of the Customers Types"
+                    },
+                    "customer_type": {
+                        "description": "Name of the customer type",
+                        "enum": [
+                            "Acheteur",
+                            "Vendeur",
+                            "Bailleur",
+                            "Loueur"
+                        ]
+                    }
+                },
+                "type": "object"
+            },
+            "Estates": {
                 "title": "Estates",
                 "description": "Estates model",
                 "properties": {
                     "id": {
-                        "description": "ID of the user"
+                        "description": "ID of the estate"
+                    },
+                    "id_estate_type": {
+                        "description": ""
+                    },
+                    "id_customer": {
+                        "description": "Id of the seller"
+                    },
+                    "title": {
+                        "description": ""
+                    },
+                    "reference": {
+                        "description": ""
+                    },
+                    "dpe_file": {
+                        "description": ""
+                    },
+                    "buy_or_rent": {
+                        "description": "it is a property for sale or a property for rent",
+                        "enum": [
+                            "BUY",
+                            "RENT"
+                        ]
+                    },
+                    "address": {
+                        "description": ""
+                    },
+                    "city": {
+                        "description": ""
+                    },
+                    "zipcode": {
+                        "description": ""
+                    },
+                    "estate_longitude": {
+                        "description": ""
+                    },
+                    "estate_latitude": {
+                        "description": ""
+                    },
+                    "price": {
+                        "description": ""
+                    },
+                    "description": {
+                        "description": ""
+                    },
+                    "disponibility": {
+                        "description": ""
+                    },
+                    "year_of_construction": {
+                        "description": ""
+                    },
+                    "living_surface": {
+                        "description": ""
+                    },
+                    "carrez_law": {
+                        "description": ""
+                    },
+                    "land_surface": {
+                        "description": ""
+                    },
+                    "nb_rooms": {
+                        "description": ""
+                    },
+                    "nb_bedrooms": {
+                        "description": ""
+                    },
+                    "nb_bathrooms": {
+                        "description": ""
+                    },
+                    "nb_sanitary": {
+                        "description": ""
+                    },
+                    "nb_toilet": {
+                        "description": ""
+                    },
+                    "nb_kitchen": {
+                        "description": ""
+                    },
+                    "nb_garage": {
+                        "description": ""
+                    },
+                    "nb_parking": {
+                        "description": ""
+                    },
+                    "nb_balcony": {
+                        "description": ""
+                    },
+                    "type_kitchen": {
+                        "description": ""
+                    },
+                    "heaters": {
+                        "description": ""
+                    },
+                    "communal_heating": {
+                        "description": ""
+                    },
+                    "furnished": {
+                        "description": ""
+                    },
+                    "private_parking": {
+                        "description": ""
+                    },
+                    "handicap_access": {
+                        "description": ""
+                    },
+                    "cellar": {
+                        "description": ""
+                    },
+                    "terrace": {
+                        "description": ""
+                    },
+                    "swimming_pool": {
+                        "description": ""
+                    },
+                    "fireplace": {
+                        "description": ""
+                    },
+                    "all_in_sewer": {
+                        "description": ""
+                    },
+                    "septik_tank": {
+                        "description": ""
+                    },
+                    "property_charge": {
+                        "description": ""
+                    },
+                    "attic": {
+                        "description": ""
+                    },
+                    "elevator": {
+                        "description": ""
+                    },
+                    "rental_charge": {
+                        "description": ""
+                    },
+                    "coownership_charge": {
+                        "description": ""
                     },
                     "created_at": {
                         "description": "Date of created"
@@ -480,25 +1175,128 @@
                         "description": "Date of updated"
                     },
                     "deleted_at": {
-                        "description": "Name of the user"
+                        "description": "Date of archived"
+                    }
+                },
+                "type": "object"
+            },
+            "EstatesTypes": {
+                "title": "EstatesTypes",
+                "description": "EstatesTypes model",
+                "properties": {
+                    "id": {
+                        "description": "ID of the estate type"
+                    },
+                    "estate_type_name": {
+                        "description": "Name of the estate type"
+                    }
+                },
+                "type": "object"
+            },
+            "Functions": {
+                "title": "Functions",
+                "description": "Functions model",
+                "properties": {
+                    "id": {
+                        "description": "ID of the function"
+                    },
+                    "function_name": {
+                        "description": "Name of the estate type"
+                    }
+                },
+                "type": "object"
+            },
+            "Pictures": {
+                "title": "Pictures",
+                "description": "Pictures model",
+                "properties": {
+                    "id": {
+                        "description": ""
                     },
                     "folder": {
-                        "description": "Folder where the contract is stocked"
+                        "description": ""
                     },
                     "name": {
-                        "description": "Name of the contract"
+                        "description": ""
                     },
-                    "id_staff": {
-                        "description": "Id of the staff"
+                    "alt": {
+                        "description": ""
+                    },
+                    "cover": {
+                        "description": ""
+                    },
+                    "created_at": {
+                        "description": "Date of created"
+                    },
+                    "updated_at": {
+                        "description": "Date of updated"
                     },
                     "id_estate": {
-                        "description": "Id of the estate"
+                        "description": ""
+                    }
+                },
+                "type": "object"
+            },
+            "Roles": {
+                "title": "Roles",
+                "description": "Roles model",
+                "properties": {
+                    "id": {
+                        "description": "ID of the role"
                     },
-                    "id_customer": {
-                        "description": "Id of the customer"
+                    "role": {
+                        "description": ""
+                    }
+                },
+                "type": "object"
+            },
+            "Staffs": {
+                "title": "Staffs",
+                "description": "Staffs model",
+                "properties": {
+                    "id": {
+                        "description": "ID of the staff"
                     },
-                    "id_contract_type": {
-                        "description": "Id of the contract type"
+                    "login": {
+                        "description": ""
+                    },
+                    "firstname": {
+                        "description": ""
+                    },
+                    "lastname": {
+                        "description": ""
+                    },
+                    "created_at": {
+                        "description": "Date of created"
+                    },
+                    "updated_at": {
+                        "description": "Date of updated"
+                    },
+                    "deleted_at": {
+                        "description": "Date of archived"
+                    },
+                    "mail": {
+                        "description": ""
+                    },
+                    "phone": {
+                        "description": ""
+                    },
+                    "password": {
+                        "description": ""
+                    },
+                    "id_function": {
+                        "description": ""
+                    },
+                    "id_role": {
+                        "description": ""
+                    },
+                    "avatar": {
+                        "description": ""
+                    },
+                    "alert_reader": {
+                        "description": "unread notification or not",
+                        "type": "boolean",
+                        "example": 0
                     }
                 },
                 "type": "object"
@@ -509,7 +1307,7 @@
                 "description": "Bad Request"
             },
             "401": {
-                "description": "Unauthenticated"
+                "description": "Access token is missing or invalid"
             },
             "403": {
                 "description": "Forbidden"
@@ -546,9 +1344,11 @@
             }
         },
         "securitySchemes": {
-            "bearer": {
-                "type": "apiKey",
-                "bearerFormat": "JWT"
+            "bearerAuth": {
+                "type": "http",
+                "description": "Enter the token for customer or staff",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
             }
         }
     }

@@ -65,11 +65,9 @@ class EstatesController extends Controller
             ]);
     }
 
-    /**
-     * Retourne la liste des biens immobilier
-     * 
+    /** 
      *  @OA\Get(
-     *      path="/estate",
+     *      path="/estates",
      *      summary="Return the list of all estates",
      *      operationId="getEstatesList",
      *      tags={"Estates"},
@@ -78,7 +76,7 @@ class EstatesController extends Controller
      *          description="A list with estates",
      *          @OA\JsonContent(
      *              type="array",
-     *              @OA\Items(ref="#/components/schemas/Estate"),
+     *              @OA\Items(ref="#/components/schemas/Estates"),
      *          ),
      *      ),
      *      @OA\Response(

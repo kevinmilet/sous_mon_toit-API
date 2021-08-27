@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *      description="ContractsTypes model",
  *      @OA\Property(
  *          property="id", description="ID of the contract type",
- *          @OA\Schema(type="number", example=1)
+ *          @OA\Schema(type="integer", example=1)
  *      ),
  *      @OA\Property(
  *          property="contract_type", description="Name of the contract type",

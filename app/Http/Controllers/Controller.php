@@ -11,14 +11,25 @@ class Controller extends BaseController
 {
 
     /** 
-    * @OA\Info(title="Sous Mon Toit", version="0.1")
+    * @OA\Info(
+    *      title="Sous Mon Toit",
+    *      version="0.1",
+    *      description="Documentation for the API SousMonToit",)
     *
     * @OA\Server(
-    *      url="https://localhost:8000",
-    *      description = "API de l'agence immobiliere Sous Mon Toit",
+    *      url="http://localhost:8000",
+    *      description = "Server of the real estate agency Sous Mon Toit",
     *      @OA\Contact(
     *           email="laforet.gerard.smt@gmail.com",
-    *           name="Gérard Laforêt - Directeur de l'agence SousMonToit"
+    *           name="Gérard Laforêt - real estate agency director of SousMonToit"
+    *      )    
+    * )
+    * @OA\Server(
+    *      url="https://sousmontoit.herokuapp.com/",
+    *      description = "Server heroku of the real estate agency Sous Mon Toit",
+    *      @OA\Contact(
+    *           email="laforet.gerard.smt@gmail.com",
+    *           name="Gérard Laforêt - real estate agency director of SousMonToit"
     *      )    
     * )
     *
@@ -36,7 +47,7 @@ class Controller extends BaseController
     * )
     * @OA\Response(
     *     response=401,
-    *     description="Unauthenticated",
+    *     description="Access token is missing or invalid",
     * )
     * @OA\Response(
     *     response=403,
@@ -54,7 +65,13 @@ class Controller extends BaseController
     *     description="une erreur ""inattendue""",
     * )
     *
-    * @OA\SecurityScheme(bearerFormat="JWT", type="apiKey" , securityScheme="bearer")
+    * @OA\SecurityScheme(
+    *     bearerFormat="JWT",
+    *     type="http" ,
+    *     securityScheme="bearerAuth",
+    *     scheme="bearer",
+    *     description="Enter the token for customer or staff"
+    * )
     */
     protected function respondWithToken($token): \Illuminate\Http\JsonResponse
     {

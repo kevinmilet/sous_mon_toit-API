@@ -15,25 +15,31 @@ class AuthController extends Controller
     /**
      * Get a JWT via given credentials.
      * 
-     *  @OA\Get(
+     *  @OA\Post(
      *      path="/login/customer",
      *      summary="Get token for Customer",
      *      description="Return the token of the customer",
      *      operationId="getTokenCustomer",
      *      tags={"Authentification"},
-     *      @OA\Parameter(
-     *          name = "mail",
-     *          in = "path",
-     *          description = "mail of customer",
-     *          required = true,
-     *          @OA\Schema(type="string"),
-     *      ),
-     *      @OA\Parameter(
-     *          name = "password",
-     *          in = "path",
-     *          description = "password of customer",
-     *          required = true,
-     *          @OA\Schema(type="string"),
+     *      @OA\RequestBody(
+     *           required=true,
+     *           @OA\MediaType(
+     *                  mediaType="application/x-www-form-urlencoded",
+     *                  @OA\Schema(
+     *                      type="object",
+     *                      required={"mail","password"},
+     *                      @OA\Property(
+     *                          property="mail",
+     *                          type="string",
+     *                          description="mail of the customer member", 
+     *                      ),
+     *                      @OA\Property(
+     *                          property="password",
+     *                          type="string",  
+     *                          description="Password of the customer member", 
+     *                      ),
+     *                  ),
+     *           ),
      *      ),
      *      @OA\Response( 
      *          response=200, 
@@ -74,25 +80,31 @@ class AuthController extends Controller
         /**
      * Get a JWT via given credentials.
      *  
-     *  @OA\Get(
+     *  @OA\Post(
      *      path="/login/staff",
      *      summary="Get token for staff",
      *      description="Return the token of the staff",
      *      operationId="getTokenStaff",
      *      tags={"Authentification"},
-     *      @OA\Parameter(
-     *          name = "login",
-     *          in = "path",
-     *          description = "mail of staff",
-     *          required = true,
-     *          @OA\Schema(type="string"),
-     *      ),
-     *      @OA\Parameter(
-     *          name = "password",
-     *          in = "path",
-     *          description = "password of staff",
-     *          required = true,
-     *          @OA\Schema(type="string"),
+     *      @OA\RequestBody(
+     *           required=true,
+     *           @OA\MediaType(
+     *                  mediaType="application/x-www-form-urlencoded",
+     *                  @OA\Schema(
+     *                      type="object",
+     *                      required={"login","password"},
+     *                      @OA\Property(
+     *                          property="login",
+     *                          type="string",
+     *                          description="login of the staff member", 
+     *                      ),
+     *                      @OA\Property(
+     *                          property="password",
+     *                          type="string",  
+     *                          description="Password of the staff member", 
+     *                      ),
+     *                  ),
+     *           ),
      *      ),
      *      @OA\Response( 
      *          response=200, 

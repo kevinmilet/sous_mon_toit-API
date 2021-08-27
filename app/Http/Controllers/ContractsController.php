@@ -22,6 +22,9 @@ class ContractsController extends Controller
     /** 
      *  @OA\Get(
      *      path="/contract/",
+     *      security={
+     *        {"bearerAuth": {}}
+     *      },
      *      summary="Get list of all contracts",
      *      description="Return list of all contracts",
      *      operationId="getContractsList",
@@ -31,7 +34,7 @@ class ContractsController extends Controller
      *          description="A list with contracts",
      *          @OA\JsonContent(
      *              type="array",
-     *              @OA\Items(ref="#/components/schemas/Contract"),
+     *              @OA\Items(ref="#/components/schemas/Contracts"),
      *          ),
      *      ),
      *      @OA\Response(response="400", ref="#/components/responses/400"),
@@ -51,6 +54,9 @@ class ContractsController extends Controller
     /**
      *  @OA\Get(
      *      path="/contract/{id}",
+     *      security={
+     *        {"bearerAuth": {}}
+     *      },
      *      summary="Get contract information",
      *      description="Return one contract",
      *      operationId="getContract",
@@ -59,7 +65,7 @@ class ContractsController extends Controller
      *      @OA\Response( 
      *          response=200, 
      *          description="Successful operation",
-     *          @OA\JsonContent(ref="#/components/schemas/Contract"),
+     *          @OA\JsonContent(ref="#/components/schemas/Contracts"),
      *      ),
      *      @OA\Response(response="400", ref="#/components/responses/400"),
      *      @OA\Response(response="401", ref="#/components/responses/401"),
@@ -78,19 +84,21 @@ class ContractsController extends Controller
     /** 
      * @OA\Post(
      *     path="/contract/saveContract",
-     *     security={"bearer"},
+     *     security={
+     *        {"bearerAuth": {}}
+     *     },
      *     operationId="storeContract",
      *     tags={"Contracts"},
      *     summary="Store new contract",
      *     description="Returns successful message",
      *     @OA\RequestBody(
      *          required=true,
-     *          @OA\JsonContent(ref="#/components/schemas/Contract"),
+     *          @OA\JsonContent(ref="#/components/schemas/Contracts"),
      *     ),
      *     @OA\Response(
      *          response=201,
      *          description="Successful operation",
-     *          @OA\JsonContent(ref="#/components/schemas/Contract")
+     *          @OA\JsonContent(ref="#/components/schemas/Contracts")
      *     ),
      *     @OA\Response(response="400", ref="#/components/responses/400"),
      *     @OA\Response(response="401", ref="#/components/responses/401"),
@@ -136,6 +144,9 @@ class ContractsController extends Controller
     /** 
      *  @OA\Put(
      *      path="/contract/update/{id}",
+     *      security={
+     *        {"bearerAuth": {}}
+     *      },
      *      operationId="updateContract",
      *      tags={"Contracts"},
      *      summary="Update existing contract",
@@ -143,12 +154,12 @@ class ContractsController extends Controller
      *      @OA\Parameter(ref="#/components/parameters/id"),
      *      @OA\RequestBody(
      *          required=true,
-     *          @OA\JsonContent(ref="#/components/schemas/Contract")
+     *          @OA\JsonContent(ref="#/components/schemas/Contracts")
      *      ),
      *      @OA\Response(
      *          response=202,
      *          description="Successful operation",
-     *          @OA\JsonContent(ref="#/components/schemas/Contract")
+     *          @OA\JsonContent(ref="#/components/schemas/Contracts")
      *       ),
      *      @OA\Response(response="400", ref="#/components/responses/400"),
      *      @OA\Response(response="401", ref="#/components/responses/401"),
@@ -201,6 +212,9 @@ class ContractsController extends Controller
     /**
      *  @OA\Delete(
      *      path="/contract/archive/{id}",
+     *      security={
+     *        {"bearerAuth": {}}
+     *      },
      *      operationId="archiveContract",
      *      tags={"Contracts"},
      *      summary="Delete existing contract",
