@@ -19,7 +19,7 @@ class ContractsController extends Controller
         //
     }
 
-    /** 
+    /**
      *  @OA\Get(
      *      path="/contract/",
      *      security={
@@ -29,8 +29,8 @@ class ContractsController extends Controller
      *      description="Return list of all contracts",
      *      operationId="getContractsList",
      *      tags={"Contracts"},
-     *      @OA\Response( 
-     *          response=200, 
+     *      @OA\Response(
+     *          response=200,
      *          description="A list with contracts",
      *          @OA\JsonContent(
      *              type="array",
@@ -42,7 +42,7 @@ class ContractsController extends Controller
      *      @OA\Response(response="403", ref="#/components/responses/403"),
      *      @OA\Response(response="default", ref="#/components/responses/default"),
      * )
-     * 
+     *
      *
      * @return Contracts[]|Collection
      */
@@ -198,7 +198,7 @@ class ContractsController extends Controller
             $oldDestinationPath = storage_path('/app/public/documents/' . $oldContract->folder );
             File::delete($oldDestinationPath.'/' . $oldName);
 
-            //On enregistre le nouveau nom 
+            //On enregistre le nouveau nom
             $contract = Contracts::find($id_contract);
             $contract->name = $name;
             $contract->save();

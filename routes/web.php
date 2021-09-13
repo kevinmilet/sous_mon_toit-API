@@ -88,6 +88,7 @@ $router->group(['prefix' => 'customer'], function () use ($router) {
     $router->post('create','CustomersController@create');
     $router->group(['prefix' => 's'], function() use ($router) {
         $router->group(['middleware' => 'auth:staff'],function() use ($router) {
+            $router->get('/', 'CustomersController@selectAllCustomers');
             $router->get('/{id}', 'CustomersController@selectOneCustomer');
             $router->put('update/{id}','CustomersController@update');
             $router->delete('delete/{id}', 'CustomersController@delete');
@@ -150,4 +151,8 @@ $router->group(['prefix' => 'estates_pictures'], function () use ($router) {
         $router->delete('delete_all/{id_estate}', 'PicturesController@deleteAll');
         $router->post('upload/{id_estate}', 'PicturesController@uploadPicture');
     });
+});
+
+$router->get('/key', function() {
+    return \Illuminate\Support\Str::random(32);
 });

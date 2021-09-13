@@ -220,6 +220,7 @@ class StaffsController extends Controller
      * @param $id
      * @param Request $request
      * @return array
+     * @throws ValidationException
      */
     public function update($id, Request $request): array
     {

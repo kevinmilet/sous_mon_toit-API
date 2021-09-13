@@ -9,6 +9,7 @@
         "darkaonline/l5-swagger": "^8.0",
         "darkaonline/swagger-lume": "8.*",
         "laravel/lumen-framework": "^8.0",
+        "league/commonmark": "^1.6",
         "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
