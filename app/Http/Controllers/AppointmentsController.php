@@ -164,7 +164,7 @@ class AppointmentsController extends Controller
      *        {"bearerAuth": {}}
      *     },
      *     operationId="storeAppointment",
-     *     tags={"Appointment"},
+     *     tags={"Appointments"},
      *     summary="Store new appointment",
      *     description="Returns successful message",
      *     @OA\RequestBody(

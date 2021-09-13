@@ -31,6 +31,29 @@ class StaffsController extends Controller
     }
 
     /**
+     *  @OA\Get(
+     *      path="/staff/",
+     *      security={
+     *        {"bearerAuth": {}}
+     *      },
+     *      summary="Get list of all staff",
+     *      description="Return list of all staff",
+     *      operationId="getStaffList",
+     *      tags={"Staffs"},
+     *      @OA\Response( 
+     *          response=200, 
+     *          description="A list with staffs",
+     *          @OA\JsonContent(
+     *              type="array",
+     *              @OA\Items(ref="#/components/schemas/Staffs"),
+     *          ),
+     *      ),
+     *      @OA\Response(response="400", ref="#/components/responses/400"),
+     *      @OA\Response(response="401", ref="#/components/responses/401"),
+     *      @OA\Response(response="403", ref="#/components/responses/403"),
+     *      @OA\Response(response="default", ref="#/components/responses/default"),
+     * )
+     * 
      * @return JsonResponse
      */
     public function getAllStaff(): JsonResponse
@@ -39,6 +62,28 @@ class StaffsController extends Controller
     }
 
     /**
+     *  @OA\Get(
+     *      path="/staff/{id}",
+     *      security={
+     *        {"bearerAuth": {}}
+     *      },
+     *      summary="Get staff information",
+     *      description="Return one staff",
+     *      operationId="getStaff",
+     *      tags={"Staffs"},
+     *      @OA\Parameter(ref="#/components/parameters/id"),
+     *      @OA\Response( 
+     *          response=200, 
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/Staffs"),
+     *      ),
+     *      @OA\Response(response="400", ref="#/components/responses/400"),
+     *      @OA\Response(response="401", ref="#/components/responses/401"),
+     *      @OA\Response(response="403", ref="#/components/responses/403"),
+     *      @OA\Response(response="404", ref="#/components/responses/404"),
+     *      @OA\Response(response="default", ref="#/components/responses/default"),
+     *  )
+     * 
      * @param $id
      * @return JsonResponse
      */
@@ -48,6 +93,27 @@ class StaffsController extends Controller
     }
 
     /**
+     *  @OA\Delete(
+     *      path="/staff/delete/{id}",
+     *      security={
+     *        {"bearerAuth": {}}
+     *      },
+     *      operationId="archiveStaff",
+     *      tags={"Staffs"},
+     *      summary="Archive existing staff",
+     *      description="Return succesfull message",
+     *      @OA\Parameter(ref="#/components/parameters/id"),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response="400", ref="#/components/responses/400"),
+     *      @OA\Response(response="401", ref="#/components/responses/401"),
+     *      @OA\Response(response="403", ref="#/components/responses/403"),
+     *      @OA\Response(response="404", ref="#/components/responses/404"),
+     *      @OA\Response(response="default", ref="#/components/responses/default"),
+     * )
      * @param $id
      * @return Response|ResponseFactory
      */
@@ -59,6 +125,30 @@ class StaffsController extends Controller
     }
 
     /**
+     * @OA\Post(
+     *     path="/staff/create",
+     *     security={
+     *        {"bearerAuth": {}}
+     *     },
+     *     operationId="storeStaff",
+     *     tags={"Staffs"},
+     *     summary="Store new staff",
+     *     description="Returns successful message",
+     *     @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(ref="#/components/schemas/Staffs"),
+     *     ),
+     *     @OA\Response(
+     *          response=201,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/Staffs")
+     *     ),
+     *     @OA\Response(response="400", ref="#/components/responses/400"),
+     *     @OA\Response(response="401", ref="#/components/responses/401"),
+     *     @OA\Response(response="403", ref="#/components/responses/403"),
+     *     @OA\Response(response="default", ref="#/components/responses/default"),
+     * )
+     * 
      * @param Request $request
      * @return array
      * @throws Exception
@@ -101,6 +191,32 @@ class StaffsController extends Controller
     }
 
     /**
+     *  @OA\Put(
+     *      path="/staff/update/{id}",
+     *      security={
+     *        {"bearerAuth": {}}
+     *      },
+     *      operationId="updateStaff",
+     *      tags={"Staffs"},
+     *      summary="Update existing staff",
+     *      description="Returns updated staff data",
+     *      @OA\Parameter(ref="#/components/parameters/id"),
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(ref="#/components/schemas/Staffs")
+     *      ),
+     *      @OA\Response(
+     *          response=202,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/Staffs")
+     *       ),
+     *      @OA\Response(response="400", ref="#/components/responses/400"),
+     *      @OA\Response(response="401", ref="#/components/responses/401"),
+     *      @OA\Response(response="403", ref="#/components/responses/403"),
+     *      @OA\Response(response="404", ref="#/components/responses/404"),
+     *      @OA\Response(response="default", ref="#/components/responses/default"),
+     * )
+     * 
      * @param $id
      * @param Request $request
      * @return array
