@@ -73,8 +73,8 @@ class AuthController extends Controller
         if (!$token = Auth::guard('customer')->attempt($credentials)) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
-
-        return $this->respondWithToken($token);
+        $user = Auth::user();
+        return $this->respondWithToken($token, $user);
     }
 
         /**
@@ -138,7 +138,8 @@ class AuthController extends Controller
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
-        return $this->respondWithToken($token);
+        $user = Auth::user();
+        return $this->respondWithToken($token,$user);
     }
 
      /**
@@ -158,7 +159,8 @@ class AuthController extends Controller
      */
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh());
+        $user = Auth::user();
+        return $this->respondWithToken(auth()->refresh(),$user);
     }
       /**
      * Log the user out (Invalidate the token).

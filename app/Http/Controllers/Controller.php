@@ -73,12 +73,13 @@ class Controller extends BaseController
     *     description="Enter the token for customer or staff"
     * )
     */
-    protected function respondWithToken($token): \Illuminate\Http\JsonResponse
+    protected function respondWithToken($token, $user): \Illuminate\Http\JsonResponse
     {
         return response()->json([
             'token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => Auth::factory()->getTTL() * 60
+            'expires_in' => Auth::factory()->getTTL() * 60,
+            'user' => $user
         ], 200);
     }
 }
