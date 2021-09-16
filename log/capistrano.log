@@ -1002,6 +1002,25 @@ et que le dépôt existe.
 Veuillez vérifier que vous avez les droits d'accès
 et que le dépôt existe.
   INFO ---------------------------------------------------------------------------
+<<<<<<< HEAD
+  INFO START 2021-08-25 11:33:48 +0200 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [ea61fc1f] Running /usr/bin/env mkdir -p /tmp as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [ea61fc1f] Command: /usr/bin/env mkdir -p /tmp
+  INFO [ea61fc1f] Finished in 0.385 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-8cd1ba87f780d2ef76f5.sh 0.0%
+  INFO Uploading /tmp/git-ssh-8cd1ba87f780d2ef76f5.sh 100.0%
+  INFO [2a78a61e] Running /usr/bin/env chmod 700 /tmp/git-ssh-8cd1ba87f780d2ef76f5.sh as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [2a78a61e] Command: /usr/bin/env chmod 700 /tmp/git-ssh-8cd1ba87f780d2ef76f5.sh
+  INFO [2a78a61e] Finished in 0.129 seconds with exit status 0 (successful).
+  INFO [56dba9ee] Running /usr/bin/env git ls-remote git@github.com:LaurentVac/sous_mon_toit.git HEAD as am_laforetgapi-sousmontoit@54.37.71.121
+ DEBUG [56dba9ee] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-8cd1ba87f780d2ef76f5.sh" ; /usr/bin/env git ls-remote git@github.com:LaurentVac/sous_mon_toit.git HEAD )
+ DEBUG [56dba9ee] 	git@github.com: Permission denied (publickey).
+ DEBUG [56dba9ee] 	fatal: Impossible de lire le dépôt distant.
+
+Veuillez vérifier que vous avez les droits d'accès
+et que le dépôt existe.
+=======
   INFO START 2021-08-25 10:24:45 +0200 cap production deploy
   INFO ---------------------------------------------------------------------------
   INFO [cadfbfd8] Running /usr/bin/env mkdir -p /tmp as am_laforetgapi-sousmontoit@54.37.71.121
@@ -1611,7 +1630,7 @@ et que le dépôt existe.
  DEBUG [36fd3aef] 	Installing dependencies from lock file (including require-dev)
  DEBUG [36fd3aef] 	Verifying lock file contents can be installed on current platform.
  DEBUG [36fd3aef] 	Your lock file does not contain a compatible set of packages. Please run composer update.
- DEBUG [36fd3aef] 	
+ DEBUG [36fd3aef]
   Problem 1
     - league/commonmark is locked to version 2.0.2 and an update of this package was not requested.
     - league/commonmark 2.0.2 requires php ^7.4 || ^8.0 -> your php version (7.3.29) does not satisfy that requirement.
@@ -1831,7 +1850,7 @@ et que le dépôt existe.
  DEBUG [f24c8ce6] 	Installing dependencies from lock file (including require-dev)
  DEBUG [f24c8ce6] 	Verifying lock file contents can be installed on current platform.
  DEBUG [f24c8ce6] 	Your lock file does not contain a compatible set of packages. Please run composer update.
- DEBUG [f24c8ce6] 	
+ DEBUG [f24c8ce6]
   Problem 1
     - league/commonmark is locked to version 2.0.2 and an update of this package was not requested.
     - league/commonmark 2.0.2 requires php ^7.4 || ^8.0 -> your php version (7.3.29) does not satisfy that requirement.
@@ -1923,6 +1942,7 @@ et que le dépôt existe.
  DEBUG [509db28e] 	fatal: cannot exec '/tmp/git-ssh-7bc6a7eb76590e21fe1e.sh': Permission denied
  DEBUG [509db28e] 	fatal: cannot exec '/tmp/git-ssh-7bc6a7eb76590e21fe1e.sh': Permission denied
  DEBUG [509db28e] 	fatal: unable to fork
+<<<<<<< HEAD
   INFO ---------------------------------------------------------------------------
   INFO START 2021-08-26 09:28:50 +0200 cap production deploy
   INFO ---------------------------------------------------------------------------
@@ -2139,7 +2159,7 @@ et que le dépôt existe.
  DEBUG [8aa4a757] 	Verifying lock file contents can be installed on current platform.
  DEBUG [8aa4a757] 	Warning: The lock file is not up to date with the latest changes in composer.json. You may be getting outdated dependencies. It is recommended that you run `composer update` or `composer update <package name>`.
  DEBUG [8aa4a757] 	Your lock file does not contain a compatible set of packages. Please run composer update.
- DEBUG [8aa4a757] 	
+ DEBUG [8aa4a757]
   Problem 1
     - league/commonmark is locked to version 2.0.2 and an update of this package was not requested.
     - league/commonmark 2.0.2 requires php ^7.4 || ^8.0 -> your php version (7.3.29) does not satisfy that requirement.
@@ -2583,7 +2603,7 @@ et que le dépôt existe.
  DEBUG [c1179dce] 	Verifying lock file contents can be installed on current platform.
  DEBUG [c1179dce] 	Warning: The lock file is not up to date with the latest changes in composer.json. You may be getting outdated dependencies. It is recommended that you run `composer update` or `composer update <package name>`.
  DEBUG [c1179dce] 	Your lock file does not contain a compatible set of packages. Please run composer update.
- DEBUG [c1179dce] 	
+ DEBUG [c1179dce]
   Problem 1
     - league/commonmark is locked to version 2.0.2 and an update of this package was not requested.
     - league/commonmark 2.0.2 requires php ^7.4 || ^8.0 -> your php version (7.3.29) does not satisfy that requirement.
@@ -2916,7 +2936,7 @@ et que le dépôt existe.
  DEBUG [b84a27cf] 	Verifying lock file contents can be installed on current platform.
  DEBUG [b84a27cf] 	Warning: The lock file is not up to date with the latest changes in composer.json. You may be getting outdated dependencies. It is recommended that you run `composer update` or `composer update <package name>`.
  DEBUG [b84a27cf] 	Your lock file does not contain a compatible set of packages. Please run composer update.
- DEBUG [b84a27cf] 	
+ DEBUG [b84a27cf]
   Problem 1
     - league/commonmark is locked to version 2.0.2 and an update of this package was not requested.
     - league/commonmark 2.0.2 requires php ^7.4 || ^8.0 -> your php version (7.3.29) does not satisfy that requirement.
@@ -3399,7 +3419,7 @@ et que le dépôt existe.
  DEBUG [98e2b442] 	Verifying lock file contents can be installed on current platform.
  DEBUG [98e2b442] 	Warning: The lock file is not up to date with the latest changes in composer.json. You may be getting outdated dependencies. It is recommended that you run `composer update` or `composer update <package name>`.
  DEBUG [98e2b442] 	Your lock file does not contain a compatible set of packages. Please run composer update.
- DEBUG [98e2b442] 	
+ DEBUG [98e2b442]
   Problem 1
     - league/commonmark is locked to version 2.0.2 and an update of this package was not requested.
     - league/commonmark 2.0.2 requires php ^7.4 || ^8.0 -> your php version (7.3.29) does not satisfy that requirement.
@@ -3732,7 +3752,7 @@ et que le dépôt existe.
  DEBUG [80023227] 	Verifying lock file contents can be installed on current platform.
  DEBUG [80023227] 	Warning: The lock file is not up to date with the latest changes in composer.json. You may be getting outdated dependencies. It is recommended that you run `composer update` or `composer update <package name>`.
  DEBUG [80023227] 	Your lock file does not contain a compatible set of packages. Please run composer update.
- DEBUG [80023227] 	
+ DEBUG [80023227]
   Problem 1
     - league/commonmark is locked to version 2.0.2 and an update of this package was not requested.
     - league/commonmark 2.0.2 requires php ^7.4 || ^8.0 -> your php version (7.3.29) does not satisfy that requirement.
@@ -3843,7 +3863,7 @@ et que le dépôt existe.
  DEBUG [72124d5c] 	Verifying lock file contents can be installed on current platform.
  DEBUG [72124d5c] 	Warning: The lock file is not up to date with the latest changes in composer.json. You may be getting outdated dependencies. It is recommended that you run `composer update` or `composer update <package name>`.
  DEBUG [72124d5c] 	Your lock file does not contain a compatible set of packages. Please run composer update.
- DEBUG [72124d5c] 	
+ DEBUG [72124d5c]
   Problem 1
     - league/commonmark is locked to version 2.0.2 and an update of this package was not requested.
     - league/commonmark 2.0.2 requires php ^7.4 || ^8.0 -> your php version (7.3.29) does not satisfy that requirement.
@@ -3855,3 +3875,6 @@ et que le dépôt existe.
     - laravel/framework v8.56.0 requires league/commonmark ^1.3|^2.0 -> satisfiable by league/commonmark[2.0.2].
     - laravel/framework is locked to version v8.56.0 and an update of this package was not requested.
 
+=======
+>>>>>>> dev
+>>>>>>> origin/laurent
