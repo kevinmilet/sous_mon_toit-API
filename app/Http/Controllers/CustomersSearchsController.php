@@ -108,4 +108,15 @@ class CustomersSearchsController extends Controller
         ]);
         return response()->json(['success' => 'Recherche enregistrée']);
     }
+    public function getSearchsForCustomer($id, Request $request): array
+    {
+        $searchsCustomer = CustomersSearchs::find($id)
+                        ->join('customers', 'customers.id', '=', 'customers_searchs.id_customer')
+                        ->where('customers_searchs.id', '=', $id)
+                        ->get();
+
+    //    $staffFunction = Staffs::find($id)->function;
+
+        return [$searchsCustomer];
+    }
 }

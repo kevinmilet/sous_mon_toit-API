@@ -53,6 +53,7 @@ class CustomersController extends Controller{
         $customer =  Customers::find($id);
         return response()->json($customer);
     }
+    
 
     /**
      * @throws ValidationException

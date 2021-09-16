@@ -230,4 +230,28 @@ class StaffsController extends Controller
 
         return [$staff];
     }
+    public function getFunctionForStaff($id, Request $request): array
+    {
+        $staffFunction = Staffs::find($id)
+            ->join('functions', 'functions.id', '=', 'staffs.id_function')
+            ->where('staffs.id', '=', $id)
+            ->get();
+
+    //    $staffFunction = Staffs::find($id)->function;
+
+        return [$staffFunction];
+    }
+
+    public function getRoleForStaff($id, Request $request): array
+    {
+        $staffRole = Staffs::find($id)
+            ->join('roles', 'roles.id', '=', 'staffs.id_role')
+            ->where('staffs.id', '=', $id)
+            ->get();
+
+    //    $staffFunction = Staffs::find($id)->function;
+
+        return [$staffRole];
+    }
+    
 }
