@@ -29,6 +29,7 @@ class InsertCustomersSearchsSeeder extends Seeder
                 'updated_at' => null,
                 'alert' => true,
                 'id_customer' => 1,
+                'id_estate_type' => 2,
             ],
             [
                 'id' => 2,
@@ -44,6 +45,7 @@ class InsertCustomersSearchsSeeder extends Seeder
                 'updated_at' => null,
                 'alert' => true,
                 'id_customer' => 2,
+                'id_estate_type' => 1,
             ],
         ]);
     }

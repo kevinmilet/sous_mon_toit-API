@@ -10,6 +10,25 @@ use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ *  @OA\Schema(
+ *      schema="ContractsTypes",
+ *      title="ContractsTypes",
+ *      description="ContractsTypes model",
+ *      @OA\Property(
+ *          property="id", description="ID of the contract type",
+ *          @OA\Schema(type="integer", example=1)
+ *      ),
+ *      @OA\Property(
+ *          property="contract_type", description="Name of the contract type",
+ *          @OA\Schema(type="string", example="Bail")
+ *      ),
+ *      @OA\Property(
+ *          property="template_path", description="Path of the contract type template",
+ *          @OA\Schema(type="string", example="bail.docx")
+ *      ),
+ *  )
+ */
 class ContractsTypes extends Model implements AuthenticatableContract, AuthorizableContract
 {
     use Authenticatable, Authorizable, HasFactory,SoftDeletes;

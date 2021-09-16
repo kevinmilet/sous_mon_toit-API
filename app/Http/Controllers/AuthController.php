@@ -14,7 +14,47 @@ class AuthController extends Controller
 {
     /**
      * Get a JWT via given credentials.
-     *
+     * 
+     *  @OA\Post(
+     *      path="/login/customer",
+     *      summary="Get token for Customer",
+     *      description="Return the token of the customer",
+     *      operationId="getTokenCustomer",
+     *      tags={"Authentification"},
+     *      @OA\RequestBody(
+     *           required=true,
+     *           @OA\MediaType(
+     *                  mediaType="application/x-www-form-urlencoded",
+     *                  @OA\Schema(
+     *                      type="object",
+     *                      required={"mail","password"},
+     *                      @OA\Property(
+     *                          property="mail",
+     *                          type="string",
+     *                          description="mail of the customer member", 
+     *                      ),
+     *                      @OA\Property(
+     *                          property="password",
+     *                          type="string",  
+     *                          description="Password of the customer member", 
+     *                      ),
+     *                  ),
+     *           ),
+     *      ),
+     *      @OA\Response( 
+     *          response=200, 
+     *          description="A token for customer",
+     *          @OA\JsonContent(
+     *              type="string",
+     *          ),
+     *      ),
+     *      @OA\Response(response="400", ref="#/components/responses/400"),
+     *      @OA\Response(response="401", ref="#/components/responses/401"),
+     *      @OA\Response(response="403", ref="#/components/responses/403"),
+     *      @OA\Response(response="default", ref="#/components/responses/default"),
+     * )
+     * 
+     * 
      * @param Request $request
      * @return JsonResponse
      * @throws ValidationException
@@ -37,6 +77,53 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
+        /**
+     * Get a JWT via given credentials.
+     *  
+     *  @OA\Post(
+     *      path="/login/staff",
+     *      summary="Get token for staff",
+     *      description="Return the token of the staff",
+     *      operationId="getTokenStaff",
+     *      tags={"Authentification"},
+     *      @OA\RequestBody(
+     *           required=true,
+     *           @OA\MediaType(
+     *                  mediaType="application/x-www-form-urlencoded",
+     *                  @OA\Schema(
+     *                      type="object",
+     *                      required={"login","password"},
+     *                      @OA\Property(
+     *                          property="login",
+     *                          type="string",
+     *                          description="login of the staff member", 
+     *                      ),
+     *                      @OA\Property(
+     *                          property="password",
+     *                          type="string",  
+     *                          description="Password of the staff member", 
+     *                      ),
+     *                  ),
+     *           ),
+     *      ),
+     *      @OA\Response( 
+     *          response=200, 
+     *          description="A token for staff",
+     *          @OA\JsonContent(
+     *              type="string",
+     *          ),
+     *      ),
+     *      @OA\Response(response="400", ref="#/components/responses/400"),
+     *      @OA\Response(response="401", ref="#/components/responses/401"),
+     *      @OA\Response(response="403", ref="#/components/responses/403"),
+     *      @OA\Response(response="default", ref="#/components/responses/default"),
+     * )
+     * 
+     * 
+     * @param Request $request
+     * @return JsonResponse
+     * @throws ValidationException
+     */
     public function loginStaff(Request $request): JsonResponse
     {
         //validate incoming request

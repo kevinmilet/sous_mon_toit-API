@@ -49,10 +49,11 @@ $router->group(['prefix' => 'schedule', 'middleware' => 'auth:staff'], function 
     $router->get('/', 'appointmentsController@showAllAppointments'); // /schedule/
     $router->get('{appointment_id}', 'appointmentsController@showAppointment'); // /schedule/{appointment_id}
     $router->get('customer/{customer_id}', 'appointmentsController@showCustomerAppointment'); // /scheduled/customer/{customer_id}
-    $router->get('staff/{staff_id}', 'appointmentsController@showStaffAppointment'); // /scheduled/customer/{staff_id}
+    $router->get('staff/{staff_id}', 'appointmentsController@showStaffAppointment'); // /scheduled/staff/{staff_id}
     $router->post('createAppt', 'appointmentsController@createAppointment'); // /schedule/createAppt
     $router->put('update/{appointment_id}', 'appointmentsController@updateAppointment'); // /schedule/update/{appointment_id} (data à passer en params)
     $router->delete('delete/{appointment_id}', 'appointmentsController@deleteAppointment'); // /schedule/delete/{appointment_id}
+    $router->get('/appointmentsTypes', 'AppointmentsTypesController@showAllTypes'); // /schedule/appointmentsTypes
 });
 
 /*
@@ -87,6 +88,7 @@ $router->group(['prefix' => 'customer'], function () use ($router) {
     $router->post('create','CustomersController@create');
     $router->group(['prefix' => 's'], function() use ($router) {
         $router->group(['middleware' => 'auth:staff'],function() use ($router) {
+            $router->get('/', 'CustomersController@selectAllCustomers');
             $router->get('/{id}', 'CustomersController@selectOneCustomer');
             $router->put('update/{id}','CustomersController@update');
             $router->delete('delete/{id}', 'CustomersController@delete');
@@ -149,4 +151,8 @@ $router->group(['prefix' => 'estates_pictures'], function () use ($router) {
         $router->delete('delete_all/{id_estate}', 'PicturesController@deleteAll');
         $router->post('upload/{id_estate}', 'PicturesController@uploadPicture');
     });
+});
+
+$router->get('/key', function() {
+    return \Illuminate\Support\Str::random(32);
 });

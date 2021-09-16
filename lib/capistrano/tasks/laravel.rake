@@ -3,11 +3,16 @@ namespace :laravel do
     task :fix_permissions do
         on roles (:web) do
             within release_path do
+<<<<<<< HEAD
                 execute :chmod, "777","-R", "storage/"
+=======
+                execute :chmod, "777", "-R", "storage/"
+>>>>>>> dev
             end
         end
     end
 end
+<<<<<<< HEAD
 
 namespace :migration do
     desc "migrer et peupler la bdd"
@@ -33,3 +38,5 @@ namespace :composer do
         end
     end
 end
+=======
+>>>>>>> dev
