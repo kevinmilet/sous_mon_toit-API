@@ -55,4 +55,15 @@ class CustomersTypesController extends Controller{
 
 
     // }
+    // public function getTypesForCustomer($id, Request $request): array
+    // {
+    //     $typeCustomer = CustomersTypes::find($id)
+    //         ->join('customers', 'customers.id', '=', 'customers_types.id')
+    //         ->where('customers_types.id', '=', $id)
+    //         ->get();
+
+    // //    $staffFunction = Staffs::find($id)->function;
+
+    //     return [$typeCustomer];
+    // }
 }

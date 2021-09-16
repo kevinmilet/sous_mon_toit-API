@@ -46,14 +46,16 @@ $router->group(['prefix' => 'estates_types'], function () use ($router) {
 
 //Appointment
 $router->group(['prefix' => 'schedule', 'middleware' => 'auth:staff'], function () use ($router) {
-    $router->get('/', 'appointmentsController@showAllAppointments'); // /schedule/
-    $router->get('{appointment_id}', 'appointmentsController@showAppointment'); // /schedule/{appointment_id}
+    
+    
     $router->get('customer/{customer_id}', 'appointmentsController@showCustomerAppointment'); // /scheduled/customer/{customer_id}
     $router->get('staff/{staff_id}', 'appointmentsController@showStaffAppointment'); // /scheduled/staff/{staff_id}
     $router->post('createAppt', 'appointmentsController@createAppointment'); // /schedule/createAppt
     $router->put('update/{appointment_id}', 'appointmentsController@updateAppointment'); // /schedule/update/{appointment_id} (data à passer en params)
     $router->delete('delete/{appointment_id}', 'appointmentsController@deleteAppointment'); // /schedule/delete/{appointment_id}
     $router->get('/appointmentsTypes', 'AppointmentsTypesController@showAllTypes'); // /schedule/appointmentsTypes
+    $router->get('{appointment_id}', 'appointmentsController@showAppointment'); // /schedule/{appointment_id}
+    $router->get('/', 'appointmentsController@showAllAppointments');//schedule//
 });
 
 /*
@@ -61,6 +63,8 @@ $router->group(['prefix' => 'schedule', 'middleware' => 'auth:staff'], function 
  */
 $router->group(['prefix' => 'staff'], function () use ($router) {
     $router->get('/', 'StaffsController@getAllStaff'); // /staff/
+    $router->get('/joinFunction/{id}', 'StaffsController@getFunctionForStaff'); // /staff/
+    $router->get('/joinRole/{id}', 'StaffsController@getRoleForStaff');
     $router->get('/{id}', 'StaffsController@getOneById'); // /staff/{id}
     $router->group(['middleware' => 'auth:staff'], function() use ($router) {
         $router->post('create', 'StaffsController@create'); // /staff/create
@@ -105,6 +109,7 @@ $router->group(['prefix' => 'customer'], function () use ($router) {
 
 // Customers searchs
 $router->group(['prefix' => 'customer_search'], function () use ($router) {
+    
     $router->group(['prefix' => 's'], function() use ($router) {
         $router->group(['middleware' => 'auth:staff'], function() use ($router) {
             $router->get('/', 'CustomersSearchsController@selectAllCustomersSearchs');
@@ -117,6 +122,7 @@ $router->group(['prefix' => 'customer_search'], function () use ($router) {
     });
     $router->group(['prefix' => 'c'], function() use ($router) {
         $router->group(['middleware' => 'auth:costumer'], function() use ($router) {
+            $router->get('/joinCustomer/{id}', 'CustomersSearchsController@getSearchsForCustomer');
             $router->get('/{id_search}', 'CustomersSearchsController@selectOneCustomerSearch');
             $router->get('/customer/{id_customer}', 'CustomersSearchsController@selectAllCustomersSearchsForCustomer');
             $router->post('/create/{id_customer}','CustomersSearchsController@create');
@@ -130,6 +136,7 @@ $router->group(['prefix' => 'customer_search'], function () use ($router) {
 $router->group(['prefix' => 'customer_type'], function () use ($router) {
     $router->get('/', 'CustomersTypesController@selectAllCustomersTypes');
     $router->get('/{id}', 'CustomersTypesController@selectOneCustomerType');
+    // $router->get('/joinCustomer/{id}', 'CustomersTypesController@getTypesForCustomer');
 });
 
 //Contract
@@ -152,6 +159,12 @@ $router->group(['prefix' => 'estates_pictures'], function () use ($router) {
         $router->post('upload/{id_estate}', 'PicturesController@uploadPicture');
     });
 });
+
+$router->group(['prefix' => 'describe_customer_type'], function () use ($router) {
+  
+    $router->get('/joinCustomer/{id}', 'DescribesCustomersTypesController@getTypesForCustomer');
+});
+
 
 $router->get('/key', function() {
     return \Illuminate\Support\Str::random(32);

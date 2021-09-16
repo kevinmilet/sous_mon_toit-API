@@ -33,4 +33,5 @@ class CustomersTypes extends Model{
          'customer_type'
      ];
 
+   
 }
