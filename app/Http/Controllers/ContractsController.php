@@ -19,19 +19,7 @@ class ContractsController extends Controller
         //
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     /**
-     * Retourne la liste des contrats
-     *
-     * @OA\Get(
-     *      path="/contract",
-     *      summary="list all contracts",
-=======
-    /** 
-=======
-    /**
->>>>>>> 8f3107fe7a6b0bd9ace3389b315630d1419cf82a
      *  @OA\Get(
      *      path="/contract/",
      *      security={
@@ -39,10 +27,6 @@ class ContractsController extends Controller
      *      },
      *      summary="Get list of all contracts",
      *      description="Return list of all contracts",
-<<<<<<< HEAD
->>>>>>> origin/anne
-=======
->>>>>>> 8f3107fe7a6b0bd9ace3389b315630d1419cf82a
      *      operationId="getContractsList",
      *      tags={"Contracts"},
      *      @OA\Response(
@@ -53,31 +37,10 @@ class ContractsController extends Controller
      *              @OA\Items(ref="#/components/schemas/Contracts"),
      *          ),
      *      ),
-<<<<<<< HEAD
-<<<<<<< HEAD
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      ),
-     *      @OA\Response(
-     *          response="default",
-     *          description="une erreur ""inattendue""",
-     *      ),
-=======
-=======
->>>>>>> 8f3107fe7a6b0bd9ace3389b315630d1419cf82a
      *      @OA\Response(response="400", ref="#/components/responses/400"),
      *      @OA\Response(response="401", ref="#/components/responses/401"),
      *      @OA\Response(response="403", ref="#/components/responses/403"),
      *      @OA\Response(response="default", ref="#/components/responses/default"),
-<<<<<<< HEAD
->>>>>>> origin/anne
-=======
->>>>>>> 8f3107fe7a6b0bd9ace3389b315630d1419cf82a
      * )
      *
      *
@@ -99,8 +62,8 @@ class ContractsController extends Controller
      *      operationId="getContract",
      *      tags={"Contracts"},
      *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\Response( 
-     *          response=200, 
+     *      @OA\Response(
+     *          response=200,
      *          description="Successful operation",
      *          @OA\JsonContent(ref="#/components/schemas/Contracts"),
      *      ),
@@ -110,7 +73,7 @@ class ContractsController extends Controller
      *      @OA\Response(response="404", ref="#/components/responses/404"),
      *      @OA\Response(response="default", ref="#/components/responses/default"),
      *  )
-     * 
+     *
      * @return Contracts[]|Collection
      */
     public function selectOneContract($id_contract)
@@ -118,7 +81,7 @@ class ContractsController extends Controller
         return Contracts::findOrFail($id_contract);
     }
 
-    /** 
+    /**
      * @OA\Post(
      *     path="/contract/saveContract",
      *     security={
@@ -142,7 +105,7 @@ class ContractsController extends Controller
      *     @OA\Response(response="403", ref="#/components/responses/403"),
      *     @OA\Response(response="default", ref="#/components/responses/default"),
      * )
-     * 
+     *
      * @return Response|ResponseFactory
      */
     public function saveNewContract(Request $request){
@@ -178,15 +141,7 @@ class ContractsController extends Controller
 
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     /**
-     * Modification d'un contrat
-     *
-=======
-=======
->>>>>>> 8f3107fe7a6b0bd9ace3389b315630d1419cf82a
-    /** 
      *  @OA\Put(
      *      path="/contract/update/{id}",
      *      security={
@@ -212,11 +167,7 @@ class ContractsController extends Controller
      *      @OA\Response(response="404", ref="#/components/responses/404"),
      *      @OA\Response(response="default", ref="#/components/responses/default"),
      * )
-     * 
-<<<<<<< HEAD
->>>>>>> origin/anne
-=======
->>>>>>> 8f3107fe7a6b0bd9ace3389b315630d1419cf82a
+     *
      * @param $id_contract
      * @return Response|ResponseFactory
      */
