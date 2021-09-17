@@ -27,6 +27,7 @@ class CreateCustomersSearchsTable extends Migration
             $table->dateTime('updated_at')->default(NULL)->nullable();
             $table->tinyInteger('alert')->default(1);
             $table->foreignId('id_customer')->constrained()->references('id')->on('customers');
+            $table->foreignId('id_estate_type')->nullable()->references('id')->on('estates_types');
         });
     }
 

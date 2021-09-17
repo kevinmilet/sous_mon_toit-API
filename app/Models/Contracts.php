@@ -12,6 +12,52 @@ use Laravel\Lumen\Auth\Authorizable;
 
 /**
  * @method static findOrFail($id_contract)
+ * 
+ *  @OA\Schema(
+ *   schema="Contracts",
+ *   title="Contracts",
+ *   description="Contracts model",
+ *   @OA\Property(
+ *     property="id", description="ID of the user",
+ *     @OA\Schema(type="number", example=1)
+ *   ),
+ *   @OA\Property(
+ *     property="created_at", description="Date of created",
+ *     @OA\Schema(type="date", example="16-06-1994")
+ *   ),
+ *   @OA\Property(
+ *     property="updated_at", description="Date of updated",
+ *     @OA\Schema(type="date", example="18-01-2008")
+ *   ),
+ *   @OA\Property(
+ *     property="deleted_at", description="Date of archived",
+ *     @OA\Schema(type="date", example="24-08-2021")
+ *   ),
+ *   @OA\Property(
+ *     property="folder", description="Folder where the contract is stocked",
+ *     @OA\Schema(type="string", example="bail")
+ *   ),
+ *   @OA\Property(
+ *     property="name", description="Name of the contract",
+ *     @OA\Schema(type="string", example="bail-1244586")
+ *   ),
+ *   @OA\Property(
+ *     property="id_staff", description="Id of the staff",
+ *     @OA\Schema(type="integer", example="3")
+ *   ),
+ *   @OA\Property(
+ *     property="id_estate", description="Id of the estate",
+ *     @OA\Schema(type="integer", example="4")
+ *   ),
+ *   @OA\Property(
+ *     property="id_customer", description="Id of the customer",
+ *     @OA\Schema(type="integer", example="1")
+ *   ),
+ *   @OA\Property(
+ *     property="id_contract_type", description="Id of the contract type",
+ *     @OA\Schema(type="integer", example="1")
+ *   ),
+ *  )
  */
 class Contracts extends Model implements AuthenticatableContract, AuthorizableContract
 {

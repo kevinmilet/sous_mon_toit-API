@@ -35,7 +35,8 @@ class CustomersSearchsController extends Controller
             'search_latitude' => 'numeric',
             'search_radius' => 'numeric|integer',
             'alert' => 'boolean|required',
-            'id_customer' => 'integer|required'
+            'id_customer' => 'integer|required',
+            'id_estate_type' => 'integer|required',
         ]);
     }
 
@@ -102,6 +103,7 @@ class CustomersSearchsController extends Controller
             'search_radius' => $validated['search_radius'],
             'alert' => $validated['alert'],
             'id_customer' => $validated['id_customer'],
+            'id_estate_type' => $validated['id_estate_type'],
 
         ]);
         return response()->json(['success' => 'Recherche enregistrée']);

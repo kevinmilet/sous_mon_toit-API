@@ -65,8 +65,33 @@ class EstatesController extends Controller
             ]);
     }
 
-    /**
-     * Retourne la liste des biens immobilier
+    /** 
+     *  @OA\Get(
+     *      path="/estates",
+     *      summary="Return the list of all estates",
+     *      operationId="getEstatesList",
+     *      tags={"Estates"},
+     *      @OA\Response( 
+     *          response=200, 
+     *          description="A list with estates",
+     *          @OA\JsonContent(
+     *              type="array",
+     *              @OA\Items(ref="#/components/schemas/Estates"),
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ), 
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      ),
+     *      @OA\Response( 
+     *          response="default", 
+     *          description="une erreur ""inattendue""",
+     *      ),
+     * )
      *
      * @return Estates[]|Collection
      */
