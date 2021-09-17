@@ -5,11 +5,11 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^7.3",
         "darkaonline/l5-swagger": "^8.0",
         "darkaonline/swagger-lume": "8.*",
         "laravel/lumen-framework": "^8.0",
-        "league/commonmark": "^1.6",
+        "league/commonmark": "1.6.6",
         "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {

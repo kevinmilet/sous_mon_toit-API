@@ -20,6 +20,7 @@ class ContractsController extends Controller
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     /**
      * Retourne la liste des contrats
      *
@@ -28,6 +29,9 @@ class ContractsController extends Controller
      *      summary="list all contracts",
 =======
     /** 
+=======
+    /**
+>>>>>>> 8f3107fe7a6b0bd9ace3389b315630d1419cf82a
      *  @OA\Get(
      *      path="/contract/",
      *      security={
@@ -35,7 +39,10 @@ class ContractsController extends Controller
      *      },
      *      summary="Get list of all contracts",
      *      description="Return list of all contracts",
+<<<<<<< HEAD
 >>>>>>> origin/anne
+=======
+>>>>>>> 8f3107fe7a6b0bd9ace3389b315630d1419cf82a
      *      operationId="getContractsList",
      *      tags={"Contracts"},
      *      @OA\Response(
@@ -46,6 +53,7 @@ class ContractsController extends Controller
      *              @OA\Items(ref="#/components/schemas/Contracts"),
      *          ),
      *      ),
+<<<<<<< HEAD
 <<<<<<< HEAD
      *      @OA\Response(
      *          response=401,
@@ -60,11 +68,16 @@ class ContractsController extends Controller
      *          description="une erreur ""inattendue""",
      *      ),
 =======
+=======
+>>>>>>> 8f3107fe7a6b0bd9ace3389b315630d1419cf82a
      *      @OA\Response(response="400", ref="#/components/responses/400"),
      *      @OA\Response(response="401", ref="#/components/responses/401"),
      *      @OA\Response(response="403", ref="#/components/responses/403"),
      *      @OA\Response(response="default", ref="#/components/responses/default"),
+<<<<<<< HEAD
 >>>>>>> origin/anne
+=======
+>>>>>>> 8f3107fe7a6b0bd9ace3389b315630d1419cf82a
      * )
      *
      *
@@ -166,10 +179,13 @@ class ContractsController extends Controller
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     /**
      * Modification d'un contrat
      *
 =======
+=======
+>>>>>>> 8f3107fe7a6b0bd9ace3389b315630d1419cf82a
     /** 
      *  @OA\Put(
      *      path="/contract/update/{id}",
@@ -197,7 +213,10 @@ class ContractsController extends Controller
      *      @OA\Response(response="default", ref="#/components/responses/default"),
      * )
      * 
+<<<<<<< HEAD
 >>>>>>> origin/anne
+=======
+>>>>>>> 8f3107fe7a6b0bd9ace3389b315630d1419cf82a
      * @param $id_contract
      * @return Response|ResponseFactory
      */

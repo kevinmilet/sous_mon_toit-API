@@ -122,5 +122,8 @@ class Staffs extends Model implements AuthenticatableContract, AuthorizableContr
     {
         return [];
     }
+    public function function(){
+        return $this->belongsTo(Functions::class);
+    }
 
 }

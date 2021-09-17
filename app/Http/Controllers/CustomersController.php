@@ -12,6 +12,30 @@ use Illuminate\Validation\ValidationException;
 class CustomersController extends Controller{
 
     /**
+     *  @OA\Get(
+     *      path="/customer/s/",
+     *      security={
+     *        {"bearerAuth": {}}
+     *      },
+     *      summary="Get list of all customers",
+     *      description="Return list of all customers",
+     *      operationId="getCustomersList",
+     *      tags={"CustomersForStaff"},
+     *      @OA\Response( 
+     *          response=200, 
+     *          description="A list with customers",
+     *          @OA\JsonContent(
+     *              type="array",
+     *              @OA\Items(ref="#/components/schemas/Customers"),
+     *          ),
+     *      ),
+     *      @OA\Response(response="400", ref="#/components/responses/400"),
+     *      @OA\Response(response="401", ref="#/components/responses/401"),
+     *      @OA\Response(response="403", ref="#/components/responses/403"),
+     *      @OA\Response(response="default", ref="#/components/responses/default"),
+     * )
+     * 
+     *
      * @return Customers[]|Collection
      */
     public function selectAllCustomers(){
@@ -29,6 +53,7 @@ class CustomersController extends Controller{
         $customer =  Customers::find($id);
         return response()->json($customer);
     }
+    
 
     /**
      * @throws ValidationException

@@ -36,4 +36,8 @@ class Functions extends Model implements AuthenticatableContract, AuthorizableCo
 
     protected $hidden = [
     ];
+
+    public function staff(){
+        return $this->hasMany(Staffs::class);
+    }
 }

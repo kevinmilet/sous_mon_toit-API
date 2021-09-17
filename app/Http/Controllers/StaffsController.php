@@ -31,36 +31,29 @@ class StaffsController extends Controller
     }
 
     /**
-     * Return staff memebers list
-     *
-     * @OA\Get(
-     *      path="/staff",
-     *      summary="list all staff members",
-     *      operationId="getAllStaff",
-     *      tags={"Staff"},
-     *      @OA\Response(
-     *          response=200,
-     *          description="A list with staff members",
+     *  @OA\Get(
+     *      path="/staff/",
+     *      security={
+     *        {"bearerAuth": {}}
+     *      },
+     *      summary="Get list of all staff",
+     *      description="Return list of all staff",
+     *      operationId="getStaffList",
+     *      tags={"Staffs"},
+     *      @OA\Response( 
+     *          response=200, 
+     *          description="A list with staffs",
      *          @OA\JsonContent(
      *              type="array",
-     *              @OA\Items(ref="Staffs"),
+     *              @OA\Items(ref="#/components/schemas/Staffs"),
      *          ),
      *      ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      ),
-     *      @OA\Response(
-     *          response="default",
-     *          description="Unexpected error",
-     *      ),
+     *      @OA\Response(response="400", ref="#/components/responses/400"),
+     *      @OA\Response(response="401", ref="#/components/responses/401"),
+     *      @OA\Response(response="403", ref="#/components/responses/403"),
+     *      @OA\Response(response="default", ref="#/components/responses/default"),
      * )
-     *
-     *
+     * 
      * @return JsonResponse
      */
     public function getAllStaff(): JsonResponse
@@ -69,40 +62,28 @@ class StaffsController extends Controller
     }
 
     /**
-     * Return a staff member
-     *
-     * @OA\Get(
+     *  @OA\Get(
      *      path="/staff/{id}",
-     *      summary="get a staff member",
-     *      operationId="getOneById",
-     *      tags={"Staff"},
-     *     @OA\Parameter(
-     *         name="include",
-     *         in="query",
-     *         required=false,
-     *      @OA\Response(
-     *          response=200,
-     *          description="A staff member",
-     *          @OA\JsonContent(
-     *              type="array",
-     *              @OA\Items(ref="Staffs"),
-     *          ),
+     *      security={
+     *        {"bearerAuth": {}}
+     *      },
+     *      summary="Get staff information",
+     *      description="Return one staff",
+     *      operationId="getStaff",
+     *      tags={"Staffs"},
+     *      @OA\Parameter(ref="#/components/parameters/id"),
+     *      @OA\Response( 
+     *          response=200, 
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/Staffs"),
      *      ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      ),
-     *      @OA\Response(
-     *          response="default",
-     *          description="Unexpected error",
-     *      ),
-     * )
-     *
-     *
+     *      @OA\Response(response="400", ref="#/components/responses/400"),
+     *      @OA\Response(response="401", ref="#/components/responses/401"),
+     *      @OA\Response(response="403", ref="#/components/responses/403"),
+     *      @OA\Response(response="404", ref="#/components/responses/404"),
+     *      @OA\Response(response="default", ref="#/components/responses/default"),
+     *  )
+     * 
      * @param $id
      * @return JsonResponse
      */
@@ -112,36 +93,27 @@ class StaffsController extends Controller
     }
 
     /**
-     * Delete a staff member
-     *
-     * @OA\Delete (
+     *  @OA\Delete(
      *      path="/staff/delete/{id}",
-     *      summary="delete a staff member",
-     *      operationId="delete",
-     *      tags={"Staff"},
+     *      security={
+     *        {"bearerAuth": {}}
+     *      },
+     *      operationId="archiveStaff",
+     *      tags={"Staffs"},
+     *      summary="Archive existing staff",
+     *      description="Return succesfull message",
+     *      @OA\Parameter(ref="#/components/parameters/id"),
      *      @OA\Response(
      *          response=200,
-     *          description="delete a staff member",
-     *          @OA\JsonContent(
-     *              type="array",
-     *              @OA\Items(ref="Staffs"),
-     *          ),
-     *      ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      ),
-     *      @OA\Response(
-     *          response="default",
-     *          description="Unexpected error",
-     *      ),
+     *          description="Successful operation",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response="400", ref="#/components/responses/400"),
+     *      @OA\Response(response="401", ref="#/components/responses/401"),
+     *      @OA\Response(response="403", ref="#/components/responses/403"),
+     *      @OA\Response(response="404", ref="#/components/responses/404"),
+     *      @OA\Response(response="default", ref="#/components/responses/default"),
      * )
-     *
-     *
      * @param $id
      * @return Response|ResponseFactory
      */
@@ -153,36 +125,30 @@ class StaffsController extends Controller
     }
 
     /**
-     * Create a staff member
-     *
-     * @OA\Post  (
-     *      path="/staff/create",
-     *      summary="create a staff member",
-     *      operationId="create",
-     *      tags={"Staff"},
-     *      @OA\Response(
-     *          response=200,
-     *          description="create a staff member",
-     *          @OA\JsonContent(
-     *              type="array",
-     *              @OA\Items(ref="Staffs"),
-     *          ),
-     *      ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      ),
-     *      @OA\Response(
-     *          response="default",
-     *          description="Unexpected error",
-     *      ),
+     * @OA\Post(
+     *     path="/staff/create",
+     *     security={
+     *        {"bearerAuth": {}}
+     *     },
+     *     operationId="storeStaff",
+     *     tags={"Staffs"},
+     *     summary="Store new staff",
+     *     description="Returns successful message",
+     *     @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(ref="#/components/schemas/Staffs"),
+     *     ),
+     *     @OA\Response(
+     *          response=201,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/Staffs")
+     *     ),
+     *     @OA\Response(response="400", ref="#/components/responses/400"),
+     *     @OA\Response(response="401", ref="#/components/responses/401"),
+     *     @OA\Response(response="403", ref="#/components/responses/403"),
+     *     @OA\Response(response="default", ref="#/components/responses/default"),
      * )
-     *
-     *
+     * 
      * @param Request $request
      * @return array
      * @throws Exception
@@ -225,36 +191,32 @@ class StaffsController extends Controller
     }
 
     /**
-     * Update a staff member
-     *
-     * @OA\Put   (
+     *  @OA\Put(
      *      path="/staff/update/{id}",
-     *      summary="update a staff member",
-     *      operationId="update",
-     *      tags={"Staff"},
-     *      @OA\Response(
-     *          response=200,
-     *          description="update a staff member",
-     *          @OA\JsonContent(
-     *              type="array",
-     *              @OA\Items(ref="Staffs"),
-     *          ),
+     *      security={
+     *        {"bearerAuth": {}}
+     *      },
+     *      operationId="updateStaff",
+     *      tags={"Staffs"},
+     *      summary="Update existing staff",
+     *      description="Returns updated staff data",
+     *      @OA\Parameter(ref="#/components/parameters/id"),
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(ref="#/components/schemas/Staffs")
      *      ),
      *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      ),
-     *      @OA\Response(
-     *          response=403,
-     *          description="Forbidden"
-     *      ),
-     *      @OA\Response(
-     *          response="default",
-     *          description="Unexpected error",
-     *      ),
+     *          response=202,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/Staffs")
+     *       ),
+     *      @OA\Response(response="400", ref="#/components/responses/400"),
+     *      @OA\Response(response="401", ref="#/components/responses/401"),
+     *      @OA\Response(response="403", ref="#/components/responses/403"),
+     *      @OA\Response(response="404", ref="#/components/responses/404"),
+     *      @OA\Response(response="default", ref="#/components/responses/default"),
      * )
-     *
-     *
+     * 
      * @param $id
      * @param Request $request
      * @return array
@@ -268,4 +230,28 @@ class StaffsController extends Controller
 
         return [$staff];
     }
+    public function getFunctionForStaff($id, Request $request): array
+    {
+        $staffFunction = Staffs::find($id)
+            ->join('functions', 'functions.id', '=', 'staffs.id_function')
+            ->where('staffs.id', '=', $id)
+            ->get();
+
+    //    $staffFunction = Staffs::find($id)->function;
+
+        return [$staffFunction];
+    }
+
+    public function getRoleForStaff($id, Request $request): array
+    {
+        $staffRole = Staffs::find($id)
+            ->join('roles', 'roles.id', '=', 'staffs.id_role')
+            ->where('staffs.id', '=', $id)
+            ->get();
+
+    //    $staffFunction = Staffs::find($id)->function;
+
+        return [$staffRole];
+    }
+    
 }
