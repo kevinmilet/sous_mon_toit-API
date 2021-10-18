@@ -32,6 +32,7 @@ $router->group(['prefix' => 'api'], function() use ($router) {
 $router->group(['prefix' => 'estates'], function () use ($router) {
     $router->get('/', 'EstatesController@selectAllEstates'); // /estates/
     $router->get('/{id}', 'EstatesController@selectOneEstate'); // /estates/{id}
+    $router->get('/rnd', 'EstatesController@randomEstates'); // /estates/rnd
     $router->group(['middleware' => 'auth:staff'], function() use ($router) {
         $router->post('/create', 'EstatesController@create'); // /estates/create/{id}
         $router->put('/update/{id}', 'EstatesController@update'); // /estates/update/{id}
