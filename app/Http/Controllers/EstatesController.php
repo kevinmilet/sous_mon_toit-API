@@ -200,6 +200,5 @@ class EstatesController extends Controller
     {
         $estatesRnd = Estates::all()->random(3);
         return response()->json($estatesRnd);
-
     }
 }
