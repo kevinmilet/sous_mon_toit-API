@@ -45,6 +45,11 @@ $router->group(['prefix' => 'estates_types'], function () use ($router) {
     $router->get('/', 'EstatesTypesController@getAllEstatesTypes'); // /estates_types/
 });
 
+// Recherche de biens
+$router->group(['prefix' => 'search'], function () use ($router) {
+    $router->get('{query}', 'SearchController@search');
+});
+
 //Appointment
 $router->group(['prefix' => 'schedule', 'middleware' => 'auth:staff'], function () use ($router) {
     $router->get('customer/{customer_id}', 'appointmentsController@showCustomerAppointment'); // /scheduled/customer/{customer_id}
