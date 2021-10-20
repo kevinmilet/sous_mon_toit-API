@@ -6,7 +6,6 @@ use App\Models\Customers;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class CustomersController extends Controller{
@@ -21,8 +20,8 @@ class CustomersController extends Controller{
      *      description="Return list of all customers",
      *      operationId="getCustomersList",
      *      tags={"CustomersForStaff"},
-     *      @OA\Response( 
-     *          response=200, 
+     *      @OA\Response(
+     *          response=200,
      *          description="A list with customers",
      *          @OA\JsonContent(
      *              type="array",
@@ -34,7 +33,7 @@ class CustomersController extends Controller{
      *      @OA\Response(response="403", ref="#/components/responses/403"),
      *      @OA\Response(response="default", ref="#/components/responses/default"),
      * )
-     * 
+     *
      *
      * @return Customers[]|Collection
      */
@@ -53,7 +52,7 @@ class CustomersController extends Controller{
         $customer =  Customers::find($id);
         return response()->json($customer);
     }
-    
+
 
     /**
      * @throws ValidationException
