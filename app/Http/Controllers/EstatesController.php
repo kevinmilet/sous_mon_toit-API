@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Estates;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;

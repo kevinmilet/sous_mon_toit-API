@@ -32,6 +32,7 @@ $router->group(['prefix' => 'api'], function() use ($router) {
 $router->group(['prefix' => 'estates'], function () use ($router) {
     $router->get('/', 'EstatesController@selectAllEstates'); // /estates/
     $router->get('/rnd', 'EstatesController@randomEstates'); // /estates/rnd
+    $router->post('/search', 'SearchController@search'); // /estates/search/
     $router->get('/{id}', 'EstatesController@selectOneEstate'); // /estates/{id}
     $router->group(['middleware' => 'auth:staff'], function() use ($router) {
         $router->post('/create', 'EstatesController@create'); // /estates/create/{id}
@@ -43,11 +44,6 @@ $router->group(['prefix' => 'estates'], function () use ($router) {
 // Types de biens
 $router->group(['prefix' => 'estates_types'], function () use ($router) {
     $router->get('/', 'EstatesTypesController@getAllEstatesTypes'); // /estates_types/
-});
-
-// Recherche de biens
-$router->group(['prefix' => 'search'], function () use ($router) {
-    $router->get('{query}', 'SearchController@search');
 });
 
 //Appointment
