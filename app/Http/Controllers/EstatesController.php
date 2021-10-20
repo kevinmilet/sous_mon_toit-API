@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Estates;
+use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
@@ -107,8 +108,19 @@ class EstatesController extends Controller
      */
     public function selectOneEstate($id): JsonResponse
     {
-        $estate =  Estates::find($id);
-        return response()->json($estate);
+
+        try{
+            $estate =  Estates::find($id);
+
+            if($estate == null ){
+                throw new Exception('aucun resultat');
+            }
+
+            return response()->json($estate);
+
+        }catch(Exception $e){
+            return response()->json($e->getMessage());
+        }
     }
 
     /**

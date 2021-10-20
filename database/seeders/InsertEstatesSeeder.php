@@ -15,6 +15,90 @@ class InsertEstatesSeeder extends Seeder
         5 => 'Chateau de Montmirail',
         6 => 'Belle maison en bord de mer',
         7 => 'Maison ancienne plein pied',
+        8 => 'Garage centre-ville',
+        9 => 'Terrain a contruire',
+        10 => 'Place de parking sous-terrain',
+        11 => 'Local commercial',
+        12 => 'Champs de paturage',
+        13 => 'Local proffessionnelle',
+        14 => 'Epicerie de quartier',
+        15 => 'Local de stockage',
+
+    ];
+
+    public static $CITY =[
+
+        1 => 'Paris',
+        2 => 'Amiens',
+        3 => 'Bapaume',
+        4 => 'Lille',
+        5 => 'Saint-Omer',
+        6 => 'Calais',
+        7 => 'Le Touquet',
+        8 => 'Lens',
+        9 => 'Albert',
+        10 => 'Salouel',
+        11 => 'Amiens',
+        12 => 'Amiens',
+        13 => 'Lille',
+        14 => 'Le Touquet',
+        15 => 'Amiens',
+    ];
+
+    public static $ZIPCODE = [
+
+        1 => 75000,
+        2 => 80000,
+        3 => 62450,
+        4 => 59000,
+        5 => 62500,
+        6 => 62100,
+        7 => 62520,
+        8 => 62300,
+        9 => 80300,
+        10 => 80480,
+        11 => 80000,
+        12 => 80000,
+        13 => 59000,
+        14 => 62520,
+        15 => 80000,
+    ];
+
+    public static $LONGITUDE =[
+
+        1 => 2.3522219,
+        2 => 2.295753,
+        3 => 2.85111,
+        4 => 3.057256,
+        5 => 2.26083,
+        6 => 1.858686,
+        7 => 1.58528,
+        8 => 2.83183,
+        9 => 2.65096,
+        10 => 2.30856,
+        11 => 2.3522219,
+        12 => 2.295753,
+        13 => 3.057256,
+        14 => 1.58528,
+        15 => 2.295753,
+    ];
+    public static $LATITUDE =[
+
+        1 => 48.856614,
+        2 => 49.894067,
+        3 => 50.1036,
+        4 => 50.62925,
+        5 => 50.7483,
+        6 => 50.95129,
+        7 => 50.5233,
+        8 => 50.42893,
+        9 => 50.00091,
+        10 => 49.89239,
+        11 => 49.894067,
+        12 => 49.894067,
+        13 => 50.62925,
+        14 => 50.5233,
+        15 => 49.894067,
     ];
 
     public static $ESTATE_BUY_OR_RENT = [
@@ -48,13 +132,13 @@ class InsertEstatesSeeder extends Seeder
                 'id' => $i,
                 'id_estate_type' => rand(1, 7),
                 'id_customer' => rand(1, 5),
-                'title' => self::$ESTATE_TITLE[rand(1, 7)],
+                'title' => self::$ESTATE_TITLE[$i],
                 'reference' => "smt" . rand(1000, 9999) . $i,
                 'dpe_file' => "lorem-ipsum.pdf",
                 'buy_or_rent' => self::$ESTATE_BUY_OR_RENT[rand(1, 2)],
                 'address' => rand(1, 199) . "  rue Danton",
-                'city' => "Paris",
-                'zipcode' => rand(10000, 95999),
+                'city' => self::$CITY[$i],
+                'zipcode' => self::$ZIPCODE[$i],
                 'estate_longitude' => "2.3422724",
                 'estate_latitude' => "48.8528186",
                 'price' => rand(100000, 1000000),
@@ -75,18 +159,18 @@ class InsertEstatesSeeder extends Seeder
                 'nb_balcony' => rand(0, 1),
                 'type_kitchen' => self::$ESTATE_KITCHEN_TYPE[rand(1, 4)],
                 'heaters' => self::$ESTATE_HEATERS[rand(1, 4)],
-                'communal_heating' => false,
-                'furnished' => true,
-                'private_parking' => true,
-                'handicap_access' => false,
-                'cellar' => false,
-                'terrace' => false,
-                'swimming_pool' => false,
-                'fireplace' => false,
-                'all_in_sewer' => true,
-                'septik_tank' => false,
+                'communal_heating' => rand(0, 1),
+                'furnished' => rand(0, 1),
+                'private_parking' => rand(0, 1),
+                'handicap_access' => rand(0, 1),
+                'cellar' => rand(0, 1),
+                'terrace' => rand(0, 1),
+                'swimming_pool' => rand(0, 1),
+                'fireplace' => rand(0, 1),
+                'all_in_sewer' => rand(0, 1),
+                'septik_tank' => rand(0, 1),
                 'property_charge' => rand(300, 2500),
-                'elevator' => ($i % 2 == 0) ? true : false,
+                'elevator' => rand(0, 1),
                 'created_at' => new \DateTime(),
                 'updated_at' => null,
                 'deleted_at' => null,
@@ -96,5 +180,6 @@ class InsertEstatesSeeder extends Seeder
         DB::table('estates')->insert(
             $data
         );
+
     }
 }
