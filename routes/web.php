@@ -31,6 +31,8 @@ $router->group(['prefix' => 'api'], function() use ($router) {
 // Biens
 $router->group(['prefix' => 'estates'], function () use ($router) {
     $router->get('/', 'EstatesController@selectAllEstates'); // /estates/
+    $router->get('/rnd', 'EstatesController@randomEstates'); // /estates/rnd
+    $router->post('/search', 'SearchController@search'); // /estates/search/
     $router->get('/{id}', 'EstatesController@selectOneEstate'); // /estates/{id}
     $router->group(['middleware' => 'auth:staff'], function() use ($router) {
         $router->post('/create', 'EstatesController@create'); // /estates/create/{id}
@@ -46,8 +48,6 @@ $router->group(['prefix' => 'estates_types'], function () use ($router) {
 
 //Appointment
 $router->group(['prefix' => 'schedule', 'middleware' => 'auth:staff'], function () use ($router) {
-    
-    
     $router->get('customer/{customer_id}', 'appointmentsController@showCustomerAppointment'); // /scheduled/customer/{customer_id}
     $router->get('staff/{staff_id}', 'appointmentsController@showStaffAppointment'); // /scheduled/staff/{staff_id}
     $router->post('createAppt', 'appointmentsController@createAppointment'); // /schedule/createAppt
@@ -109,7 +109,7 @@ $router->group(['prefix' => 'customer'], function () use ($router) {
 
 // Customers searchs
 $router->group(['prefix' => 'customer_search'], function () use ($router) {
-    
+
     $router->group(['prefix' => 's'], function() use ($router) {
         $router->group(['middleware' => 'auth:staff'], function() use ($router) {
             $router->get('/', 'CustomersSearchsController@selectAllCustomersSearchs');
@@ -162,7 +162,7 @@ $router->group(['prefix' => 'estates_pictures'], function () use ($router) {
 });
 
 $router->group(['prefix' => 'describe_customer_type'], function () use ($router) {
-  
+
     $router->get('/joinCustomer/{id}', 'DescribesCustomersTypesController@getTypesForCustomer');
     
 });

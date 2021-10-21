@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Estates;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -65,14 +63,14 @@ class EstatesController extends Controller
             ]);
     }
 
-    /** 
+    /**
      *  @OA\Get(
      *      path="/estates",
      *      summary="Return the list of all estates",
      *      operationId="getEstatesList",
      *      tags={"Estates"},
-     *      @OA\Response( 
-     *          response=200, 
+     *      @OA\Response(
+     *          response=200,
      *          description="A list with estates",
      *          @OA\JsonContent(
      *              type="array",
@@ -82,22 +80,23 @@ class EstatesController extends Controller
      *      @OA\Response(
      *          response=401,
      *          description="Unauthenticated",
-     *      ), 
+     *      ),
      *      @OA\Response(
      *          response=403,
      *          description="Forbidden"
      *      ),
-     *      @OA\Response( 
-     *          response="default", 
+     *      @OA\Response(
+     *          response="default",
      *          description="une erreur ""inattendue""",
      *      ),
      * )
      *
-     * @return Estates[]|Collection
+     * @return JsonResponse
      */
-    public function selectAllEstates()
+    public function selectAllEstates(): JsonResponse
     {
-        return Estates::all();
+        $estates = Estates::all();
+        return response()->json($estates);
     }
 
     /**
@@ -179,12 +178,25 @@ class EstatesController extends Controller
         return [$response];
     }
 
-
+    /**
+     * @param $id
+     * @param Request $request
+     * @return array
+     */
     public function update($id, Request $request): array
     {
         $estate = Estates::findOrFail($id);
         $estate->update($request->all());
 
         return [$estate];
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function randomEstates(): JsonResponse
+    {
+        $estatesRnd = Estates::all()->random(3);
+        return response()->json($estatesRnd);
     }
 }

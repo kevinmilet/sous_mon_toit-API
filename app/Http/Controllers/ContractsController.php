@@ -62,8 +62,8 @@ class ContractsController extends Controller
      *      operationId="getContract",
      *      tags={"Contracts"},
      *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\Response( 
-     *          response=200, 
+     *      @OA\Response(
+     *          response=200,
      *          description="Successful operation",
      *          @OA\JsonContent(ref="#/components/schemas/Contracts"),
      *      ),
@@ -73,7 +73,7 @@ class ContractsController extends Controller
      *      @OA\Response(response="404", ref="#/components/responses/404"),
      *      @OA\Response(response="default", ref="#/components/responses/default"),
      *  )
-     * 
+     *
      * @return Contracts[]|Collection
      */
     public function selectOneContract($id_contract)
@@ -81,7 +81,7 @@ class ContractsController extends Controller
         return Contracts::findOrFail($id_contract);
     }
 
-    /** 
+    /**
      * @OA\Post(
      *     path="/contract/saveContract",
      *     security={
@@ -105,7 +105,7 @@ class ContractsController extends Controller
      *     @OA\Response(response="403", ref="#/components/responses/403"),
      *     @OA\Response(response="default", ref="#/components/responses/default"),
      * )
-     * 
+     *
      * @return Response|ResponseFactory
      */
     public function saveNewContract(Request $request){
@@ -141,7 +141,7 @@ class ContractsController extends Controller
 
     }
 
-    /** 
+    /**
      *  @OA\Put(
      *      path="/contract/update/{id}",
      *      security={
@@ -167,7 +167,7 @@ class ContractsController extends Controller
      *      @OA\Response(response="404", ref="#/components/responses/404"),
      *      @OA\Response(response="default", ref="#/components/responses/default"),
      * )
-     * 
+     *
      * @param $id_contract
      * @return Response|ResponseFactory
      */
