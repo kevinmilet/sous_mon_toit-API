@@ -118,6 +118,7 @@ $router->group(['prefix' => 'customer_search'], function () use ($router) {
             $router->post('/create/{id_customer}','CustomersSearchsController@create');
             $router->put('/update/{id}','CustomersSearchsController@update');
             $router->delete('/delete/{id}', 'CustomersSearchsController@delete');
+            $router->get('/joinCustomer/{id}', 'CustomersSearchsController@getSearchsForCustomer');
         });
     });
     $router->group(['prefix' => 'c'], function() use ($router) {
@@ -163,6 +164,7 @@ $router->group(['prefix' => 'estates_pictures'], function () use ($router) {
 $router->group(['prefix' => 'describe_customer_type'], function () use ($router) {
   
     $router->get('/joinCustomer/{id}', 'DescribesCustomersTypesController@getTypesForCustomer');
+    
 });
 
 
