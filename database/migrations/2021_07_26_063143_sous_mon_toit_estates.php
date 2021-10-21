@@ -24,8 +24,8 @@ class SousMonToitEstates extends Migration
             $table->string('address', 255);
             $table->string('city', 50);
             $table->string('zipcode', 5);
-            $table->decimal('estate_longitude');
-            $table->decimal('estate_latitude');
+            $table->double('estate_longitude');
+            $table->double('estate_latitude');
             $table->decimal('price')->nullable();
             $table->longText('description')->nullable();
             $table->string('disponibility')->nullable();
