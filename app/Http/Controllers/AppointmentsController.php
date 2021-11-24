@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointments;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use OpenApi\Annotations\Get;
 
 class AppointmentsController extends Controller
 {
@@ -31,7 +33,7 @@ class AppointmentsController extends Controller
     }
 
     /**
-     *  
+     *
      *  @OA\Get(
      *      path="/schedule/",
      *      security={
@@ -41,8 +43,8 @@ class AppointmentsController extends Controller
      *      description="Return list of all appointments",
      *      operationId="getAppointmentList",
      *      tags={"Appointments"},
-     *      @OA\Response( 
-     *          response=200, 
+     *      @OA\Response(
+     *          response=200,
      *          description="A list with appointment",
      *          @OA\JsonContent(
      *              type="array",
@@ -62,7 +64,7 @@ class AppointmentsController extends Controller
     }
 
     /**
-     *   
+     *
      *  @OA\Get(
      *      path="/schedule/{id}",
      *      security={
@@ -73,8 +75,8 @@ class AppointmentsController extends Controller
      *      operationId="getAppointment",
      *      tags={"Appointments"},
      *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\Response( 
-     *          response=200, 
+     *      @OA\Response(
+     *          response=200,
      *          description="Successful operation",
      *          @OA\JsonContent(ref="#/components/schemas/Appointments"),
      *      ),
@@ -84,7 +86,7 @@ class AppointmentsController extends Controller
      *      @OA\Response(response="404", ref="#/components/responses/404"),
      *      @OA\Response(response="default", ref="#/components/responses/default"),
      *  )
-     * 
+     *
      * @return mixed
      */
     public function showAppointment($appointment_id) {
@@ -102,8 +104,8 @@ class AppointmentsController extends Controller
      *      operationId="getAppointmentCustomer",
      *      tags={"Appointments"},
      *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\Response( 
-     *          response=200, 
+     *      @OA\Response(
+     *          response=200,
      *          description="Successful operation",
      *          @OA\JsonContent(
      *              type="array",
@@ -116,7 +118,7 @@ class AppointmentsController extends Controller
      *      @OA\Response(response="404", ref="#/components/responses/404"),
      *      @OA\Response(response="default", ref="#/components/responses/default"),
      *  )
-     * 
+     *
      * @param $customer_id
      * @return mixed
      */
@@ -135,8 +137,8 @@ class AppointmentsController extends Controller
      *      operationId="getAppointmentStaff",
      *      tags={"Appointments"},
      *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\Response( 
-     *          response=200, 
+     *      @OA\Response(
+     *          response=200,
      *          description="Successful operation",
      *          @OA\JsonContent(
      *              type="array",
@@ -149,7 +151,7 @@ class AppointmentsController extends Controller
      *      @OA\Response(response="404", ref="#/components/responses/404"),
      *      @OA\Response(response="default", ref="#/components/responses/default"),
      *  )
-     * 
+     *
      * @param $staff_id
      * @return mixed
      */
@@ -157,7 +159,7 @@ class AppointmentsController extends Controller
         return Appointments::where('id_staff', $staff_id)->get();
     }
 
-    /** 
+    /**
      * @OA\Post(
      *     path="/schedule/createAppt",
      *     security={
@@ -181,7 +183,7 @@ class AppointmentsController extends Controller
      *     @OA\Response(response="403", ref="#/components/responses/403"),
      *     @OA\Response(response="default", ref="#/components/responses/default"),
      * )
-     * 
+     *
      * @param Request $request
      * @return array
      * @throws ValidationException
@@ -227,7 +229,7 @@ class AppointmentsController extends Controller
      *      @OA\Response(response="404", ref="#/components/responses/404"),
      *      @OA\Response(response="default", ref="#/components/responses/default"),
      * )
-     * 
+     *
      * @param $appointment_id
      * @param Request $request
      * @return mixed
@@ -269,6 +271,38 @@ class AppointmentsController extends Controller
      */
     public function deleteAppointment($appointment_id) {
         return Appointments::find($appointment_id)->delete();
+    }
+
+    /**
+     * showCurrentDayAptmts
+     *
+     * @return void
+     */
+    public function showCurrentDayAptmts() {
+        $date = Carbon::now()->toDateString();
+        return Appointments::whereDate('scheduled_at', '=', $date)->get();
+    }
+
+    /**
+     * showCurrentDayStaffAptmts
+     *
+     * @param  mixed $staff_id
+     * @return void
+     */
+    public function showCurrentDayStaffAptmts($staff_id) {
+        $date = Carbon::now()->toDateString();
+        return Appointments::whereDate('scheduled_at', '=', $date)->where('id_staff', '=', $staff_id)->get();
+    }
+
+    /**
+     * showCurrentDayCustomerAptmts
+     *
+     * @param  mixed $customer_id
+     * @return void
+     */
+    public function showCurrentDayCustomerAptmts($customer_id) {
+        $date = Carbon::now()->toDateString();
+        return Appointments::whereDate('scheduled_at', '=', $date)->where('id_customer', '=', $customer_id)->get();
     }
 
 }
