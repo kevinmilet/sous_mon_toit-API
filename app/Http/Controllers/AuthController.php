@@ -14,7 +14,7 @@ class AuthController extends Controller
 {
     /**
      * Get a JWT via given credentials.
-     * 
+     *
      *  @OA\Post(
      *      path="/login/customer",
      *      summary="Get token for Customer",
@@ -31,18 +31,18 @@ class AuthController extends Controller
      *                      @OA\Property(
      *                          property="mail",
      *                          type="string",
-     *                          description="mail of the customer member", 
+     *                          description="mail of the customer member",
      *                      ),
      *                      @OA\Property(
      *                          property="password",
-     *                          type="string",  
-     *                          description="Password of the customer member", 
+     *                          type="string",
+     *                          description="Password of the customer member",
      *                      ),
      *                  ),
      *           ),
      *      ),
-     *      @OA\Response( 
-     *          response=200, 
+     *      @OA\Response(
+     *          response=200,
      *          description="A token for customer",
      *          @OA\JsonContent(
      *              type="string",
@@ -53,8 +53,8 @@ class AuthController extends Controller
      *      @OA\Response(response="403", ref="#/components/responses/403"),
      *      @OA\Response(response="default", ref="#/components/responses/default"),
      * )
-     * 
-     * 
+     *
+     *
      * @param Request $request
      * @return JsonResponse
      * @throws ValidationException
@@ -68,9 +68,8 @@ class AuthController extends Controller
         ]);
 
         $credentials = $request->only(['mail', 'password']);
-        // dd($this->getGuard());
 
-        if (!$token = Auth::guard('customer')->attempt($credentials)) {
+        if (!$token = auth()->guard('customer')->attempt($credentials)) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
         $user = Auth::user();
@@ -79,7 +78,7 @@ class AuthController extends Controller
 
         /**
      * Get a JWT via given credentials.
-     *  
+     *
      *  @OA\Post(
      *      path="/login/staff",
      *      summary="Get token for staff",
@@ -96,18 +95,18 @@ class AuthController extends Controller
      *                      @OA\Property(
      *                          property="login",
      *                          type="string",
-     *                          description="login of the staff member", 
+     *                          description="login of the staff member",
      *                      ),
      *                      @OA\Property(
      *                          property="password",
-     *                          type="string",  
-     *                          description="Password of the staff member", 
+     *                          type="string",
+     *                          description="Password of the staff member",
      *                      ),
      *                  ),
      *           ),
      *      ),
-     *      @OA\Response( 
-     *          response=200, 
+     *      @OA\Response(
+     *          response=200,
      *          description="A token for staff",
      *          @OA\JsonContent(
      *              type="string",
@@ -118,8 +117,8 @@ class AuthController extends Controller
      *      @OA\Response(response="403", ref="#/components/responses/403"),
      *      @OA\Response(response="default", ref="#/components/responses/default"),
      * )
-     * 
-     * 
+     *
+     *
      * @param Request $request
      * @return JsonResponse
      * @throws ValidationException
@@ -133,13 +132,13 @@ class AuthController extends Controller
         ]);
 
         $credentials = $request->only(['login', 'password']);
-        
-        if (!$token = Auth::guard('staff')->attempt($credentials)) {
+
+        if (!$token = auth()->guard('staff')->attempt($credentials)) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
         $user = Auth::user();
-        return $this->respondWithToken($token,$user);
+        return $this->respondWithToken($token, $user);
     }
 
      /**
@@ -149,6 +148,7 @@ class AuthController extends Controller
      */
     public function me()
     {
+        var_dump(auth()->user());
         return response()->json(auth()->user());
     }
 
