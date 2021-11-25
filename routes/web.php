@@ -49,17 +49,17 @@ $router->group(['prefix' => 'estates_types'], function () use ($router) {
 
 //Appointment
 $router->group(['prefix' => 'schedule', 'middleware' => 'auth:staff'], function () use ($router) {
-    $router->get('today', 'appointmentsController@showCurrentDayAptmts');
-    $router->get('today_staff/{staff_id}', 'appointmentsController@showCurrentDayStaffAptmts');
-    $router->get('today_customer/{customer_id}', 'appointmentsController@showCurrentDayCustomerAptmts');
-    $router->get('customer/{customer_id}', 'appointmentsController@showCustomerAppointment'); // /scheduled/customer/{customer_id}
-    $router->get('staff/{staff_id}', 'appointmentsController@showStaffAppointment'); // /scheduled/staff/{staff_id}
-    $router->post('createAppt', 'appointmentsController@createAppointment'); // /schedule/createAppt
-    $router->put('update/{appointment_id}', 'appointmentsController@updateAppointment'); // /schedule/update/{appointment_id} (data à passer en params)
-    $router->delete('delete/{appointment_id}', 'appointmentsController@deleteAppointment'); // /schedule/delete/{appointment_id}
+    $router->get('today', 'AppointmentsController@showCurrentDayAptmts');
+    $router->get('today_staff/{staff_id}', 'AppointmentsController@showCurrentDayStaffAptmts');
+    $router->get('today_customer/{customer_id}', 'AppointmentsController@showCurrentDayCustomerAptmts');
+    $router->get('customer/{customer_id}', 'AppointmentsController@showCustomerAppointment'); // /scheduled/customer/{customer_id}
+    $router->get('staff/{staff_id}', 'AppointmentsController@showStaffAppointment'); // /scheduled/staff/{staff_id}
+    $router->post('createAppt', 'AppointmentsController@createAppointment'); // /schedule/createAppt
+    $router->put('update/{appointment_id}', 'AppointmentsController@updateAppointment'); // /schedule/update/{appointment_id} (data à passer en params)
+    $router->delete('delete/{appointment_id}', 'AppointmentsController@deleteAppointment'); // /schedule/delete/{appointment_id}
     $router->get('appointmentsTypes', 'AppointmentsTypesController@showAllTypes'); // /schedule/appointmentsTypes
-    $router->get('{appointment_id}', 'appointmentsController@showAppointment'); // /schedule/{appointment_id}
-    $router->get('/', 'appointmentsController@showAllAppointments');//schedule//
+    $router->get('{appointment_id}', 'AppointmentsController@showAppointment'); // /schedule/{appointment_id}
+    $router->get('/', 'AppointmentsController@showAllAppointments');//schedule//
 });
 
 /*

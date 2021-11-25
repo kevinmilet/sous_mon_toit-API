@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\DescribesCustomersTypes;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -12,14 +11,14 @@ class DescribesCustomersTypesController extends Controller{
 
     /**
      * Retourne la liste des types de customers
-     * 
+     *
      *  @OA\Get(
      *      path="/customer_type/",
      *      summary="Return the list of all Customers Types",
      *      operationId="getCustomersTypesList",
      *      tags={"CustomersTypes"},
-     *      @OA\Response( 
-     *          response=200, 
+     *      @OA\Response(
+     *          response=200,
      *          description="A list with customers types",
      *          @OA\JsonContent(
      *              type="array",
@@ -34,20 +33,15 @@ class DescribesCustomersTypesController extends Controller{
      *
      * @return DescribesCustomersTypes[]|Collection
      */
-  
-    public function getTypesForCustomer($id, Request $request): array
-    {
-        // $typeCustomer = DescribesCustomersTypes::find($id)
-              $typeCustomer = DB::table('describes_customers_types')
+    public function getTypesForCustomer($id, Request $request): array {
+        $typeCustomer = DB::table('describes_customers_types')
                             ->join('customers', 'customers.id', '=', 'describes_customers_types.id_customer')
                             ->join('customers_types','customers_types.id' ,'=', 'describes_customers_types.id_customer_type')
                             ->where('describes_customers_types.id_customer', '=', $id)
                             ->get();
 
-    //    $staffFunction = Staffs::find($id)->function;
-
         return [$typeCustomer];
     }
- 
-  
+
+
 }
