@@ -285,7 +285,7 @@ class AppointmentsController extends Controller
                             ->join('customers', 'appointments.id_customer', '=', 'customers.id')
                             ->join('staffs', 'appointments.id_staff', '=', 'staffs.id')
                             ->select('appointments.id', 'appointments.scheduled_at', 'appointments_types.appointment_type', 'estates.address', 'estates.city', 'estates.zipcode', 'appointments.id_customer' ,'customers.lastname as customerLastname', 'customers.firstname as customerFirstname', 'appointments.id_staff', 'staffs.lastname as staffLastname', 'staffs.firstname as staffFirstname')
-                            ->whereDate('scheduled_at', '=', $date)
+                            ->whereDate('appointments.scheduled_at', '=', $date)
                             ->get();
     }
 
@@ -302,8 +302,8 @@ class AppointmentsController extends Controller
                             ->join('customers', 'appointments.id_customer', '=', 'customers.id')
                             ->join('staffs', 'appointments.id_staff', '=', 'staffs.id')
                             ->select('appointments.id', 'appointments.scheduled_at', 'appointments_types.appointment_type', 'estates.address', 'estates.city', 'estates.zipcode', 'appointments.id_customer' ,'customers.lastname as customerLastname', 'customers.firstname as customerFirstname', 'appointments.id_staff', 'staffs.lastname as staffLastname', 'staffs.firstname as staffFirstname')
-                            ->whereDate('scheduled_at', '=', $date)
-                            ->where('id_staff', '=', $staff_id)
+                            ->whereDate('appointments.scheduled_at', '=', $date)
+                            ->where('appointments.id_staff', '=', $staff_id)
                             ->get();
     }
 
@@ -315,12 +315,13 @@ class AppointmentsController extends Controller
      */
     public function showCurrentDayCustomerAptmts($customer_id) {
         $date = Carbon::now()->toDateString();
-        return Appointments::join('appointments_types', 'id_appointment_type', '=', 'appointments_types.id')
-                            ->join('estates', 'id_estate', '=', 'estates.id')
+        return Appointments::join('appointments_types', 'appointments.id_appointment_type', '=', 'appointments_types.id')
+                            ->join('estates', 'appointments.id_estate', '=', 'estates.id')
                             ->join('customers', 'appointments.id_customer', '=', 'customers.id')
+                            ->join('staffs', 'appointments.id_staff', '=', 'staffs.id')
                             ->select('appointments.id', 'appointments.scheduled_at', 'appointments_types.appointment_type', 'estates.address', 'estates.city', 'estates.zipcode', 'appointments.id_customer' ,'customers.lastname as customerLastname', 'customers.firstname as customerFirstname', 'appointments.id_staff', 'staffs.lastname as staffLastname', 'staffs.firstname as staffFirstname')
-                            ->whereDate('scheduled_at', '=', $date)
-                            ->where('id_customer', '=', $customer_id)
+                            ->whereDate('appointments.scheduled_at', '=', $date)
+                            ->where('appointments.id_customer', '=', $customer_id)
                             ->get();
     }
 
