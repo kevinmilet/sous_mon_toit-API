@@ -8,7 +8,7 @@ use Tymon\JWTAuth\Http\Middleware\BaseMiddleware;
 
 //Auth
 $router->group(['prefix' => 'login'], function($router) {
-    $router->post('customer', 'AuthController@loginCustomer'); // /login/customer
+    $router->post('customer', 'AuthController@loginCustomer'); // /login/customersss
     $router->post('staff', 'AuthController@loginStaff'); // /login/staff
 });
 

@@ -119,6 +119,8 @@ class Customers extends Model implements AuthenticatableContract, AuthorizableCo
         'password',
     ];
 
+    protected $guard = 'customer';
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
