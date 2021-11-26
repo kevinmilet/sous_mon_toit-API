@@ -72,7 +72,8 @@ class AuthController extends Controller
         if (!$token = auth()->guard('customer')->attempt($credentials)) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
-        $user = Auth::user();
+
+        $user = auth('customer')->user();
         return $this->respondWithToken($token, $user);
     }
 
@@ -133,15 +134,17 @@ class AuthController extends Controller
 
         $credentials = $request->only(['login', 'password']);
 
+        config('auth.guard.defaults', 'staff');
+
         if (!$token = auth()->guard('staff')->attempt($credentials)) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
-        $user = Auth::user();
+        $user = auth('staff')->user();
         return $this->respondWithToken($token, $user);
     }
 
-     /**
+    /**
      * Get the authenticated User.
      *
      * @return \Illuminate\Http\JsonResponse
@@ -162,7 +165,8 @@ class AuthController extends Controller
         $user = Auth::user();
         return $this->respondWithToken(auth()->refresh(),$user);
     }
-      /**
+    
+    /**
      * Log the user out (Invalidate the token).
      *
      * @return JsonResponse
