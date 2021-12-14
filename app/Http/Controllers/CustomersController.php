@@ -128,4 +128,15 @@ class CustomersController extends Controller{
         $customer->delete();
         return response()->json(['success'=>'Utilisateur supprimé']);
     }
+
+    /**
+     * @param $value
+     * @return mixed
+     */
+    public function searchCustomers($value) {
+        $value = '%'.$value.'%';
+        return Customers::where('lastname', 'like', $value)
+            ->orWhere('firstname', 'like', $value)
+            ->get();
+    }
 }

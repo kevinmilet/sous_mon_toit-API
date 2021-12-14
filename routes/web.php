@@ -100,6 +100,7 @@ $router->group(['prefix' => 'customer'], function () use ($router) {
             $router->get('/{id}', 'CustomersController@selectOneCustomer');
             $router->put('update/{id}','CustomersController@update');
             $router->delete('delete/{id}', 'CustomersController@delete');
+            $router->get('search/{value}','CustomersController@searchCustomers');
         });
     });
     $router->group(['prefix' => 'c'], function() use ($router) {
