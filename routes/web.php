@@ -34,6 +34,7 @@ $router->group(['prefix' => 'estates'], function () use ($router) {
     $router->get('/', 'EstatesController@selectAllEstates'); // /estates/
     $router->get('/rnd', 'EstatesController@randomEstates'); // /estates/rnd
     $router->post('/search', 'SearchController@search'); // /estates/search/
+    $router->get('/search/{value}', 'EstatesController@searchEstates');
     $router->get('/{id}', 'EstatesController@selectOneEstate'); // /estates/{id}
     $router->group(['middleware' => 'auth:staff'], function() use ($router) {
         $router->post('/create', 'EstatesController@create'); // /estates/create/{id}

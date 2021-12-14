@@ -210,4 +210,18 @@ class EstatesController extends Controller
         $estatesRnd = Estates::join('pictures', 'estates.id', '=', 'pictures.id_estate')->select('*')->random(3);
         return response()->json($estatesRnd);
     }
+
+    /**
+     * @param $value
+     * @return mixed
+     */
+    public function searchEstates($value) {
+        $value = '%'.$value.'%';
+        return Estates::where('title', 'like', $value)
+            ->orWhere('reference', 'like', $value)
+            ->orWhere('address', 'like', $value)
+            ->orWhere('city', 'like', $value)
+            ->orWhere('zipcode', 'like', $value)
+            ->get();
+    }
 }
