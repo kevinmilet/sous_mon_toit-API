@@ -86,7 +86,7 @@ class CustomersController extends Controller{
         $this->validation($request);
 
         $response = Customers::create([
-            'n_customer' => substr(time(), 5, 9),
+            'n_customer' => rand(1,9).substr(time(), 7, 9).rand(0,9),
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
             'gender' => $request->gender,

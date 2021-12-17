@@ -31,6 +31,18 @@ class InsertAppointmentsTypesSeeder extends Seeder
             [
                 'id' => 4,
                 'appointment_type' => 'Première visite'
+            ],
+            [
+                'id' => 5,
+                'appointment_type' => 'Rendez-vous téléphonique'
+            ],
+            [
+                'id' => 6,
+                'appointment_type' => 'En agence'
+            ],
+            [
+                'id' => 7,
+                'appointment_type' => 'Autre'
             ]
         ]);
     }
