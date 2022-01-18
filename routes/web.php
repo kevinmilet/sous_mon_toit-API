@@ -50,6 +50,7 @@ $router->group(['prefix' => 'estates_types'], function () use ($router) {
 
 //Appointment
 $router->group(['prefix' => 'schedule', 'middleware' => 'auth:staff'], function () use ($router) {
+    $router->get('calendar', 'AppointmentsController@getCalendar');
     $router->get('today', 'AppointmentsController@showCurrentDayAptmts');
     $router->get('today_staff/{staff_id}', 'AppointmentsController@showCurrentDayStaffAptmts');
     $router->get('today_customer/{customer_id}', 'AppointmentsController@showCurrentDayCustomerAptmts');

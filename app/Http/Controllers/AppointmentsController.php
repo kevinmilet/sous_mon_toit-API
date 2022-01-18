@@ -58,9 +58,18 @@ class AppointmentsController extends Controller
      * )
      * @return Appointments[]|Collection
      */
-    public function showAllAppointments()
-    {
+    public function showAllAppointments() {
         return Appointments::all();
+
+    }
+
+    public function  getCalendar() {
+        return Appointments::leftJoin('appointments_types', 'appointments.id_appointment_type', '=', 'appointments_types.id')
+            ->leftJoin('estates', 'appointments.id_estate', '=', 'estates.id')
+            ->leftJoin('customers', 'appointments.id_customer', '=', 'customers.id')
+            ->join('staffs', 'appointments.id_staff', '=', 'staffs.id')
+            ->select('appointments.id', 'appointments.scheduled_at as start', 'appointments_types.appointment_type', 'appointments.notes', 'estates.address', 'estates.city', 'estates.zipcode', 'appointments.id_customer' ,'customers.lastname as customerLastname', 'customers.firstname as customerFirstname', 'appointments.id_staff', 'staffs.lastname as staffLastname', 'staffs.firstname as staffFirstname')
+            ->get();
     }
 
     /**
