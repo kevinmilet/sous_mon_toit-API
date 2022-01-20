@@ -24,10 +24,10 @@ class AppointmentsController extends Controller
         return $this->validate($request, [
             'notes' => 'nullable|string',
             'scheduled_at' => 'date',
-            'id_estate' => 'numeric|integer',
+            'id_estate' => 'nullable|numeric|integer',
             'id_staff' =>'numeric|integer',
-            'id_customer' => 'numeric|integer',
-            'id_appointment_type' => 'numeric|integer'
+            'id_customer' => 'nullable|numeric|integer',
+            'id_appointment_type' => 'nullable|numeric|integer'
 
         ]);
     }
