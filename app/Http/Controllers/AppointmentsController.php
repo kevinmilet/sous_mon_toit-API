@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use OpenApi\Annotations\Get;
 
+use function PHPUnit\Framework\isEmpty;
+use function PHPUnit\Framework\isNull;
+
 class AppointmentsController extends Controller
 {
     /**
@@ -24,10 +27,10 @@ class AppointmentsController extends Controller
         return $this->validate($request, [
             'notes' => 'nullable|string',
             'scheduled_at' => 'date',
-            'id_estate' => 'nullable|numeric|integer',
+            'id_estate' => 'numeric|integer',
             'id_staff' =>'numeric|integer',
-            'id_customer' => 'nullable|numeric|integer',
-            'id_appointment_type' => 'nullable|numeric|integer'
+            'id_customer' => 'numeric|integer',
+            'id_appointment_type' => 'numeric|integer'
 
         ]);
     }
@@ -205,13 +208,14 @@ class AppointmentsController extends Controller
      */
     public function createAppointment(Request $request): array
     {
+
         $validated = $this->validation($request);
         Appointments::create([
             'notes' => $validated['notes'],
             'scheduled_at' => $validated['scheduled_at'],
-            'id_estate' => $validated['id_estate'],
+            'id_estate' => $request['id_estate'] !== "" ? $validated['id_estate'] : null,
             'id_staff' => $validated['id_staff'],
-            'id_customer' => $validated['id_customer'],
+            'id_customer' => $request['id_customer'] !== "" ? $validated['id_customer'] : null,
             'id_appointment_type' => $validated['id_appointment_type']
         ]);
 
