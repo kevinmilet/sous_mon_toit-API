@@ -6,6 +6,7 @@ use App\Models\Appointments;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Exists;
 use Illuminate\Validation\ValidationException;
 use OpenApi\Annotations\Get;
 
@@ -261,9 +262,46 @@ class AppointmentsController extends Controller
         $appointments = Appointments::findOrFail($appointment_id);
         $validated = $this->validation($request);
 
+        if ($request['notes']){
+            $notes = $validated['notes'];
+        } else {
+            $notes = null;
+        }
+        if ($request['scheduled_at']){
+            $scheduled_at = $validated['scheduled_at'];
+        } else {
+            $scheduled_at = null;
+        }
+        if ($request['id_estate']){
+            $id_estate = $request['id_estate'] !== "" ? $validated['id_estate'] : null;
+        } else {
+            $id_estate = null;
+        }
+        if ($request['id_staff']){
+            $id_staff = $validated['id_staff'];
+        } else {
+            $id_staff = null;
+        }
+        if ($request['id_customer']){
+            $id_customer = $request['id_customer'] !== "" ? $validated['id_customer'] : null;
+        } else {
+            $id_customer = null;
+        }
+        if ($request['id_appointment_type']){
+            $id_appointment_type = $validated['id_appointment_type'];
+        } else {
+            $id_appointment_type = null;
+        }
 
-        //validation à ajouter
-        $appointments->update($request->all());
+        $appointments->update([
+            'notes' => $notes,
+            'scheduled_at' => $scheduled_at,
+            'id_estate' => $id_estate,
+            'id_staff' => $id_staff,
+            'id_customer' => $id_customer,
+            'id_appointment_type' => $id_appointment_type
+        ]);
+
         return $appointments;
     }
 
