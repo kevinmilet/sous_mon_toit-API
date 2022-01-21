@@ -260,37 +260,43 @@ class AppointmentsController extends Controller
      */
     public function updateAppointment($appointment_id, Request $request) {
         $appointments = Appointments::findOrFail($appointment_id);
+        $id_staff = $appointments['id_staff'];
+        $id_appointment_type = $appointments['id_appointment_type'];
+        $notes = $appointments['id'];
+        $scheduled_at = $appointments['scheduled_at'];
+        $id_customer = $appointments['id_customer'];
+        $id_estate = $appointments['id_estate'];
         $validated = $this->validation($request);
 
-        if ($request['notes']){
-            $notes = $validated['notes'];
-        } else {
-            $notes = null;
+        if (isset($request['notes'])){
+            if ($request['notes']){
+                $notes = $validated['notes'];
+            }
         }
-        if ($request['scheduled_at']){
-            $scheduled_at = $validated['scheduled_at'];
-        } else {
-            $scheduled_at = null;
+        if (isset($request['scheduled_at'])) {
+            if ($request['scheduled_at']){
+                $scheduled_at = $validated['scheduled_at'];
+            }
         }
-        if ($request['id_estate']){
-            $id_estate = $request['id_estate'] !== "" ? $validated['id_estate'] : null;
-        } else {
-            $id_estate = null;
+        if (isset($request['id_estate'])) {
+            if ($request['id_estate']){
+                $id_estate = $request['id_estate'] !== "" ? $validated['id_estate'] : null;
+            }
         }
-        if ($request['id_staff']){
-            $id_staff = $validated['id_staff'];
-        } else {
-            $id_staff = null;
+        if (isset($request['id_staff'])) {
+            if ($request['id_staff']){
+                $id_staff = $validated['id_staff'];
+            }
         }
-        if ($request['id_customer']){
-            $id_customer = $request['id_customer'] !== "" ? $validated['id_customer'] : null;
-        } else {
-            $id_customer = null;
+        if (isset($request['id_customer'])) {
+            if ($request['id_customer']){
+                $id_customer = $request['id_customer'] !== "" ? $validated['id_customer'] : null;
+            }
         }
-        if ($request['id_appointment_type']){
-            $id_appointment_type = $validated['id_appointment_type'];
-        } else {
-            $id_appointment_type = null;
+        if (isset($request['id_appointment_type'])) {
+            if ($request['id_appointment_type']){
+                $id_appointment_type = $validated['id_appointment_type'];
+            }
         }
 
         $appointments->update([
