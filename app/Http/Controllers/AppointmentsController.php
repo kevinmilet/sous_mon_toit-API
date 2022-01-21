@@ -6,6 +6,7 @@ use App\Models\Appointments;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Exists;
 use Illuminate\Validation\ValidationException;
 use OpenApi\Annotations\Get;
 
@@ -107,7 +108,7 @@ class AppointmentsController extends Controller
                             ->leftJoin('estates', 'appointments.id_estate', '=', 'estates.id')
                             ->leftJoin('customers', 'appointments.id_customer', '=', 'customers.id')
                             ->join('staffs', 'appointments.id_staff', '=', 'staffs.id')
-                            ->select('appointments.id', 'appointments.scheduled_at', 'appointments_types.appointment_type', 'appointments.notes', 'estates.address', 'estates.city', 'estates.zipcode', 'appointments.id_customer' ,'customers.lastname as customerLastname', 'customers.firstname as customerFirstname', 'appointments.id_staff', 'staffs.lastname as staffLastname', 'staffs.firstname as staffFirstname')
+                            ->select('appointments.id', 'appointments_types.id as apptmt_type_id', 'appointments.scheduled_at', 'appointments_types.appointment_type', 'appointments.notes', 'estates.address', 'estates.city', 'estates.zipcode', 'estates.reference', 'estates.title', 'estates.id as id_estate', 'appointments.id_customer' ,'customers.lastname as customerLastname', 'customers.firstname as customerFirstname', 'appointments.id_staff', 'staffs.lastname as staffLastname', 'staffs.firstname as staffFirstname')
                             ->findOrFail($appointment_id);
     }
 
@@ -141,7 +142,10 @@ class AppointmentsController extends Controller
      * @return mixed
      */
     public function showCustomerAppointment($customer_id) {
-        return Appointments::where('id_customer', $customer_id)->get();
+        return Appointments::leftJoin('appointments_types', 'appointments.id_appointment_type', '=', 'appointments_types.id')
+                            ->join('staffs', 'appointments.id_staff', '=', 'staffs.id')
+                            ->select('appointments.id', 'appointments_types.id as id_appointment_type', 'appointments.scheduled_at', 'appointments_types.appointment_type', 'appointments.id_customer as id_customer' ,'customers.lastname as customerLastname', 'customers.firstname as customerFirstname', 'appointments.id_staff as id_staff', 'staffs.lastname as staffLastname', 'staffs.firstname as staffFirstname')
+                            ->findOrFail($customer_id);
     }
 
     /**
@@ -256,10 +260,54 @@ class AppointmentsController extends Controller
      */
     public function updateAppointment($appointment_id, Request $request) {
         $appointments = Appointments::findOrFail($appointment_id);
+        $id_staff = $appointments['id_staff'];
+        $id_appointment_type = $appointments['id_appointment_type'];
+        $notes = $appointments['id'];
+        $scheduled_at = $appointments['scheduled_at'];
+        $id_customer = $appointments['id_customer'];
+        $id_estate = $appointments['id_estate'];
         $validated = $this->validation($request);
 
-        //validation à ajouter
-        $appointments->update($request->all());
+        if (isset($request['notes'])){
+            if ($request['notes']){
+                $notes = $validated['notes'];
+            }
+        }
+        if (isset($request['scheduled_at'])) {
+            if ($request['scheduled_at']){
+                $scheduled_at = $validated['scheduled_at'];
+            }
+        }
+        if (isset($request['id_estate'])) {
+            if ($request['id_estate']){
+                $id_estate = $request['id_estate'] !== "" ? $validated['id_estate'] : null;
+            }
+        }
+        if (isset($request['id_staff'])) {
+            if ($request['id_staff']){
+                $id_staff = $validated['id_staff'];
+            }
+        }
+        if (isset($request['id_customer'])) {
+            if ($request['id_customer']){
+                $id_customer = $request['id_customer'] !== "" ? $validated['id_customer'] : null;
+            }
+        }
+        if (isset($request['id_appointment_type'])) {
+            if ($request['id_appointment_type']){
+                $id_appointment_type = $validated['id_appointment_type'];
+            }
+        }
+
+        $appointments->update([
+            'notes' => $notes,
+            'scheduled_at' => $scheduled_at,
+            'id_estate' => $id_estate,
+            'id_staff' => $id_staff,
+            'id_customer' => $id_customer,
+            'id_appointment_type' => $id_appointment_type
+        ]);
+
         return $appointments;
     }
 
