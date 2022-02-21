@@ -40,8 +40,8 @@ class StaffsController extends Controller
      *      description="Return list of all staff",
      *      operationId="getStaffList",
      *      tags={"Staffs"},
-     *      @OA\Response( 
-     *          response=200, 
+     *      @OA\Response(
+     *          response=200,
      *          description="A list with staffs",
      *          @OA\JsonContent(
      *              type="array",
@@ -53,7 +53,7 @@ class StaffsController extends Controller
      *      @OA\Response(response="403", ref="#/components/responses/403"),
      *      @OA\Response(response="default", ref="#/components/responses/default"),
      * )
-     * 
+     *
      * @return JsonResponse
      */
     public function getAllStaff(): JsonResponse
@@ -72,8 +72,8 @@ class StaffsController extends Controller
      *      operationId="getStaff",
      *      tags={"Staffs"},
      *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\Response( 
-     *          response=200, 
+     *      @OA\Response(
+     *          response=200,
      *          description="Successful operation",
      *          @OA\JsonContent(ref="#/components/schemas/Staffs"),
      *      ),
@@ -83,7 +83,7 @@ class StaffsController extends Controller
      *      @OA\Response(response="404", ref="#/components/responses/404"),
      *      @OA\Response(response="default", ref="#/components/responses/default"),
      *  )
-     * 
+     *
      * @param $id
      * @return JsonResponse
      */
@@ -148,7 +148,7 @@ class StaffsController extends Controller
      *     @OA\Response(response="403", ref="#/components/responses/403"),
      *     @OA\Response(response="default", ref="#/components/responses/default"),
      * )
-     * 
+     *
      * @param Request $request
      * @return array
      * @throws Exception
@@ -216,19 +216,20 @@ class StaffsController extends Controller
      *      @OA\Response(response="404", ref="#/components/responses/404"),
      *      @OA\Response(response="default", ref="#/components/responses/default"),
      * )
-     * 
+     *
      * @param $id
      * @param Request $request
      * @return array
      * @throws ValidationException
      */
-    public function update($id, Request $request): array
+    public function update($id, Request $request)
     {
+        // TODO à modifier pour update (voir exemple dans appointements)
         $staff = Staffs::findOrFail($id);
-        $this->validation($request);
+        // $this->validation($request);
         $staff->update($request->all());
 
-        return [$staff];
+        return $staff;
     }
     public function getFunctionForStaff($id, Request $request): array
     {
@@ -253,5 +254,5 @@ class StaffsController extends Controller
 
         return [$staffFunction];
     }
-    
+
 }
