@@ -20,8 +20,8 @@ class StaffsController extends Controller
     {
         return $this->validate($request,
             [
-                'firstname' => 'string|required|regex:/^[a-zA-Z \'-]+$/',
-                'lastname' => 'string|required|regex:/^[a-zA-Z \'-]+$/',
+                'firstname' => 'string|required|regex:/^[[A-Za-zéèêàâ \'-]+$/',
+                'lastname' => 'string|required|regex:/^[[A-Za-zéèêàâ \'-]+$/',
                 'mail' => 'email|unique:App\Models\Staffs,mail|required',
                 'phone' => 'string|min:10|max:15|required|regex:/^[0-9 -\/\.]+$/',
                 'avatar' => 'nullable|sometimes|image|mimes:jpeg,jpg,png,gif|max:2048',
@@ -219,19 +219,95 @@ class StaffsController extends Controller
      *
      * @param $id
      * @param Request $request
-     * @return array
      * @throws ValidationException
      */
     public function update($id, Request $request)
     {
         // TODO à modifier pour update (voir exemple dans appointements)
         $staff = Staffs::findOrFail($id);
-        // $this->validation($request);
-        $staff->update($request->all());
+
+        $firstname = $staff['firstname'];
+        $lastname = $staff['lastname'];
+        $login = $staff['login'];
+        $mail = $staff['mail'];
+        $phone = $staff['phone'];
+        $password = $staff['password'];
+        $avatar = $staff['avatar'];
+        $alert_reader = $staff['alert_reader'];
+        $idFunction = $staff['id_function'];
+        $idRole = $staff['id_role'];
+
+        // $validated = $this->validation($request);
+
+        if (isset($request['firstname'])) {
+            if ($request['firstname']) {
+                if ($this->validate($request,[
+                    'firstname' => 'string|required|regex:/^[[A-Za-zéèêàâ \'-]+$/'
+                ])) {
+                    $firstname = $request['firstname'];
+                }
+            }
+        }
+        if (isset($request['lastname'])) {
+            if ($request['lastname']) {
+                if ($this->validate($request,[
+                    'lastname' => 'string|required|regex:/^[[A-Za-zéèêàâ \'-]+$/'
+                ])) {
+                    $lastname = $request['lastname'];
+                }
+            }
+        }
+        if (isset($request['phone'])) {
+            if ($request['phone']) {
+                if ($this->validate($request,[
+                    'phone' => 'string|required|regex:/^[0-9 -\/\.]{10,14}$/'
+                ])) {
+                    $phone = $request['phone'];
+                }
+            }
+        }
+        if (!isset($request['id_function'])) {
+            if ($request['id_function']) {
+                if ($this->validate($request,[
+                    'id_function' => 'numeric|integer|required'
+                ])) {
+                    $idFunction = $request['id_function'];
+                }
+            }
+        }
+        if (!isset($request['id_role'])) {
+            if ($request['id_role']) {
+                if ($this->validate($request,[
+                    'id_role' => 'numeric|integer|required'
+                ])) {
+                    $idRole = $request['id_role'];
+                }
+            }
+        }
+        if (isset($request['mail'])) {
+            if ($request['mail'] !== $mail) {
+                if ($this->validate($request,[
+                    'mail' => 'email|unique:App\Models\Staffs,mail|required'
+                ])) {
+                    $mail = $request['mail'];
+                }
+            }
+        }
+
+        $staff->update([
+            'firstname' => $firstname,
+            'lastname' => $lastname,
+            'login' => $login,
+            'mail' => $mail,
+            'avatar' => $avatar,
+            'id_function' => $idFunction,
+            'id_role' => $idRole,
+            'phone' => $phone
+        ]);
 
         return $staff;
     }
-    
+
     public function getFunctionForStaff($id, Request $request): array
     {
         $staffFunction = Staffs::find($id)
