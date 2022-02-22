@@ -231,6 +231,7 @@ class StaffsController extends Controller
 
         return $staff;
     }
+    
     public function getFunctionForStaff($id, Request $request): array
     {
         $staffFunction = Staffs::find($id)
