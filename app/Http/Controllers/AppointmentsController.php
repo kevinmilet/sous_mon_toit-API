@@ -178,7 +178,14 @@ class AppointmentsController extends Controller
      * @return mixed
      */
     public function showStaffAppointment($staff_id) {
-        return Appointments::where('id_staff', $staff_id)->get();
+        // return Appointments::where('id_staff', $staff_id)->get();
+        return Appointments::leftJoin('appointments_types', 'appointments.id_appointment_type', '=', 'appointments_types.id')
+        ->leftJoin('estates', 'appointments.id_estate', '=', 'estates.id')
+        ->leftJoin('customers', 'appointments.id_customer', '=', 'customers.id')
+        ->join('staffs', 'appointments.id_staff', '=', 'staffs.id')
+        ->select('appointments.id', 'appointments.scheduled_at', 'appointments_types.appointment_type', 'estates.address', 'estates.city', 'estates.zipcode', 'appointments.id_customer', 'customers.lastname as customerLastname', 'customers.firstname as customerFirstname', 'appointments.id_staff', 'staffs.lastname as staffLastname', 'staffs.firstname as staffFirstname')
+        ->where('appointments.id_staff', '=', $staff_id)
+        ->get();
     }
 
     /**
