@@ -70,6 +70,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *     property="id_estate_type", description="ID of the estate type",
  *     @OA\Schema(type="integer", example=1)
  *   ),
+*     @OA\Property(
+ *     property="city", description="city",
+ *     @OA\Schema(type="string", example="PARIS")
+ *   ),
  *  )
  * @method static find($id)
  * @method static findOrFail($id)
@@ -94,5 +98,6 @@ class CustomersSearchs extends Model{
         'alert',
         'id_customer',
         'id_estate_type',
+        'city',
     ];
 }
