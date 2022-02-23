@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Estates;
+use DateTime;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Validation\ValidationException;
 use Laravel\Lumen\Http\ResponseFactory;
 
@@ -205,8 +207,41 @@ class EstatesController extends Controller
     public function update($id, Request $request): array
     {
         $estate = Estates::findOrFail($id);
-        $estate->update($request->all());
-
+        $estate->update([
+            'price' => $request['price'],
+            'description' => $request['description'],
+            'disponibility' => $request['disponibility'],
+            'year_of_construction' => new DateTime( $request['year_of_construction'] . "-01-01"),
+            'living_surface' => $request['living_surface'],
+            'carrez_law' => $request['carrez_law'],
+            'land_surface' => $request['land_surface'],
+            'nb_rooms' => $request['nb_rooms'],
+            'nb_bedrooms' => $request['nb_bedrooms'],
+            'nb_bathrooms' => $request['nb_bathrooms'],
+            'nb_sanitary' => $request['nb_sanitary'],
+            'nb_toilet' => $request['nb_toilet'],
+            'nb_kitchen' => $request['nb_kitchen'],
+            'nb_garage' => $request['nb_garage'],
+            'nb_parking' => $request['nb_parking'],
+            'nb_balcony' => $request['nb_balcony'],
+            'type_kitchen' => $request['type_kitchen'],
+            'heaters' => $request['heaters'],
+            'communal_heating' => $request['communal_heating'],
+            'furnished' => $request['furnished'],
+            'private_parking' => $request['private_parking'],
+            'handicap_access' => $request['handicap_access'],
+            'cellar' => $request['cellar'],
+            'terrace' => $request['terrace'],
+            'swimming_pool' => $request['swimming_pool'],
+            'fireplace' => $request['fireplace'],
+            'all_in_sewer' => $request['all_in_sewer'],
+            'septik_tank' => $request['septik_tank'],
+            'property_charge' => $request['property_charge'],
+            'attic' => $request['attic'],
+            'elevator' => $request['elevator'],
+            'rental_charge' => $request['rental_charge'],
+            'coownership_charge' => $request['coownership_charge'],
+        ]);
         return [$estate];
     }
 
