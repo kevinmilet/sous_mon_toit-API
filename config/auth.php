@@ -2,8 +2,8 @@
 
 return [
     'defaults' => [
-        'guard' => 'customer',
-        'passwords' => 'customers',
+        'guard' => 'staff',
+        'passwords' => 'staffs',
     ],
 
     'guards' => [

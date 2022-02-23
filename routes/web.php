@@ -2,12 +2,13 @@
 
 /** @var Router $router */
 
+use App\Http\Controllers\AppointmentsController;
 use Laravel\Lumen\Routing\Router;
 use Tymon\JWTAuth\Http\Middleware\BaseMiddleware;
 
 //Auth
 $router->group(['prefix' => 'login'], function($router) {
-    $router->post('customer', 'AuthController@loginCustomer'); // /login/customer
+    $router->post('customer', 'AuthController@loginCustomer'); // /login/customersss
     $router->post('staff', 'AuthController@loginStaff'); // /login/staff
 });
 
@@ -33,6 +34,7 @@ $router->group(['prefix' => 'estates'], function () use ($router) {
     $router->get('/', 'EstatesController@selectAllEstates'); // /estates/
     $router->get('/rnd', 'EstatesController@randomEstates'); // /estates/rnd
     $router->post('/search', 'SearchController@search'); // /estates/search/
+    $router->get('/search/{value}', 'EstatesController@searchEstates');
     $router->get('/{id}', 'EstatesController@selectOneEstate'); // /estates/{id}
     $router->group(['middleware' => 'auth:staff'], function() use ($router) {
         $router->post('/create', 'EstatesController@create'); // /estates/create/{id}
@@ -48,14 +50,18 @@ $router->group(['prefix' => 'estates_types'], function () use ($router) {
 
 //Appointment
 $router->group(['prefix' => 'schedule', 'middleware' => 'auth:staff'], function () use ($router) {
-    $router->get('customer/{customer_id}', 'appointmentsController@showCustomerAppointment'); // /scheduled/customer/{customer_id}
-    $router->get('staff/{staff_id}', 'appointmentsController@showStaffAppointment'); // /scheduled/staff/{staff_id}
-    $router->post('createAppt', 'appointmentsController@createAppointment'); // /schedule/createAppt
-    $router->put('update/{appointment_id}', 'appointmentsController@updateAppointment'); // /schedule/update/{appointment_id} (data à passer en params)
-    $router->delete('delete/{appointment_id}', 'appointmentsController@deleteAppointment'); // /schedule/delete/{appointment_id}
-    $router->get('/appointmentsTypes', 'AppointmentsTypesController@showAllTypes'); // /schedule/appointmentsTypes
-    $router->get('{appointment_id}', 'appointmentsController@showAppointment'); // /schedule/{appointment_id}
-    $router->get('/', 'appointmentsController@showAllAppointments');//schedule//
+    $router->get('calendar', 'AppointmentsController@getCalendar');
+    $router->get('today', 'AppointmentsController@showCurrentDayAptmts');
+    $router->get('today_staff/{staff_id}', 'AppointmentsController@showCurrentDayStaffAptmts');
+    $router->get('today_customer/{customer_id}', 'AppointmentsController@showCurrentDayCustomerAptmts');
+    $router->get('customer/{customer_id}', 'AppointmentsController@showCustomerAppointment'); // /scheduled/customer/{customer_id}
+    $router->get('staff/{staff_id}', 'AppointmentsController@showStaffAppointment'); // /scheduled/staff/{staff_id}
+    $router->post('createAppt', 'AppointmentsController@createAppointment'); // /schedule/createAppt
+    $router->put('update/{appointment_id}', 'AppointmentsController@updateAppointment'); // /schedule/update/{appointment_id} (data à passer en params)
+    $router->delete('delete/{appointment_id}', 'AppointmentsController@deleteAppointment'); // /schedule/delete/{appointment_id}
+    $router->get('appointmentsTypes', 'AppointmentsTypesController@showAllTypes'); // /schedule/appointmentsTypes
+    $router->get('{appointment_id}', 'AppointmentsController@showAppointment'); // /schedule/{appointment_id}
+    $router->get('/', 'AppointmentsController@showAllAppointments');//schedule//
 });
 
 /*
@@ -96,6 +102,7 @@ $router->group(['prefix' => 'customer'], function () use ($router) {
             $router->get('/{id}', 'CustomersController@selectOneCustomer');
             $router->put('update/{id}','CustomersController@update');
             $router->delete('delete/{id}', 'CustomersController@delete');
+            $router->get('search/{value}','CustomersController@searchCustomers');
         });
     });
     $router->group(['prefix' => 'c'], function() use ($router) {
@@ -164,7 +171,7 @@ $router->group(['prefix' => 'estates_pictures'], function () use ($router) {
 $router->group(['prefix' => 'describe_customer_type'], function () use ($router) {
 
     $router->get('/joinCustomer/{id}', 'DescribesCustomersTypesController@getTypesForCustomer');
-    
+
 });
 
 

@@ -10,7 +10,7 @@ use OpenApi\Annotations as OA;
 class Controller extends BaseController
 {
 
-    /** 
+    /**
     * @OA\Info(
     *      title="Sous Mon Toit",
     *      version="0.1",
@@ -22,7 +22,7 @@ class Controller extends BaseController
     *      @OA\Contact(
     *           email="laforet.gerard.smt@gmail.com",
     *           name="Gérard Laforêt - real estate agency director of SousMonToit"
-    *      )    
+    *      )
     * )
     * @OA\Server(
     *      url="https://sousmontoit.herokuapp.com/",
@@ -30,7 +30,7 @@ class Controller extends BaseController
     *      @OA\Contact(
     *           email="laforet.gerard.smt@gmail.com",
     *           name="Gérard Laforêt - real estate agency director of SousMonToit"
-    *      )    
+    *      )
     * )
     *
     * @OA\Parameter(
@@ -60,8 +60,8 @@ class Controller extends BaseController
     *          @OA\Property(property="message", type="string", example="Resource Not Found")
     *     ),
     * )
-    * @OA\Response( 
-    *     response="default", 
+    * @OA\Response(
+    *     response="default",
     *     description="une erreur ""inattendue""",
     * )
     *
@@ -78,7 +78,7 @@ class Controller extends BaseController
         return response()->json([
             'token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => Auth::factory()->getTTL() * 60,
+            'expires_in' => Auth::factory()->getTTL() * (60 * 12),
             'user' => $user
         ], 200);
     }

@@ -235,7 +235,7 @@ class InsertPicturesSeeder extends Seeder
                 'updated_at' => null,
                 'id_estate' => 14,
             ],[
-                'id' => 24,
+                'id' => 25,
                 'folder' => '/pictures/',
                 'name' => 'stockage.jpg',
                 'cover' => true,

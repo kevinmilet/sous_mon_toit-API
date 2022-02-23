@@ -1,8 +1,5 @@
 <?php
-
-
 namespace App\Models;
-
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -88,24 +85,26 @@ class Staffs extends Model implements AuthenticatableContract, AuthorizableContr
 
     protected $fillable = [
         'id',
-        'login', 
-        'firstname', 
-        'lastname', 
-        'created_at', 
-        'updated_at', 
-        'deleted_at', 
-        'mail', 
-        'phone', 
-        'password', 
-        'avatar', 
-        'alert_reader', 
-        'id_function', 
+        'login',
+        'firstname',
+        'lastname',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'mail',
+        'phone',
+        'password',
+        'avatar',
+        'alert_reader',
+        'id_function',
         'id_role',
     ];
 
     protected $hidden = [
         'password',
     ];
+
+    protected $guard = 'staff';
 
     public function getJWTIdentifier()
     {

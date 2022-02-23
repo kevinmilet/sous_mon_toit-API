@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Appointments;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use OpenApi\Annotations\Get;
+
+use function PHPUnit\Framework\isEmpty;
+use function PHPUnit\Framework\isNull;
 
 class AppointmentsController extends Controller
 {
@@ -31,7 +36,7 @@ class AppointmentsController extends Controller
     }
 
     /**
-     *  
+     *
      *  @OA\Get(
      *      path="/schedule/",
      *      security={
@@ -41,8 +46,8 @@ class AppointmentsController extends Controller
      *      description="Return list of all appointments",
      *      operationId="getAppointmentList",
      *      tags={"Appointments"},
-     *      @OA\Response( 
-     *          response=200, 
+     *      @OA\Response(
+     *          response=200,
      *          description="A list with appointment",
      *          @OA\JsonContent(
      *              type="array",
@@ -56,13 +61,22 @@ class AppointmentsController extends Controller
      * )
      * @return Appointments[]|Collection
      */
-    public function showAllAppointments()
-    {
+    public function showAllAppointments() {
         return Appointments::all();
+
+    }
+
+    public function  getCalendar() {
+        return Appointments::leftJoin('appointments_types', 'appointments.id_appointment_type', '=', 'appointments_types.id')
+            ->leftJoin('estates', 'appointments.id_estate', '=', 'estates.id')
+            ->leftJoin('customers', 'appointments.id_customer', '=', 'customers.id')
+            ->join('staffs', 'appointments.id_staff', '=', 'staffs.id')
+            ->select('appointments.id', 'appointments.scheduled_at as start', 'appointments_types.appointment_type', 'appointments.notes', 'estates.address', 'estates.city', 'estates.zipcode', 'appointments.id_customer' ,'customers.lastname as customerLastname', 'customers.firstname as customerFirstname', 'appointments.id_staff', 'staffs.lastname as staffLastname', 'staffs.firstname as staffFirstname')
+            ->get();
     }
 
     /**
-     *   
+     *
      *  @OA\Get(
      *      path="/schedule/{id}",
      *      security={
@@ -73,8 +87,8 @@ class AppointmentsController extends Controller
      *      operationId="getAppointment",
      *      tags={"Appointments"},
      *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\Response( 
-     *          response=200, 
+     *      @OA\Response(
+     *          response=200,
      *          description="Successful operation",
      *          @OA\JsonContent(ref="#/components/schemas/Appointments"),
      *      ),
@@ -84,11 +98,17 @@ class AppointmentsController extends Controller
      *      @OA\Response(response="404", ref="#/components/responses/404"),
      *      @OA\Response(response="default", ref="#/components/responses/default"),
      *  )
-     * 
+     *
      * @return mixed
      */
     public function showAppointment($appointment_id) {
-        return Appointments::findOrFail($appointment_id);
+        // return Appointments::findOrFail($appointment_id);
+        return Appointments::leftJoin('appointments_types', 'appointments.id_appointment_type', '=', 'appointments_types.id')
+                            ->leftJoin('estates', 'appointments.id_estate', '=', 'estates.id')
+                            ->leftJoin('customers', 'appointments.id_customer', '=', 'customers.id')
+                            ->join('staffs', 'appointments.id_staff', '=', 'staffs.id')
+                            ->select('appointments.id', 'appointments_types.id as apptmt_type_id', 'appointments.scheduled_at', 'appointments_types.appointment_type', 'appointments.notes', 'estates.address', 'estates.city', 'estates.zipcode', 'estates.reference', 'estates.title', 'estates.id as id_estate', 'appointments.id_customer' ,'customers.lastname as customerLastname', 'customers.firstname as customerFirstname', 'appointments.id_staff', 'staffs.lastname as staffLastname', 'staffs.firstname as staffFirstname')
+                            ->findOrFail($appointment_id);
     }
 
     /**
@@ -102,8 +122,8 @@ class AppointmentsController extends Controller
      *      operationId="getAppointmentCustomer",
      *      tags={"Appointments"},
      *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\Response( 
-     *          response=200, 
+     *      @OA\Response(
+     *          response=200,
      *          description="Successful operation",
      *          @OA\JsonContent(
      *              type="array",
@@ -116,12 +136,16 @@ class AppointmentsController extends Controller
      *      @OA\Response(response="404", ref="#/components/responses/404"),
      *      @OA\Response(response="default", ref="#/components/responses/default"),
      *  )
-     * 
+     *
      * @param $customer_id
      * @return mixed
      */
     public function showCustomerAppointment($customer_id) {
-        return Appointments::where('id_customer', $customer_id)->get();
+        return Appointments::leftJoin('appointments_types', 'appointments.id_appointment_type', '=', 'appointments_types.id')
+                            ->join('staffs', 'appointments.id_staff', '=', 'staffs.id')
+                            ->join('customers', 'customers.id' , '=', 'appointments.id_customer')
+                            ->select('appointments.id', 'appointments_types.id as id_appointment_type', 'appointments.scheduled_at', 'appointments_types.appointment_type', 'appointments.id_customer as id_customer' ,'customers.lastname as customerLastname', 'customers.firstname as customerFirstname', 'appointments.id_staff as id_staff', 'staffs.lastname as staffLastname', 'staffs.firstname as staffFirstname')
+                            ->findOrFail($customer_id);
     }
 
     /**
@@ -135,8 +159,8 @@ class AppointmentsController extends Controller
      *      operationId="getAppointmentStaff",
      *      tags={"Appointments"},
      *      @OA\Parameter(ref="#/components/parameters/id"),
-     *      @OA\Response( 
-     *          response=200, 
+     *      @OA\Response(
+     *          response=200,
      *          description="Successful operation",
      *          @OA\JsonContent(
      *              type="array",
@@ -149,7 +173,7 @@ class AppointmentsController extends Controller
      *      @OA\Response(response="404", ref="#/components/responses/404"),
      *      @OA\Response(response="default", ref="#/components/responses/default"),
      *  )
-     * 
+     *
      * @param $staff_id
      * @return mixed
      */
@@ -157,7 +181,7 @@ class AppointmentsController extends Controller
         return Appointments::where('id_staff', $staff_id)->get();
     }
 
-    /** 
+    /**
      * @OA\Post(
      *     path="/schedule/createAppt",
      *     security={
@@ -181,20 +205,21 @@ class AppointmentsController extends Controller
      *     @OA\Response(response="403", ref="#/components/responses/403"),
      *     @OA\Response(response="default", ref="#/components/responses/default"),
      * )
-     * 
+     *
      * @param Request $request
      * @return array
      * @throws ValidationException
      */
     public function createAppointment(Request $request): array
     {
+
         $validated = $this->validation($request);
         Appointments::create([
             'notes' => $validated['notes'],
             'scheduled_at' => $validated['scheduled_at'],
-            'id_estate' => $validated['id_estate'],
+            'id_estate' => $request['id_estate'] !== "" ? $validated['id_estate'] : null,
             'id_staff' => $validated['id_staff'],
-            'id_customer' => $validated['id_customer'],
+            'id_customer' => $request['id_customer'] !== "" ? $validated['id_customer'] : null,
             'id_appointment_type' => $validated['id_appointment_type']
         ]);
 
@@ -227,7 +252,7 @@ class AppointmentsController extends Controller
      *      @OA\Response(response="404", ref="#/components/responses/404"),
      *      @OA\Response(response="default", ref="#/components/responses/default"),
      * )
-     * 
+     *
      * @param $appointment_id
      * @param Request $request
      * @return mixed
@@ -236,6 +261,7 @@ class AppointmentsController extends Controller
     public function updateAppointment($appointment_id, Request $request) {
         $appointments = Appointments::findOrFail($appointment_id);
         $validated = $this->validation($request);
+
 
         //validation à ajouter
         $appointments->update($request->all());
@@ -269,6 +295,58 @@ class AppointmentsController extends Controller
      */
     public function deleteAppointment($appointment_id) {
         return Appointments::find($appointment_id)->delete();
+    }
+
+    /**
+     * showCurrentDayAptmts
+     *
+     * @return void
+     */
+    public function showCurrentDayAptmts() {
+        $date = Carbon::now()->toDateString();
+        return Appointments::join('appointments_types', 'appointments.id_appointment_type', '=', 'appointments_types.id')
+                            ->join('estates', 'appointments.id_estate', '=', 'estates.id')
+                            ->join('customers', 'appointments.id_customer', '=', 'customers.id')
+                            ->join('staffs', 'appointments.id_staff', '=', 'staffs.id')
+                            ->select('appointments.id', 'appointments.scheduled_at', 'appointments_types.appointment_type', 'estates.address', 'estates.city', 'estates.zipcode', 'appointments.id_customer' ,'customers.lastname as customerLastname', 'customers.firstname as customerFirstname', 'appointments.id_staff', 'staffs.lastname as staffLastname', 'staffs.firstname as staffFirstname')
+                            ->whereDate('appointments.scheduled_at', '=', $date)
+                            ->get();
+    }
+
+    /**
+     * showCurrentDayStaffAptmts
+     *
+     * @param  mixed $staff_id
+     * @return void
+     */
+    public function showCurrentDayStaffAptmts($staff_id) {
+        $date = Carbon::now()->toDateString();
+        return Appointments::leftJoin('appointments_types', 'appointments.id_appointment_type', '=', 'appointments_types.id')
+                            ->leftJoin('estates', 'appointments.id_estate', '=', 'estates.id')
+                            ->leftJoin('customers', 'appointments.id_customer', '=', 'customers.id')
+                            ->join('staffs', 'appointments.id_staff', '=', 'staffs.id')
+                            ->select('appointments.id', 'appointments.scheduled_at', 'appointments_types.appointment_type', 'estates.address', 'estates.city', 'estates.zipcode', 'appointments.id_customer', 'customers.lastname as customerLastname', 'customers.firstname as customerFirstname', 'appointments.id_staff', 'staffs.lastname as staffLastname', 'staffs.firstname as staffFirstname')
+                            ->whereDate('appointments.scheduled_at', '=', $date)
+                            ->where('appointments.id_staff', '=', $staff_id)
+                            ->get();
+    }
+
+    /**
+     * showCurrentDayCustomerAptmts
+     *
+     * @param  mixed $customer_id
+     * @return void
+     */
+    public function showCurrentDayCustomerAptmts($customer_id) {
+        $date = Carbon::now()->toDateString();
+        return Appointments::leftJoin('appointments_types', 'appointments.id_appointment_type', '=', 'appointments_types.id')
+                            ->leftJoin('estates', 'appointments.id_estate', '=', 'estates.id')
+                            ->leftJoin('customers', 'appointments.id_customer', '=', 'customers.id')
+                            ->join('staffs', 'appointments.id_staff', '=', 'staffs.id')
+                            ->select('appointments.id', 'appointments.scheduled_at', 'appointments_types.appointment_type', 'estates.address', 'estates.city', 'estates.zipcode', 'appointments.id_customer' ,'customers.lastname as customerLastname', 'customers.firstname as customerFirstname', 'appointments.id_staff', 'staffs.lastname as staffLastname', 'staffs.firstname as staffFirstname')
+                            ->whereDate('appointments.scheduled_at', '=', $date)
+                            ->where('appointments.id_customer', '=', $customer_id)
+                            ->get();
     }
 
 }

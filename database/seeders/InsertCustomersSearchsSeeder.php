@@ -30,6 +30,7 @@ class InsertCustomersSearchsSeeder extends Seeder
                 'alert' => true,
                 'id_customer' => 1,
                 'id_estate_type' => 2,
+                'city' => 'Amiens'
             ],
             [
                 'id' => 2,
@@ -46,6 +47,7 @@ class InsertCustomersSearchsSeeder extends Seeder
                 'alert' => true,
                 'id_customer' => 2,
                 'id_estate_type' => 1,
+                'city' => 'Amiens'
             ],
         ]);
     }
