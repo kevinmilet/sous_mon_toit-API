@@ -30,7 +30,7 @@ class DescribesCustomersTypesController extends Controller{
      *      @OA\Response(response="403", ref="#/components/responses/403"),
      *      @OA\Response(response="default", ref="#/components/responses/default"),
      * )
-     *
+     *@return JsonResponse
      * @return DescribesCustomersTypes[]|Collection
      */
     public function getTypesForCustomer($id, Request $request): array {

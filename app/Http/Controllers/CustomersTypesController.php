@@ -44,7 +44,7 @@ class CustomersTypesController extends Controller{
      */
     public function selectOneCustomerType($id): JsonResponse
     {
-        $customerType=  CustomersTypes::find($id);
+        $customerType =  CustomersTypes::find($id);
         return response()->json($customerType);
     }
 

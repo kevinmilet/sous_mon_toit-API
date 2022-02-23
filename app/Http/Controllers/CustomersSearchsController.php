@@ -56,7 +56,9 @@ class CustomersSearchsController extends Controller
      */
     public function selectAllCustomersSearchsForCustomer($id_customer): JsonResponse
     {
-        return response()->json(CustomersSearchs::where('id_customer', $id_customer)->get());
+        return response()->json(CustomersSearchs::where('id_customer', $id_customer)
+        ->join('estates_types', 'estates_types.id', '=', 'customers_searchs.id_estate_type')
+        ->get());
     }
 
     /**
