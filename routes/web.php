@@ -38,7 +38,7 @@ $router->group(['prefix' => 'estates'], function () use ($router) {
     $router->get('/{id}', 'EstatesController@selectOneEstate'); // /estates/{id}
     $router->group(['middleware' => 'auth:staff'], function() use ($router) {
         $router->post('/create', 'EstatesController@create'); // /estates/create/{id}
-        $router->put('/update/{id}', 'EstatesController@update'); // /estates/update/{id}
+        $router->put('/update/{id}/{typeUpdate}', 'EstatesController@update'); // /estates/update/{id}
         $router->delete('/delete/{id}', 'EstatesController@delete'); // /estates/delete/{id}
     });
 });

@@ -238,7 +238,7 @@ class Estates extends Model implements AuthenticatableContract, AuthorizableCont
         'living_surface',
         'carrez_law',
         'land_surface',
-        'nd_rooms',
+        'nb_rooms',
         'nb_bedrooms',
         'nb_bathrooms',
         'nb_sanitary',
