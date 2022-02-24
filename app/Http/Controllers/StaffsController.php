@@ -223,7 +223,6 @@ class StaffsController extends Controller
      */
     public function update($id, Request $request)
     {
-        // TODO à modifier pour update (voir exemple dans appointements)
         $staff = Staffs::findOrFail($id);
 
         $firstname = $staff['firstname'];
@@ -232,12 +231,18 @@ class StaffsController extends Controller
         $mail = $staff['mail'];
         $phone = $staff['phone'];
         $password = $staff['password'];
-        $avatar = $staff['avatar'];
         $alert_reader = $staff['alert_reader'];
         $idFunction = $staff['id_function'];
         $idRole = $staff['id_role'];
 
-        // $validated = $this->validation($request);
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $name = uniqid('avatar_') . '.' . $avatar->guessExtension();
+            $destinationPath = storage_path('/app/public/pictures/avatars/');
+            $avatar->move($destinationPath, $name);
+        } else {
+            $name = $staff['avatar'];
+        }
 
         if (isset($request['firstname'])) {
             if ($request['firstname']) {
@@ -294,15 +299,32 @@ class StaffsController extends Controller
             }
         }
 
+        try {
+            if (isset($request['password']) && isset($request['pwdConf'])) {
+                if (
+                    ($request['password'] && $request['pwdConf'])
+                    && ($request['password'] === $request['pwdConf'])) {
+                    if ($this->validate($request, [
+                        'password' => 'string|regex:/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%&?,;:#()<>\'.\/\\_éèàùûêâôöëç ])([-+!*$@%&.,;:#()<>\'.\/\\_éèàùûêâôöëç \w]{8,})$/'
+                    ])) {
+                        $passwordHash = password_hash($request['password'], PASSWORD_DEFAULT);
+                    }
+                }
+            }
+        } catch (Exception $e) {
+            throw new Exception('Le mot de passe n\'a pas été changé', $e->getMessage());
+        }
+
         $staff->update([
             'firstname' => $firstname,
             'lastname' => $lastname,
             'login' => $login,
             'mail' => $mail,
-            'avatar' => $avatar,
+            'avatar' => $name,
             'id_function' => $idFunction,
             'id_role' => $idRole,
-            'phone' => $phone
+            'phone' => $phone,
+            'password' => $passwordHash,
         ]);
 
         return $staff;
