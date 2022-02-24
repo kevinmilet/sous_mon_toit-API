@@ -74,7 +74,7 @@ $router->group(['prefix' => 'staff'], function () use ($router) {
     $router->get('/{id}', 'StaffsController@getOneById'); // /staff/{id}
     $router->group(['middleware' => 'auth:staff'], function() use ($router) {
         $router->post('create', 'StaffsController@create'); // /staff/create
-        $router->put('/update/{id}', 'StaffsController@update'); // /staff/update/{id}
+        $router->post('/update/{id}', 'StaffsController@update'); // /staff/update/{id}
         $router->delete('/delete/{id}', 'StaffsController@delete'); // /staff/delete/{id}
     });
 });

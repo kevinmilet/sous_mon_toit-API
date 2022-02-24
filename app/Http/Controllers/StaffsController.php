@@ -230,18 +230,19 @@ class StaffsController extends Controller
         $login = $staff['login'];
         $mail = $staff['mail'];
         $phone = $staff['phone'];
-        $password = $staff['password'];
-        $alert_reader = $staff['alert_reader'];
         $idFunction = $staff['id_function'];
         $idRole = $staff['id_role'];
 
-        if ($request->hasFile('avatar')) {
-            $avatar = $request->file('avatar');
-            $name = uniqid('avatar_') . '.' . $avatar->guessExtension();
-            $destinationPath = storage_path('/app/public/pictures/avatars/');
-            $avatar->move($destinationPath, $name);
-        } else {
-            $name = $staff['avatar'];
+
+        try {
+            if ($request->hasFile('file')) {
+                $avatar = $request->file('file');
+                $name = uniqid('avatar_') . '.' . $avatar->guessExtension();
+                $destinationPath = storage_path('/app/public/pictures/avatars/');
+                $avatar->move($destinationPath, $name);
+            }
+        } catch (Exception $e) {
+            throw new Exception('La modification de la photo de profil a échouée', $e->getMessage());
         }
 
         if (isset($request['firstname'])) {
@@ -315,17 +316,30 @@ class StaffsController extends Controller
             throw new Exception('Le mot de passe n\'a pas été changé', $e->getMessage());
         }
 
-        $staff->update([
-            'firstname' => $firstname,
-            'lastname' => $lastname,
-            'login' => $login,
-            'mail' => $mail,
-            'avatar' => $name,
-            'id_function' => $idFunction,
-            'id_role' => $idRole,
-            'phone' => $phone,
-            'password' => $passwordHash,
-        ]);
+        if (isset($passwordHash)) {
+            $staff->update([
+                'firstname' => $firstname,
+                'lastname' => $lastname,
+                'login' => $login,
+                'mail' => $mail,
+                'avatar' => $name ?? $staff['avatar'],
+                'id_function' => $idFunction,
+                'id_role' => $idRole,
+                'phone' => $phone,
+                'password' => $passwordHash,
+            ]);
+        } else {
+            $staff->update([
+                'firstname' => $firstname,
+                'lastname' => $lastname,
+                'login' => $login,
+                'mail' => $mail,
+                'avatar' => $name ?? $staff['avatar'],
+                'id_function' => $idFunction,
+                'id_role' => $idRole,
+                'phone' => $phone,
+            ]);
+        }
 
         return $staff;
     }
