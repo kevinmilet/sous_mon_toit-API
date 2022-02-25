@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 use Laravel\Lumen\Http\ResponseFactory;
+use Illuminate\Support\Facades\File;
+
 
 class StaffsController extends Controller
 {
@@ -228,21 +230,33 @@ class StaffsController extends Controller
         $firstname = $staff['firstname'];
         $lastname = $staff['lastname'];
         $login = $staff['login'];
-        $mail = $staff['mail'];
+        $currentMail = $staff['mail'];
         $phone = $staff['phone'];
         $idFunction = $staff['id_function'];
         $idRole = $staff['id_role'];
+        $oldAvatar = $staff['avatar'];
 
+        $newMail = '';
 
-        try {
-            if ($request->hasFile('file')) {
+        if ($request->hasFile('file')) {
+            try {
                 $avatar = $request->file('file');
                 $name = uniqid('avatar_') . '.' . $avatar->guessExtension();
                 $destinationPath = storage_path('/app/public/pictures/avatars/');
                 $avatar->move($destinationPath, $name);
+
+                // Suppression ancienne photo de profil
+                File::delete($destinationPath . $oldAvatar);
+
+                $staff->update([
+                    'avatar' => $name,
+                ]);
+
+                return response('La photo de profil a bien été modifiée', 200);
+
+            } catch (Exception $e) {
+                throw new Exception('La modification de la photo de profil a échouée', $e->getMessage());
             }
-        } catch (Exception $e) {
-            throw new Exception('La modification de la photo de profil a échouée', $e->getMessage());
         }
 
         if (isset($request['firstname'])) {
@@ -290,18 +304,23 @@ class StaffsController extends Controller
                 }
             }
         }
+
         if (isset($request['mail'])) {
-            if ($request['mail'] !== $mail) {
-                if ($this->validate($request,[
-                    'mail' => 'email|unique:App\Models\Staffs,mail|required'
-                ])) {
-                    $mail = $request['mail'];
+            try {
+                if ($request['mail'] !== $currentMail) {
+                    if ($this->validate($request,[
+                        'mail' => 'email|unique:App\Models\Staffs,mail|required'
+                        ])) {
+                            $newMail = $request['mail'];
+                        }
                 }
+            } catch (Exception $e) {
+                throw new Exception('Cet email est déjà utilisé', $e->getMessage());
             }
         }
 
-        try {
-            if (isset($request['password']) && isset($request['pwdConf'])) {
+        if (isset($request['password']) && isset($request['pwdConf'])) {
+            try {
                 if (
                     ($request['password'] && $request['pwdConf'])
                     && ($request['password'] === $request['pwdConf'])) {
@@ -311,38 +330,64 @@ class StaffsController extends Controller
                         $passwordHash = password_hash($request['password'], PASSWORD_DEFAULT);
                     }
                 }
+            } catch (Exception $e) {
+                throw new Exception('Le mot de passe n\'a pas été changé', $e->getMessage());
             }
-        } catch (Exception $e) {
-            throw new Exception('Le mot de passe n\'a pas été changé', $e->getMessage());
         }
 
-        if (isset($passwordHash)) {
-            $staff->update([
-                'firstname' => $firstname,
-                'lastname' => $lastname,
-                'login' => $login,
-                'mail' => $mail,
-                'avatar' => $name ?? $staff['avatar'],
-                'id_function' => $idFunction,
-                'id_role' => $idRole,
-                'phone' => $phone,
-                'password' => $passwordHash,
-            ]);
+        if (!empty($newMail)) {
+            if (isset($passwordHash)) {
+                $staff->update([
+                    'firstname' => $firstname,
+                    'lastname' => $lastname,
+                    'login' => $login,
+                    'mail' => $newMail,
+                    'avatar' => $name ?? $staff['avatar'],
+                    'id_function' => $idFunction,
+                    'id_role' => $idRole,
+                    'phone' => $phone,
+                    'password' => $passwordHash,
+                ]);
+            } else {
+                $staff->update([
+                    'firstname' => $firstname,
+                    'lastname' => $lastname,
+                    'login' => $login,
+                    'mail' => $newMail,
+                    'avatar' => $name ?? $staff['avatar'],
+                    'id_function' => $idFunction,
+                    'id_role' => $idRole,
+                    'phone' => $phone,
+                ]);
+            }
         } else {
-            $staff->update([
-                'firstname' => $firstname,
-                'lastname' => $lastname,
-                'login' => $login,
-                'mail' => $mail,
-                'avatar' => $name ?? $staff['avatar'],
-                'id_function' => $idFunction,
-                'id_role' => $idRole,
-                'phone' => $phone,
-            ]);
+            if (isset($passwordHash)) {
+                $staff->update([
+                    'firstname' => $firstname,
+                    'lastname' => $lastname,
+                    'login' => $login,
+                    'avatar' => $name ?? $staff['avatar'],
+                    'id_function' => $idFunction,
+                    'id_role' => $idRole,
+                    'phone' => $phone,
+                    'password' => $passwordHash,
+                ]);
+            } else {
+                $staff->update([
+                    'firstname' => $firstname,
+                    'lastname' => $lastname,
+                    'login' => $login,
+                    'avatar' => $name ?? $staff['avatar'],
+                    'id_function' => $idFunction,
+                    'id_role' => $idRole,
+                    'phone' => $phone,
+                ]);
+            }
         }
 
         return $staff;
     }
+
 
     public function getFunctionForStaff($id, Request $request): array
     {

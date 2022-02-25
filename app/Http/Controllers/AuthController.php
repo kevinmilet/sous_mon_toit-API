@@ -6,6 +6,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
@@ -137,7 +138,7 @@ class AuthController extends Controller
         config('auth.guard.defaults', 'staff');
 
         if (!$token = auth()->guard('staff')->attempt($credentials)) {
-            return response()->json(['message' => 'Unauthorized'], 401);
+            return response()->json(['message' => 'Wrong login or password'], 401);
         }
 
         $user = auth('staff')->user();
@@ -163,9 +164,9 @@ class AuthController extends Controller
     public function refresh()
     {
         $user = Auth::user();
-        return $this->respondWithToken(auth()->refresh(),$user);
+        return $this->respondWithToken(auth()->refresh(), $user);
     }
-    
+
     /**
      * Log the user out (Invalidate the token).
      *
