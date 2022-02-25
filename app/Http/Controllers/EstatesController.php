@@ -135,7 +135,7 @@ class EstatesController extends Controller
                     'estates.reference',
                     'estates.dpe_file',
                     'estates.buy_or_rent',
-                    'estates.address',
+                    'estates.address as estateAddress',
                     'estates.city',
                     'estates.zipcode',
                     'estates.estate_longitude',
@@ -181,7 +181,7 @@ class EstatesController extends Controller
                     'customers.phone',
                     'customers.password',
                     'customers.birthdate',
-                    'customers.address',
+                    'customers.address as custAddress',
                     'customers.first_met',
                     'customers.token',
                     'customers.password_request',
@@ -340,19 +340,27 @@ class EstatesController extends Controller
             ]);
         } else if ($typeUpdate == "info") {
             $estate->update([
-                'title' => $request['title'],
-                'id_estate_type' => $request['id_estate_type'],
-                'buy_or_rent' => $request['buy_or_rent'],
-                'price' => $request['price'],
-                'description' => $request['description'],
-                'disponibility' => $request['disponibility'],
-                'year_of_construction' => new DateTime($request['year_of_construction'] . "-01-01"),
-                'living_surface' => $request['living_surface'],
-                'carrez_law' => $request['carrez_law'],
-                'land_surface' => $request['land_surface'],
-                'property_charge' => $request['property_charge'],
-                'rental_charge' => $request['rental_charge'],
-                'coownership_charge' => $request['coownership_charge'],
+                'title' => trim($request['title']),
+                'id_estate_type' => trim($request['id_estate_type']),
+                'buy_or_rent' => trim($request['buy_or_rent']),
+                'price' => trim($request['price']),
+                'description' => trim($request['description']),
+                'disponibility' => trim($request['disponibility']),
+                'year_of_construction' => new DateTime(trim($request['year_of_construction']) . "-01-01"),
+                'living_surface' => trim($request['living_surface']),
+                'carrez_law' => trim($request['carrez_law']),
+                'land_surface' => trim($request['land_surface']),
+                'property_charge' => trim($request['property_charge']),
+                'rental_charge' => trim($request['rental_charge']),
+                'coownership_charge' => trim($request['coownership_charge']),
+            ]);
+        } else if ($typeUpdate == "loca") {
+            $estate->update([
+                'address' => $request['address'],
+                'city' => $request['city'],
+                'zipcode' => $request['zipcode'],
+                'estate_longitude' => $request['estate_longitude'],
+                'estate_latitude' => $request['estate_latitude'],
             ]);
         }
         return [$estate];
