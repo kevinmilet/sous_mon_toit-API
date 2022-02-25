@@ -98,6 +98,6 @@ class CustomersSearchs extends Model{
         'alert',
         'id_customer',
         'id_estate_type',
-        'city',
+        'city'
     ];
 }
