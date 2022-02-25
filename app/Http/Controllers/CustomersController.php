@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
+
 class CustomersController extends Controller{
 
     /**
@@ -112,10 +113,18 @@ class CustomersController extends Controller{
      */
     public function update($id, Request $request): JsonResponse
     {
-        $customer = Customers::findOrFail($id);
-        $this->validation($request);
-        $customer->update($request->all());
-        return response()->json(['success'=>'Modifications enregistrées']);
+        // var_dump($request);
+        // die;
+      
+
+      
+            $customer = Customers::findOrFail($id);
+            $this->validation($request);
+            $customer->update($request->all());
+            var_dump($customer);
+            return response()->json(['success'=>'Modifications enregistrées']);
+
+        
     }
 
     /**
