@@ -19,7 +19,8 @@ class EstatesController extends Controller
      */
     private function validation($request): array
     {
-        return $this->validate($request,
+        return $this->validate(
+            $request,
             [
                 'id_estate_type' => 'numeric|integer|required',
                 'id_customer' => 'numeric|integer|required',
@@ -30,7 +31,7 @@ class EstatesController extends Controller
                     'required',
                     'regex:/^^(achat)$|^(Achat)$|^(location)$|^(Location)$$/'
                 ),
-                'address' => 'string|required|regex:/^[a-zA-Z \'-]+/',
+                'address' => 'string|required',
                 'city' => 'string|required|regex:/^[a-zA-Z \'-]+/',
                 'zipcode' => array(
                     'string',
@@ -71,7 +72,8 @@ class EstatesController extends Controller
                 'elevator' => 'boolean|nullable',
                 'rental_charge' => 'numeric|nullable|regex:/^[0-9]+$/',
                 'coownership_charge' => 'numeric|nullable|regex:/^[0-9]+$/',
-            ]);
+            ]
+        );
     }
 
     /**
@@ -116,16 +118,79 @@ class EstatesController extends Controller
      */
     public function selectOneEstate($id): JsonResponse
     {
-        try{
+        try {
             $estate =  Estates::find($id);
 
-            if($estate == null ){
+            if ($estate == null) {
                 throw new Exception('aucun resultat');
             }
 
-            return response()->json($estate);
-
-        }catch(Exception $e){
+            $estate = Estates::leftJoin('estates_types', 'estates.id_estate_type', '=', 'estates_types.id')
+                ->leftJoin('customers', 'estates.id_customer', '=', 'customers.id')
+                ->select(
+                    'estates.id',
+                    'estates.id_customer',
+                    'estates.id_estate_type',
+                    'estates.title',
+                    'estates.reference',
+                    'estates.dpe_file',
+                    'estates.buy_or_rent',
+                    'estates.address',
+                    'estates.city',
+                    'estates.zipcode',
+                    'estates.estate_longitude',
+                    'estates.estate_latitude',
+                    'estates.price',
+                    'estates.description',
+                    'estates.disponibility',
+                    'estates.year_of_construction',
+                    'estates.living_surface',
+                    'estates.carrez_law',
+                    'estates.land_surface',
+                    'estates.nb_rooms',
+                    'estates.nb_bedrooms',
+                    'estates.nb_bathrooms',
+                    'estates.nb_sanitary',
+                    'estates.nb_toilet',
+                    'estates.nb_kitchen',
+                    'estates.nb_garage',
+                    'estates.nb_parking',
+                    'estates.nb_balcony',
+                    'estates.type_kitchen',
+                    'estates.heaters',
+                    'estates.communal_heating',
+                    'estates.furnished',
+                    'estates.private_parking',
+                    'estates.handicap_access',
+                    'estates.cellar',
+                    'estates.terrace',
+                    'estates.swimming_pool',
+                    'estates.fireplace',
+                    'estates.all_in_sewer',
+                    'estates.septik_tank',
+                    'estates.property_charge',
+                    'estates.attic',
+                    'estates.elevator',
+                    'estates.rental_charge',
+                    'estates.coownership_charge',
+                    'customers.n_customer',
+                    'customers.firstname',
+                    'customers.lastname',
+                    'customers.gender',
+                    'customers.mail',
+                    'customers.phone',
+                    'customers.password',
+                    'customers.birthdate',
+                    'customers.address',
+                    'customers.first_met',
+                    'customers.token',
+                    'customers.password_request',
+                    'estates_types.estate_type_name',
+                )
+                ->where('estates.id', '=', $id)
+                ->get();
+            return response()->json($estate[0]);
+        } catch (Exception $e) {
             return response()->json($e->getMessage());
         }
     }
@@ -154,7 +219,7 @@ class EstatesController extends Controller
             'id_estate_type' => $validated['id_estate_type'],
             'id_customer' => $validated['id_customer'],
             'title' => $validated['title'],
-            'reference' => 'SMT'.substr(time(), 5, 9),
+            'reference' => 'SMT' . substr(time(), 5, 9),
             // 'dpe_file' => $validated['dpe_file'],
             'buy_or_rent' => $validated['buy_or_rent'],
             'address' => $validated['address'],
@@ -204,44 +269,92 @@ class EstatesController extends Controller
      * @param Request $request
      * @return array
      */
-    public function update($id, Request $request): array
+    public function update($id, $typeUpdate, Request $request): array
     {
+        // var_dump($request['price']);
         $estate = Estates::findOrFail($id);
-        $estate->update([
-            'price' => $request['price'],
-            'description' => $request['description'],
-            'disponibility' => $request['disponibility'],
-            'year_of_construction' => new DateTime( $request['year_of_construction'] . "-01-01"),
-            'living_surface' => $request['living_surface'],
-            'carrez_law' => $request['carrez_law'],
-            'land_surface' => $request['land_surface'],
-            'nb_rooms' => $request['nb_rooms'],
-            'nb_bedrooms' => $request['nb_bedrooms'],
-            'nb_bathrooms' => $request['nb_bathrooms'],
-            'nb_sanitary' => $request['nb_sanitary'],
-            'nb_toilet' => $request['nb_toilet'],
-            'nb_kitchen' => $request['nb_kitchen'],
-            'nb_garage' => $request['nb_garage'],
-            'nb_parking' => $request['nb_parking'],
-            'nb_balcony' => $request['nb_balcony'],
-            'type_kitchen' => $request['type_kitchen'],
-            'heaters' => $request['heaters'],
-            'communal_heating' => $request['communal_heating'],
-            'furnished' => $request['furnished'],
-            'private_parking' => $request['private_parking'],
-            'handicap_access' => $request['handicap_access'],
-            'cellar' => $request['cellar'],
-            'terrace' => $request['terrace'],
-            'swimming_pool' => $request['swimming_pool'],
-            'fireplace' => $request['fireplace'],
-            'all_in_sewer' => $request['all_in_sewer'],
-            'septik_tank' => $request['septik_tank'],
-            'property_charge' => $request['property_charge'],
-            'attic' => $request['attic'],
-            'elevator' => $request['elevator'],
-            'rental_charge' => $request['rental_charge'],
-            'coownership_charge' => $request['coownership_charge'],
-        ]);
+        if ($typeUpdate == "step3") {
+            $estate->update([
+                'price' => $request['price'],
+                'description' => $request['description'],
+                'disponibility' => $request['disponibility'],
+                'year_of_construction' => new DateTime($request['year_of_construction'] . "-01-01"),
+                'living_surface' => $request['living_surface'],
+                'carrez_law' => $request['carrez_law'],
+                'land_surface' => $request['land_surface'],
+                'nb_rooms' => $request['nb_rooms'],
+                'nb_bedrooms' => $request['nb_bedrooms'],
+                'nb_bathrooms' => $request['nb_bathrooms'],
+                'nb_sanitary' => $request['nb_sanitary'],
+                'nb_toilet' => $request['nb_toilet'],
+                'nb_kitchen' => $request['nb_kitchen'],
+                'nb_garage' => $request['nb_garage'],
+                'nb_parking' => $request['nb_parking'],
+                'nb_balcony' => $request['nb_balcony'],
+                'type_kitchen' => $request['type_kitchen'],
+                'heaters' => $request['heaters'],
+                'communal_heating' => $request['communal_heating'],
+                'furnished' => $request['furnished'],
+                'private_parking' => $request['private_parking'],
+                'handicap_access' => $request['handicap_access'],
+                'cellar' => $request['cellar'],
+                'terrace' => $request['terrace'],
+                'swimming_pool' => $request['swimming_pool'],
+                'fireplace' => $request['fireplace'],
+                'all_in_sewer' => $request['all_in_sewer'],
+                'septik_tank' => $request['septik_tank'],
+                'property_charge' => $request['property_charge'],
+                'attic' => $request['attic'],
+                'elevator' => $request['elevator'],
+                'rental_charge' => $request['rental_charge'],
+                'coownership_charge' => $request['coownership_charge'],
+            ]);
+        } else if ($typeUpdate == "equipment") {
+            $estate->update([
+                'communal_heating' => $request['communal_heating'],
+                'furnished' => $request['furnished'],
+                'private_parking' => $request['private_parking'],
+                'handicap_access' => $request['handicap_access'],
+                'cellar' => $request['cellar'],
+                'terrace' => $request['terrace'],
+                'swimming_pool' => $request['swimming_pool'],
+                'fireplace' => $request['fireplace'],
+                'all_in_sewer' => $request['all_in_sewer'],
+                'septik_tank' => $request['septik_tank'],
+                'attic' => $request['attic'],
+                'elevator' => $request['elevator'],
+            ]);
+        } else if ($typeUpdate == "caract") {
+            $estate->update([
+                'nb_rooms' => $request['nb_rooms'],
+                'nb_bedrooms' => $request['nb_bedrooms'],
+                'nb_bathrooms' => $request['nb_bathrooms'],
+                'nb_sanitary' => $request['nb_sanitary'],
+                'nb_toilet' => $request['nb_toilet'],
+                'nb_kitchen' => $request['nb_kitchen'],
+                'nb_garage' => $request['nb_garage'],
+                'nb_parking' => $request['nb_parking'],
+                'nb_balcony' => $request['nb_balcony'],
+                'type_kitchen' => $request['type_kitchen'],
+                'heaters' => $request['heaters'],
+            ]);
+        } else if ($typeUpdate == "info") {
+            $estate->update([
+                'title' => $request['title'],
+                'id_estate_type' => $request['id_estate_type'],
+                'buy_or_rent' => $request['buy_or_rent'],
+                'price' => $request['price'],
+                'description' => $request['description'],
+                'disponibility' => $request['disponibility'],
+                'year_of_construction' => new DateTime($request['year_of_construction'] . "-01-01"),
+                'living_surface' => $request['living_surface'],
+                'carrez_law' => $request['carrez_law'],
+                'land_surface' => $request['land_surface'],
+                'property_charge' => $request['property_charge'],
+                'rental_charge' => $request['rental_charge'],
+                'coownership_charge' => $request['coownership_charge'],
+            ]);
+        }
         return [$estate];
     }
 
@@ -258,8 +371,9 @@ class EstatesController extends Controller
      * @param $value
      * @return mixed
      */
-    public function searchEstates($value) {
-        $value = '%'.$value.'%';
+    public function searchEstates($value)
+    {
+        $value = '%' . $value . '%';
         return Estates::where('title', 'like', $value)
             ->orWhere('reference', 'like', $value)
             ->orWhere('address', 'like', $value)
