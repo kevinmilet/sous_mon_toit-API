@@ -19,7 +19,8 @@ class EstatesController extends Controller
      */
     private function validation($request): array
     {
-        return $this->validate($request,
+        return $this->validate(
+            $request,
             [
                 'id_estate_type' => 'numeric|integer|required',
                 'id_customer' => 'numeric|integer|required',
@@ -71,7 +72,8 @@ class EstatesController extends Controller
                 'elevator' => 'boolean|nullable',
                 'rental_charge' => 'numeric|nullable|regex:/^[0-9]+$/',
                 'coownership_charge' => 'numeric|nullable|regex:/^[0-9]+$/',
-            ]);
+            ]
+        );
     }
 
     /**
@@ -116,16 +118,15 @@ class EstatesController extends Controller
      */
     public function selectOneEstate($id): JsonResponse
     {
-        try{
+        try {
             $estate =  Estates::find($id);
 
-            if($estate == null ){
+            if ($estate == null) {
                 throw new Exception('aucun resultat');
             }
 
             return response()->json($estate);
-
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return response()->json($e->getMessage());
         }
     }
@@ -154,7 +155,7 @@ class EstatesController extends Controller
             'id_estate_type' => $validated['id_estate_type'],
             'id_customer' => $validated['id_customer'],
             'title' => $validated['title'],
-            'reference' => 'SMT'.substr(time(), 5, 9),
+            'reference' => 'SMT' . substr(time(), 5, 9),
             // 'dpe_file' => $validated['dpe_file'],
             'buy_or_rent' => $validated['buy_or_rent'],
             'address' => $validated['address'],
@@ -211,7 +212,7 @@ class EstatesController extends Controller
             'price' => $request['price'],
             'description' => $request['description'],
             'disponibility' => $request['disponibility'],
-            'year_of_construction' => new DateTime( $request['year_of_construction'] . "-01-01"),
+            'year_of_construction' => new DateTime($request['year_of_construction'] . "-01-01"),
             'living_surface' => $request['living_surface'],
             'carrez_law' => $request['carrez_law'],
             'land_surface' => $request['land_surface'],
@@ -250,7 +251,7 @@ class EstatesController extends Controller
      */
     public function randomEstates(): JsonResponse
     {
-        $estatesRnd = Estates::join('pictures', 'estates.id', '=', 'pictures.id_estate')->select('*')->random(3);
+        $estatesRnd = Estates::join('pictures', 'estates.id', '=', 'pictures.id_estate')->inRandomOrder()->limit(3)->get();
         return response()->json($estatesRnd);
     }
 
@@ -258,8 +259,9 @@ class EstatesController extends Controller
      * @param $value
      * @return mixed
      */
-    public function searchEstates($value) {
-        $value = '%'.$value.'%';
+    public function searchEstates($value)
+    {
+        $value = '%' . $value . '%';
         return Estates::where('title', 'like', $value)
             ->orWhere('reference', 'like', $value)
             ->orWhere('address', 'like', $value)
