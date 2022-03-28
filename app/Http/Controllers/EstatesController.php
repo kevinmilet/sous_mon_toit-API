@@ -371,7 +371,7 @@ class EstatesController extends Controller
      */
     public function randomEstates(): JsonResponse
     {
-        $estatesRnd = Estates::join('pictures', 'estates.id', '=', 'pictures.id_estate')->select('*')->random(3);
+        $estatesRnd = Estates::join('pictures', 'estates.id', '=', 'pictures.id_estate')->inRandomOrder()->limit(3)->get();
         return response()->json($estatesRnd);
     }
 
