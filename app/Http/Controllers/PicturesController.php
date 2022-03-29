@@ -20,11 +20,13 @@ class PicturesController extends Controller
      */
     private function validation($request): array
     {
-        return $this->validate($request,
+        return $this->validate(
+            $request,
             [
                 'name' => 'image|mimes:jpeg,jpg,png|max:2048',
                 'cover' => '',
-            ]);
+            ]
+        );
     }
 
     /**
@@ -57,7 +59,7 @@ class PicturesController extends Controller
         try {
             // $validated = $this->validation($request);
             if ($request->hasFile('fileCover')) {
-                //Enregistrement de l'image dans le storage 
+                //Enregistrement de l'image dans le storage
                 $img = $request->file('fileCover');
                 $name = uniqid('estate_id_' . $id_estate . '_') . '.' . $img->getClientOriginalExtension();
                 $altAttribute = Estates::find($id_estate)->title . ' - ' . Estates::find($id_estate)->reference . ' - ' . time();
@@ -67,13 +69,13 @@ class PicturesController extends Controller
                 //Enregistrement en base
                 $picture = new Pictures;
                 $picture->create([
-                    'folder' => '/estates',
+                    'folder' => '/estates/',
                     'name' => $name,
                     'cover' => 1,
                     'alt' => $altAttribute,
                     'id_estate' => $id_estate
                 ]);
-            } 
+            }
 
             if ($request->hasFile('file1')) {
                 $img = $request->file('file1');
@@ -90,7 +92,7 @@ class PicturesController extends Controller
                     'alt' => $altAttribute,
                     'id_estate' => $id_estate
                 ]);
-            } 
+            }
 
             if ($request->hasFile('file2')) {
                 $img = $request->file('file2');
@@ -124,7 +126,7 @@ class PicturesController extends Controller
                     'alt' => $altAttribute,
                     'id_estate' => $id_estate
                 ]);
-            } 
+            }
 
             return response('La ou les images ont bien étaient uploadées', 200);
         } catch (Exception $e) {
@@ -133,8 +135,7 @@ class PicturesController extends Controller
     }
 
     /**
-     * @param $id_estate
-     * @param $id
+     * @param $id_picture
      * @return Response|ResponseFactory
      */
     public function delete($id_picture)
@@ -144,13 +145,12 @@ class PicturesController extends Controller
 
                 $path = storage_path('/app/public/pictures/estates/');
                 $filename = Pictures::findOrFail($id_picture)->name;
-                // Suppression du fichier 
+                // Suppression du fichier
                 File::delete($path . $filename);
                 // Supression de l'image en base de données
                 Pictures::findOrFail($id_picture)->delete();
 
                 return response('Image "' . $filename . '" supprimée avec succès', 200);
-
             } catch (Exception $e) {
                 throw new Exception('Suppression de l\image impossible. ' . $e->getMessage());
             }
