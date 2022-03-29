@@ -346,7 +346,7 @@ class EstatesController extends Controller
                 'price' => trim($request['price']),
                 'description' => trim($request['description']),
                 'disponibility' => trim($request['disponibility']),
-                'year_of_construction' => new DateTime(trim($request['year_of_construction']) . "-01-01"),
+                'year_of_construction' => new DateTime($request['year_of_construction'] . "-01-01"),
                 'living_surface' => trim($request['living_surface']),
                 'carrez_law' => trim($request['carrez_law']),
                 'land_surface' => trim($request['land_surface']),

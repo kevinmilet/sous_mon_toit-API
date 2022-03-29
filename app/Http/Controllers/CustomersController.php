@@ -66,7 +66,7 @@ class CustomersController extends Controller{
             'lastname' => 'string|required|regex:/^[a-zA-Z \'-]+$/',
             'gender' => 'required|string|regex:/^[HF]$/',
             'mail' => 'string|email|unique:customers',
-            'phone' => 'string|min:10|max:15|required|regex:/^[0-9 -\/\.]+$/',
+            'phone' => 'string|min:10|max:15|regex:/^[0-9 -\/\.]+$/',
             'password' => 'string|regex:/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%&?,;:#()<>\'.\/\\_éèàùûêâôöëç ])([-+!*$@%&.,;:#()<>\'.\/\\_éèàùûêâôöëç \w]{8,})$/',
             'birthdate' => 'date',
             'address' => 'string|regex:/^[0-9A-Za-zéèàùûêâôöëç \'\-]+$/',

@@ -162,7 +162,7 @@ $router->group(['prefix' => 'estates_pictures'], function () use ($router) {
     $router->get('/{id_estate}', 'PicturesController@getEstatePictures');
     $router->get('/cover/{id_estate}', 'PicturesController@getEstateCover');
     $router->group(['middleware' => 'auth:staff'], function() use ($router) {
-        $router->delete('delete/{id_estate}/{id}', 'PicturesController@delete');
+        $router->delete('delete/{id_picture}', 'PicturesController@delete');
         $router->delete('delete_all/{id_estate}', 'PicturesController@deleteAll');
         $router->post('upload/{id_estate}', 'PicturesController@uploadPicture');
     });

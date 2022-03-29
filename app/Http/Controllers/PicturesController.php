@@ -133,8 +133,7 @@ class PicturesController extends Controller
     }
 
     /**
-     * @param $id_estate
-     * @param $id
+     * @param $id_picture
      * @return Response|ResponseFactory
      */
     public function delete($id_picture)
