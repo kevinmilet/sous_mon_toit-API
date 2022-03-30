@@ -86,7 +86,7 @@ class PicturesController extends Controller
 
                 $picture = new Pictures;
                 $picture->create([
-                    'folder' => '/estates',
+                    'folder' => '/estates/',
                     'name' => $name,
                     'cover' => 0,
                     'alt' => $altAttribute,
@@ -103,7 +103,7 @@ class PicturesController extends Controller
 
                 $picture = new Pictures;
                 $picture->create([
-                    'folder' => '/estates',
+                    'folder' => '/estates/',
                     'name' => $name,
                     'cover' => 0,
                     'alt' => $altAttribute,
@@ -120,7 +120,7 @@ class PicturesController extends Controller
 
                 $picture = new Pictures;
                 $picture->create([
-                    'folder' => '/estates',
+                    'folder' => '/estates/',
                     'name' => $name,
                     'cover' => 0,
                     'alt' => $altAttribute,
@@ -182,4 +182,36 @@ class PicturesController extends Controller
             return response('Images introuvables', 404);
         }
     }
+
+    /**
+     * @param $id_estate
+     * @param $id_picture
+     * @return Response|ResponseFactory
+     */
+    public function choiceCover($id_estate , $id_picture)
+    {
+        if (!empty($id_estate) && !empty($id_picture)){
+            try {
+                //On enlève l'image de couverture actuel
+                foreach (Pictures::where('id_estate', $id_estate)->cursor() as $picture) {
+                    $picture->update([
+                        'cover' => 0,
+                    ]);
+                }
+                // On set la nouvelle cover a 1 (true)
+                $newCoverPicture = Pictures::findOrFail($id_picture);
+                $newCoverPicture->update([
+                    'cover' => 1,
+                ]);
+
+                return response('L\'image de couverture a bien été changée', 200);
+            } catch (Exception $e) {
+                throw new Exception('Suppression des images impossible. ' . $e->getMessage());
+            }
+        } else {
+            return response('Donnée manquantes', 404);
+        }
+    }
+
+
 }
