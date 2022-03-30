@@ -108,7 +108,8 @@ class EstatesController extends Controller
      */
     public function selectAllEstates(): JsonResponse
     {
-        $estates = Estates::all();
+        $estates = Estates::join('pictures', 'estates.id', '=', 'pictures.id_estate')
+            ->where('pictures.cover', '=', '1')->get();
         return response()->json($estates);
     }
 
@@ -346,7 +347,7 @@ class EstatesController extends Controller
                 'price' => trim($request['price']),
                 'description' => trim($request['description']),
                 'disponibility' => trim($request['disponibility']),
-                'year_of_construction' => new DateTime(trim($request['year_of_construction']) . "-01-01"),
+                'year_of_construction' => new DateTime($request['year_of_construction'] . "-01-01"),
                 'living_surface' => trim($request['living_surface']),
                 'carrez_law' => trim($request['carrez_law']),
                 'land_surface' => trim($request['land_surface']),
@@ -371,7 +372,8 @@ class EstatesController extends Controller
      */
     public function randomEstates(): JsonResponse
     {
-        $estatesRnd = Estates::join('pictures', 'estates.id', '=', 'pictures.id_estate')->inRandomOrder()->limit(3)->get();
+        $estatesRnd = Estates::join('pictures', 'estates.id', '=', 'pictures.id_estate')
+            ->where('pictures.cover', '=', '1')->inRandomOrder()->limit(3)->get();
         return response()->json($estatesRnd);
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Estates;
+use App\Models\Pictures;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -17,7 +18,7 @@ class SearchController extends Controller
     {
         $this->validate($request, [
             'city' => 'string|regex:/^[a-zA-Z\-\'.\s]+$/',
-            'estate_type_name' =>'string|regex:/^[a-zA-Z]+$/',
+            'estate_type_name' => 'string|regex:/^[a-zA-Z]+$/',
             'nb_rooms' => 'string:regex:/^[1-5]{1,1}$/',
             'price' => 'number',
             'buy_or_rent' => 'string|required'
@@ -28,70 +29,39 @@ class SearchController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function search(Request $request): JsonResponse
+    public function search(): JsonResponse
     {
         try {
-            $queryByCity = '';
-            $queryByRooms = '';
-            $queryByType = '';
-            $queryByPrice = null;
-            $queryByBuyOrRent = '';
+            $query = Estates::query();
 
-            // Recherche par ville
-            if (isset($request->city) && !empty($request->city)) {
-                $city = ucfirst($request->city);
-                try {
-                    $queryByCity = Estates::where('city', $city)->get();
-                } catch (\Exception $e) {
-                    dd($e->getMessage());
-                }
-            } else {
-                $queryByCity = Estates::where('city', '!=', '')->get();
+            if (request()->has('city') && !empty(request('city'))) {
+                $city = ucfirst(request('city'));
+                $query->where('city', 'like', $city);
             }
-
-            // Recherche par type de bien
-            if (isset($request->id_estate_type) && !empty($request->id_estate_type)) {
-                $queryByType = Estates::where('id_estate_type', $request->id_estate_type)->get();
-            } else {
-                $queryByType = Estates::where('id_estate_type', '!=', '')->get();
+            if (request()->has('id_estate_type') && !empty(request('id_estate_type'))) {
+                $query->where('id_estate_type', 'like', request('id_estate_type'));
             }
-
-            // Recherche par nombre de pieces
-            if (isset($request->nb_rooms) && !empty($request->nb_rooms)) {
-                if ($request->nb_rooms === '5') {
-                    $queryByRooms = Estates::where('nb_rooms', '>=', intval($request->nb_rooms))->get();
+            if (request()->has('nb_rooms') && !empty(request('nb_rooms'))) {
+                if (request('nb_rooms') === '5') {
+                    $query->where('nb_rooms', '>=', intval(request('nb_rooms')));
                 } else {
-                    $queryByRooms = Estates::where('nb_rooms', intval($request->nb_rooms))->get();
+                    $query->where('nb_rooms', 'like', intval(request('nb_rooms')));
                 }
-            } else {
-                $queryByRooms = Estates::where('nb_rooms', '!=', '')->get();
+            }
+            if (request()->has('price') && !empty(request('price'))) {
+                $query->where('price', '<=', request('price'));
+            }
+            if (request()->has('buy_or_rent')) {
+                $query->where('buy_or_rent', 'like', request('buy_or_rent'));
             }
 
-            // Recherche par budget
-            if (isset($request->price) && !empty($request->price)) {
-                $queryByPrice = Estates::where('price', '<=', $request->price)->get();
-            } else {
-                $queryByPrice = Estates::where('price', '!=', '')->get();
-            }
-
-            // Recherche par achat ou location
-            if (isset($request->buy_or_rent) && !empty($request->buy_or_rent)) {
-                $queryByBuyOrRent = Estates::where('buy_or_rent', $request->buy_or_rent)->get();
-            }
-
-            $result = Estates::all();
-
-            $result = $result->intersect($queryByCity)
-                ->intersect($queryByType)
-                ->intersect($queryByRooms)
-                ->intersect($queryByPrice)
-                ->intersect($queryByBuyOrRent)
-                ->all();
+            $query->join('pictures', 'estates.id', '=', 'pictures.id_estate')
+                ->where('pictures.cover', '=', 1);
+            $result = $query->get();
 
             return response()->json($result);
-
         } catch (\Exception $e) {
-            return response()->json(['message'=>$e->getMessage()]);
+            return response()->json(['message' => $e->getMessage()]);
         }
     }
 }

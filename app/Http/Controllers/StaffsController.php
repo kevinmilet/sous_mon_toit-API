@@ -20,16 +20,18 @@ class StaffsController extends Controller
      */
     private function validation($request): array
     {
-        return $this->validate($request,
+        return $this->validate(
+            $request,
             [
-                'firstname' => 'string|required|regex:/^[[A-Za-zéèêàâ \'-]+$/',
-                'lastname' => 'string|required|regex:/^[[A-Za-zéèêàâ \'-]+$/',
+                'firstname' => 'string|required|regex:/^[[A-Za-zéèàùûêâôöëç \'-]+$/',
+                'lastname' => 'string|required|regex:/^[[A-Za-zéèàùûêâôöëç \'-]+$/',
                 'mail' => 'email|unique:App\Models\Staffs,mail|required',
                 'phone' => 'string|min:10|max:15|required|regex:/^[0-9 -\/\.]+$/',
                 'avatar' => 'nullable|sometimes|image|mimes:jpeg,jpg,png,gif|max:2048',
                 'id_function' => 'numeric|integer|required',
                 'id_role' => 'numeric|integer|required'
-            ]);
+            ]
+        );
     }
 
     /**
@@ -253,7 +255,6 @@ class StaffsController extends Controller
                 ]);
 
                 return response('La photo de profil a bien été modifiée', 200);
-
             } catch (Exception $e) {
                 throw new Exception('La modification de la photo de profil a échouée', $e->getMessage());
             }
@@ -261,7 +262,7 @@ class StaffsController extends Controller
 
         if (isset($request['firstname'])) {
             if ($request['firstname']) {
-                if ($this->validate($request,[
+                if ($this->validate($request, [
                     'firstname' => 'string|required|regex:/^[[A-Za-zéèêàâ \'-]+$/'
                 ])) {
                     $firstname = $request['firstname'];
@@ -270,7 +271,7 @@ class StaffsController extends Controller
         }
         if (isset($request['lastname'])) {
             if ($request['lastname']) {
-                if ($this->validate($request,[
+                if ($this->validate($request, [
                     'lastname' => 'string|required|regex:/^[[A-Za-zéèêàâ \'-]+$/'
                 ])) {
                     $lastname = $request['lastname'];
@@ -279,25 +280,26 @@ class StaffsController extends Controller
         }
         if (isset($request['phone'])) {
             if ($request['phone']) {
-                if ($this->validate($request,[
+                if ($this->validate($request, [
                     'phone' => 'string|required|regex:/^[0-9 -\/\.]{10,14}$/'
                 ])) {
                     $phone = $request['phone'];
                 }
             }
         }
-        if (!isset($request['id_function'])) {
+        if (isset($request['id_function'])) {
             if ($request['id_function']) {
-                if ($this->validate($request,[
+                if ($this->validate($request, [
                     'id_function' => 'numeric|integer|required'
                 ])) {
                     $idFunction = $request['id_function'];
                 }
             }
         }
-        if (!isset($request['id_role'])) {
+
+        if (isset($request['id_role'])) {
             if ($request['id_role']) {
-                if ($this->validate($request,[
+                if ($this->validate($request, [
                     'id_role' => 'numeric|integer|required'
                 ])) {
                     $idRole = $request['id_role'];
@@ -308,11 +310,11 @@ class StaffsController extends Controller
         if (isset($request['mail'])) {
             try {
                 if ($request['mail'] !== $currentMail) {
-                    if ($this->validate($request,[
+                    if ($this->validate($request, [
                         'mail' => 'email|unique:App\Models\Staffs,mail|required'
-                        ])) {
-                            $newMail = $request['mail'];
-                        }
+                    ])) {
+                        $newMail = $request['mail'];
+                    }
                 }
             } catch (Exception $e) {
                 throw new Exception('Cet email est déjà utilisé', $e->getMessage());
@@ -323,7 +325,8 @@ class StaffsController extends Controller
             try {
                 if (
                     ($request['password'] && $request['pwdConf'])
-                    && ($request['password'] === $request['pwdConf'])) {
+                    && ($request['password'] === $request['pwdConf'])
+                ) {
                     if ($this->validate($request, [
                         'password' => 'string|regex:/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[-+!*$@%&?,;:#()<>\'.\/\\_éèàùûêâôöëç ])([-+!*$@%&.,;:#()<>\'.\/\\_éèàùûêâôöëç \w]{8,})$/'
                     ])) {
@@ -396,7 +399,7 @@ class StaffsController extends Controller
             ->where('staffs.id', '=', $id)
             ->get();
 
-    //    $staffFunction = Staffs::find($id)->function;
+        //    $staffFunction = Staffs::find($id)->function;
 
         return [$staffFunction];
     }
@@ -412,5 +415,4 @@ class StaffsController extends Controller
 
         return [$staffFunction];
     }
-
 }
