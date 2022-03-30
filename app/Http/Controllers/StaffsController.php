@@ -23,8 +23,8 @@ class StaffsController extends Controller
         return $this->validate(
             $request,
             [
-                'firstname' => 'string|required|regex:/^[[A-Za-zéèêàâ \'-]+$/',
-                'lastname' => 'string|required|regex:/^[[A-Za-zéèêàâ \'-]+$/',
+                'firstname' => 'string|required|regex:/^[[A-Za-zéèàùûêâôöëç \'-]+$/',
+                'lastname' => 'string|required|regex:/^[[A-Za-zéèàùûêâôöëç \'-]+$/',
                 'mail' => 'email|unique:App\Models\Staffs,mail|required',
                 'phone' => 'string|min:10|max:15|required|regex:/^[0-9 -\/\.]+$/',
                 'avatar' => 'nullable|sometimes|image|mimes:jpeg,jpg,png,gif|max:2048',
