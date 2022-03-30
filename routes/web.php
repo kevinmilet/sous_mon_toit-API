@@ -165,6 +165,7 @@ $router->group(['prefix' => 'estates_pictures'], function () use ($router) {
         $router->delete('delete/{id_picture}', 'PicturesController@delete');
         $router->delete('delete_all/{id_estate}', 'PicturesController@deleteAll');
         $router->post('upload/{id_estate}', 'PicturesController@uploadPicture');
+        $router->post('choiceCover/{id_estate}/{id_picture}', 'PicturesController@choiceCover');
     });
 });
 

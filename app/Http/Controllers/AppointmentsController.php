@@ -146,7 +146,9 @@ class AppointmentsController extends Controller
                             ->join('staffs', 'appointments.id_staff', '=', 'staffs.id')
                             ->join('customers', 'customers.id' , '=', 'appointments.id_customer')
                             ->select('appointments.id', 'appointments_types.id as id_appointment_type', 'appointments.scheduled_at', 'appointments_types.appointment_type', 'appointments.id_customer as id_customer' ,'customers.lastname as customerLastname', 'customers.firstname as customerFirstname', 'appointments.id_staff as id_staff', 'staffs.lastname as staffLastname', 'staffs.firstname as staffFirstname')
-                            ->findOrFail($customer_id);
+                            ->where('appointments.id_customer', '=', $customer_id)
+                            ->get();
+                            // ->findOrFail($customer_id);
     }
 
     /**
