@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 
-class CustomersController extends Controller{
+class CustomersController extends Controller
+{
 
     /**
      *  @OA\Get(
@@ -38,7 +39,8 @@ class CustomersController extends Controller{
      *
      * @return Customers[]|Collection
      */
-    public function selectAllCustomers(){
+    public function selectAllCustomers()
+    {
 
         return Customers::all();
     }
@@ -61,9 +63,9 @@ class CustomersController extends Controller{
     private function validation($request): void
     {
         $this->validate($request, [
-//            'n_customer' => 'string|required|regex:/^[0-9]{5}$/',
-            'firstname' => 'string|required|regex:/^[a-zA-Z \'-]+$/',
-            'lastname' => 'string|required|regex:/^[a-zA-Z \'-]+$/',
+            //            'n_customer' => 'string|required|regex:/^[0-9]{5}$/',
+            'firstname' => 'string|required|regex:/^[A-Za-zéèàùûêâôöëç \'-]+$/',
+            'lastname' => 'string|required|regex:/^[A-Za-zéèàùûêâôöëç \'-]+$/',
             'gender' => 'required|string|regex:/^[HF]$/',
             'mail' => 'string|email|unique:customers',
             'phone' => 'string|min:10|max:15|regex:/^[0-9 -\/\.]+$/',
@@ -74,7 +76,6 @@ class CustomersController extends Controller{
             'token' => 'string',
             'password_request' => 'boolean',
         ]);
-
     }
 
     /**
@@ -87,13 +88,13 @@ class CustomersController extends Controller{
         $this->validation($request);
 
         $response = Customers::create([
-            'n_customer' => rand(1,9).substr(time(), 7, 9).rand(0,9),
+            'n_customer' => rand(1, 9) . substr(time(), 7, 9) . rand(0, 9),
             'firstname' => $request->firstname,
             'lastname' => $request->lastname,
             'gender' => $request->gender,
             'mail' => $request->mail,
             'phone' => $request->phone,
-            'password'=>password_hash($request->password, PASSWORD_DEFAULT),
+            'password' => password_hash($request->password, PASSWORD_DEFAULT),
             'birthdate' => $request->birthdate,
             'address' => $request->address,
             'first_met' => $request->first_met,
@@ -101,8 +102,7 @@ class CustomersController extends Controller{
             'password_request' => $request->password_request
 
         ]);
-        return response()->json(['success'=>'Utilisateur créé', $response]);
-
+        return response()->json(['success' => 'Utilisateur créé', $response]);
     }
 
     /**
@@ -115,16 +115,14 @@ class CustomersController extends Controller{
     {
         // var_dump($request);
         // die;
-      
 
-      
-            $customer = Customers::findOrFail($id);
-            $this->validation($request);
-            $customer->update($request->all());
-            var_dump($customer);
-            return response()->json(['success'=>'Modifications enregistrées']);
 
-        
+
+        $customer = Customers::findOrFail($id);
+        $this->validation($request);
+        $customer->update($request->all());
+        var_dump($customer);
+        return response()->json(['success' => 'Modifications enregistrées']);
     }
 
     /**
@@ -135,15 +133,16 @@ class CustomersController extends Controller{
     {
         $customer = Customers::find($id);
         $customer->delete();
-        return response()->json(['success'=>'Utilisateur supprimé']);
+        return response()->json(['success' => 'Utilisateur supprimé']);
     }
 
     /**
      * @param $value
      * @return mixed
      */
-    public function searchCustomers($value) {
-        $value = '%'.$value.'%';
+    public function searchCustomers($value)
+    {
+        $value = '%' . $value . '%';
         return Customers::where('lastname', 'like', $value)
             ->orWhere('firstname', 'like', $value)
             ->get();
