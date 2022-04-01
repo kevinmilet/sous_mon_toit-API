@@ -17,11 +17,11 @@ class InsertDescribesCustomersTypesSeeder extends Seeder
         DB::table('describes_customers_types')->insert([
             [
                 'id_customer'=> 3,
-                'id_customer_type'=>'2',
+                'id_customer_type'=> 2,
             ],
             [
                 'id_customer'=> 4,
-                'id_customer_type'=>'3',
+                'id_customer_type'=> 3,
             ],
             ]);
     }
