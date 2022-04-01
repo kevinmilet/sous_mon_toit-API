@@ -13,20 +13,20 @@ class SousMonToitEstates extends Migration
      */
     public function up(): void
     {
-        Schema::create('estates', function(Blueprint $table) {
+        Schema::create('estates', function (Blueprint $table) {
             $table->id('id');
             $table->foreignId('id_estate_type')->references('id')->on('estates_types');
             $table->foreignId('id_customer')->references('id')->on('customers');
             $table->string('title', 50);
             $table->string('reference', 50);
-            $table->string('dpe_file', 255 )->nullable();
+            $table->string('dpe_file', 255)->nullable();
             $table->string('buy_or_rent', 10);
             $table->string('address', 255);
             $table->string('city', 50);
             $table->string('zipcode', 5);
             $table->double('estate_longitude');
             $table->double('estate_latitude');
-            $table->decimal('price')->nullable();
+            $table->decimal('price', 10, 2)->nullable();
             $table->longText('description')->nullable();
             $table->string('disponibility')->nullable();
             $table->dateTime('year_of_construction')->nullable();
@@ -62,8 +62,6 @@ class SousMonToitEstates extends Migration
             $table->dateTime('created_at');
             $table->dateTime('updated_at')->nullable();
             $table->dateTime('deleted_at')->nullable();
-
-
         });
     }
 
