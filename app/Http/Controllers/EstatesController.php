@@ -180,12 +180,7 @@ class EstatesController extends Controller
                     'customers.gender',
                     'customers.mail',
                     'customers.phone',
-                    'customers.password',
-                    'customers.birthdate',
                     'customers.address as custAddress',
-                    'customers.first_met',
-                    'customers.token',
-                    'customers.password_request',
                     'estates_types.estate_type_name',
                 )
                 ->where('estates.id', '=', $id)
