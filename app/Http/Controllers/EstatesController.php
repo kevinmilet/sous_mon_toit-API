@@ -24,15 +24,15 @@ class EstatesController extends Controller
             [
                 'id_estate_type' => 'numeric|integer|required',
                 'id_customer' => 'numeric|integer|required',
-                'title' => 'string|required|regex:/^[a-zA-Z \'-]+$/',
-                'dpe_file' => 'string|nullable|regex:/^[a-zA-Z \'-]+$/',
+                'title' => 'string|required|regex:/^[A-Za-z0-9éèàùûêâôöëç² \'-]+$/',
+                'dpe_file' => 'string|nullable|regex:/^[A-Za-z0-9éèàùûêâôöëç \'-]+$/',
                 'buy_or_rent' => array(
                     'string',
                     'required',
                     'regex:/^^(achat)$|^(Achat)$|^(location)$|^(Location)$$/'
                 ),
                 'address' => 'string|required',
-                'city' => 'string|required|regex:/^[a-zA-Z \'-]+/',
+                'city' => 'string|required|regex:/^[a-zA-Zéèàùûêâôöëç \'-]+/',
                 'zipcode' => array(
                     'string',
                     'required',

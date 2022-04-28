@@ -44,8 +44,8 @@ class PicturesController extends Controller
      */
     public function getEstateCover($id_estate): JsonResponse
     {
-        $estate = Pictures::where('id_estate', $id_estate)->get();
-        return response()->json($estate->where('cover', true));
+        $estate = Pictures::where('id_estate', '=', $id_estate)->get();
+        return response()->json($estate->where('cover', '=', 1));
     }
 
     /**
@@ -188,9 +188,9 @@ class PicturesController extends Controller
      * @param $id_picture
      * @return Response|ResponseFactory
      */
-    public function choiceCover($id_estate , $id_picture)
+    public function choiceCover($id_estate, $id_picture)
     {
-        if (!empty($id_estate) && !empty($id_picture)){
+        if (!empty($id_estate) && !empty($id_picture)) {
             try {
                 //On enlève l'image de couverture actuel
                 foreach (Pictures::where('id_estate', $id_estate)->cursor() as $picture) {
@@ -212,6 +212,4 @@ class PicturesController extends Controller
             return response('Donnée manquantes', 404);
         }
     }
-
-
 }
